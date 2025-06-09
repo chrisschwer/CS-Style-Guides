@@ -97,47 +97,115 @@ import CopyButton from '../components/CopyButton.astro';
                       </li>
                       <li class="flex gap-2">
                         <span class="font-medium">2.</span>
-                        <span>Styleguide-Inhalt in die Projektanweisungen einfügen</span>
+                        <span>Projektanweisungen mit der unten stehenden Vorlage einrichten</span>
                       </li>
                       <li class="flex gap-2">
                         <span class="font-medium">3.</span>
+                        <span>Gewählte Styleguides zum Projektwissen hinzufügen</span>
+                      </li>
+                      <li class="flex gap-2">
+                        <span class="font-medium">4.</span>
                         <span>Project speichern und für alle Unterhaltungen verwenden</span>
                       </li>
                     </ol>
-                    <div class="bg-gray-50 p-4 rounded-lg">
-                      <p class="text-sm text-gray-600 mb-2"><strong>Tipp:</strong> Beispiel-Projektanweisung:</p>
-                      <div class="bg-white p-3 rounded border text-sm font-mono text-gray-700">
-                        Du bist ein erfahrener Redakteur. Befolge diese Stilregeln:<br><br>
-                        [Hier den Styleguide einfügen]
+                    <div class="bg-gray-50 p-4 rounded-lg mb-4">
+                      <p class="text-sm text-gray-600 mb-2"><strong>Projektanweisungen-Vorlage:</strong></p>
+                      <div class="bg-white p-3 rounded border text-sm font-mono text-gray-700 leading-relaxed">
+                        Du bist ein erfahrener Redakteur, der freundlich und professionell detailliertes Feedback gibt. 
+                        Dabei beachtest Du die beigefügten Styleguides und Hinweise.<br><br>
+                        
+                        Um präzises Feedback geben zu können, erfragst Du ggf. zunächst:<br>
+                        - Die Zielgruppe des Dokuments<br>
+                        - Bei Präsentationen: Wie viele Personen werden im Raum sein?<br>
+                        - Eventuelle Beschränkungen (z.B. Rahmenvorgaben für Seitenzahl oder Dauer)
                       </div>
                       <CopyButton 
-                        content={"Du bist ein erfahrener Redakteur. Befolge diese Stilregeln:\n\n[Hier den gewählten Styleguide einfügen]"}
+                        content={"Du bist ein erfahrener Redakteur, der freundlich und professionell detailliertes Feedback gibt. Dabei beachtest Du die beigefügten Styleguides und Hinweise.\n\nUm präzises Feedback geben zu können, erfragst Du ggf. zunächst:\n- Die Zielgruppe des Dokuments\n- Bei Präsentationen: Wie viele Personen werden im Raum sein?\n- Eventuelle Beschränkungen (z.B. Rahmenvorgaben für Seitenzahl oder Dauer)"}
                         label="Projektanweisung kopieren"
                         size="sm"
                         variant="primary"
                       />
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                      <p class="text-sm text-blue-800 mb-2"><strong>💡 Wichtig:</strong> Styleguides zum Projektwissen hinzufügen</p>
+                      <p class="text-sm text-blue-700">
+                        Die passenden Styleguides (z.B. "Gutes Deutsch" und "Gendergerecht mit Sternchen") 
+                        fügen Sie separat zum Projektwissen hinzu, nicht in die Projektanweisungen.
+                      </p>
                     </div>
                   </div>
 
                   <!-- ChatGPT -->
                   <div class="bg-white rounded-lg p-6 border">
                     <h3 class="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                      💬 ChatGPT Custom Instructions
+                      💬 ChatGPT Setup
                     </h3>
-                    <ol class="space-y-2 text-gray-700 mb-4">
-                      <li class="flex gap-2">
-                        <span class="font-medium">1.</span>
-                        <span>ChatGPT öffnen → Einstellungen → Custom Instructions</span>
-                      </li>
-                      <li class="flex gap-2">
-                        <span class="font-medium">2.</span>
-                        <span>Styleguide in "How would you like ChatGPT to respond?" einfügen</span>
-                      </li>
-                      <li class="flex gap-2">
-                        <span class="font-medium">3.</span>
-                        <span>Speichern - gilt für alle neuen Unterhaltungen</span>
-                      </li>
-                    </ol>
+                    
+                    <div class="mb-6">
+                      <h4 class="font-semibold text-gray-900 mb-2">Option 1: Custom GPT erstellen (empfohlen)</h4>
+                      <ol class="space-y-2 text-gray-700 mb-4">
+                        <li class="flex gap-2">
+                          <span class="font-medium">1.</span>
+                          <span>ChatGPT öffnen → "Explore GPTs" → "Create a GPT"</span>
+                        </li>
+                        <li class="flex gap-2">
+                          <span class="font-medium">2.</span>
+                          <span>Name: "Deutscher Redakteur & Stilberater"</span>
+                        </li>
+                        <li class="flex gap-2">
+                          <span class="font-medium">3.</span>
+                          <span>Instructions mit untenstehender Vorlage ausfüllen</span>
+                        </li>
+                        <li class="flex gap-2">
+                          <span class="font-medium">4.</span>
+                          <span>Styleguide-Dateien als Knowledge hochladen</span>
+                        </li>
+                      </ol>
+                      
+                      <div class="bg-gray-50 p-4 rounded-lg mb-4">
+                        <p class="text-sm text-gray-600 mb-2"><strong>Custom GPT Instructions:</strong></p>
+                        <div class="bg-white p-3 rounded border text-sm font-mono text-gray-700 leading-relaxed">
+                          Du bist ein erfahrener deutscher Redakteur und Stilberater. Du hilfst bei der Erstellung 
+                          und Überarbeitung von deutschen Texten und Präsentationen nach spezifischen Stilrichtlinien.<br><br>
+                          
+                          Verfügbare Stilrichtlinien:<br>
+                          1. Gutes Deutsch - Klares, prägnantes Deutsch<br>
+                          2. Gendergerechte Sprache mit Sternchen (z.B. Student*innen)<br>
+                          3. Gendergerechte Sprache ohne Sternchen (neutrale Begriffe)<br>
+                          4. Gute Präsentationen (Struktur und Argumentation)<br><br>
+                          
+                          Bevor du mit der Arbeit beginnst, frage nach:<br>
+                          - Welche Stilrichtlinie(n) angewendet werden soll(en)<br>
+                          - Zielgruppe und Kontext<br>
+                          - Besondere Anforderungen oder Beschränkungen<br><br>
+                          
+                          Gib konstruktives, detailliertes Feedback und erkläre deine Verbesserungsvorschläge.
+                        </div>
+                        <CopyButton 
+                          content={"Du bist ein erfahrener deutscher Redakteur und Stilberater. Du hilfst bei der Erstellung und Überarbeitung von deutschen Texten und Präsentationen nach spezifischen Stilrichtlinien.\n\nVerfügbare Stilrichtlinien:\n1. Gutes Deutsch - Klares, prägnantes Deutsch\n2. Gendergerechte Sprache mit Sternchen (z.B. Student*innen)\n3. Gendergerechte Sprache ohne Sternchen (neutrale Begriffe)\n4. Gute Präsentationen (Struktur und Argumentation)\n\nBevor du mit der Arbeit beginnst, frage nach:\n- Welche Stilrichtlinie(n) angewendet werden soll(en)\n- Zielgruppe und Kontext\n- Besondere Anforderungen oder Beschränkungen\n\nGib konstruktives, detailliertes Feedback und erkläre deine Verbesserungsvorschläge."}
+                          label="Custom GPT Instructions kopieren"
+                          size="sm"
+                          variant="primary"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <h4 class="font-semibold text-gray-900 mb-2">Option 2: Custom Instructions</h4>
+                      <ol class="space-y-2 text-gray-700">
+                        <li class="flex gap-2">
+                          <span class="font-medium">1.</span>
+                          <span>ChatGPT → Einstellungen → Custom Instructions</span>
+                        </li>
+                        <li class="flex gap-2">
+                          <span class="font-medium">2.</span>
+                          <span>Styleguide-Regeln in jeder Unterhaltung manuell einfügen</span>
+                        </li>
+                      </ol>
+                      <p class="text-sm text-gray-600 mt-2">
+                        <strong>Hinweis:</strong> Bei dieser Option müssen Sie die Regeln bei jeder neuen Unterhaltung wiederholen.
+                      </p>
+                    </div>
                   </div>
 
                   <!-- Microsoft 365 Copilot -->
@@ -145,20 +213,86 @@ import CopyButton from '../components/CopyButton.astro';
                     <h3 class="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
                       🏢 Microsoft 365 Copilot
                     </h3>
-                    <ol class="space-y-2 text-gray-700 mb-4">
-                      <li class="flex gap-2">
-                        <span class="font-medium">1.</span>
-                        <span>In Word/Outlook: Copilot-Icon klicken</span>
-                      </li>
-                      <li class="flex gap-2">
-                        <span class="font-medium">2.</span>
-                        <span>Styleguide-Regeln vor jeden Schreibauftrag einfügen</span>
-                      </li>
-                      <li class="flex gap-2">
-                        <span class="font-medium">3.</span>
-                        <span>Beispiel: "Befolge diese Stilregeln: [Regeln] Schreibe eine E-Mail..."</span>
-                      </li>
-                    </ol>
+                    
+                    <div class="bg-yellow-50 p-4 rounded-lg mb-4">
+                      <p class="text-sm text-yellow-800">
+                        <strong>⚠️ Wichtig:</strong> Da Copilot keinen dauerhaften Kontext speichert, müssen Sie die 
+                        relevanten Styleguide-Regeln bei jedem Prompt mitgeben.
+                      </p>
+                    </div>
+                    
+                    <div class="mb-4">
+                      <h4 class="font-semibold text-gray-900 mb-2">Vorbereitung:</h4>
+                      <ol class="space-y-2 text-gray-700 mb-4">
+                        <li class="flex gap-2">
+                          <span class="font-medium">1.</span>
+                          <span>Gewünschten Styleguide öffnen (z.B. Gutes Deutsch.md)</span>
+                        </li>
+                        <li class="flex gap-2">
+                          <span class="font-medium">2.</span>
+                          <span>Relevante Regeln kopieren</span>
+                        </li>
+                        <li class="flex gap-2">
+                          <span class="font-medium">3.</span>
+                          <span>In Copilot-Prompt einfügen</span>
+                        </li>
+                      </ol>
+                    </div>
+                    
+                    <div class="space-y-4">
+                      <div>
+                        <h4 class="font-semibold text-gray-900 mb-2">📝 Word - Textverbesserung</h4>
+                        <div class="bg-gray-50 p-3 rounded-lg">
+                          <p class="text-sm font-mono text-gray-700">
+                            @Copilot Überarbeite diesen Text nach Wolf Schneiders Prinzipien:<br><br>
+                            REGELN:<br>
+                            - Hauptsachen in Hauptsätze<br>
+                            - Maximal 15-20 Wörter pro Satz<br>
+                            - Verben statt Substantive<br>
+                            - Aktiv statt Passiv<br>
+                            - Konkret statt abstrakt<br><br>
+                            TEXT ZU ÜBERARBEITEN:<br>
+                            [Text hier einfügen]
+                          </p>
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <h4 class="font-semibold text-gray-900 mb-2">📧 Outlook - E-Mail schreiben</h4>
+                        <div class="bg-gray-50 p-3 rounded-lg">
+                          <p class="text-sm font-mono text-gray-700">
+                            @Copilot Schreibe eine E-Mail mit folgenden Regeln:<br><br>
+                            STIL:<br>
+                            - Kurze, klare Sätze (max. 20 Wörter)<br>
+                            - Gendergerechte Sprache ohne Sternchen<br>
+                            - Professionell aber freundlich<br>
+                            - Maximal 150 Wörter<br><br>
+                            Thema: [Ihr Thema]
+                          </p>
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <h4 class="font-semibold text-gray-900 mb-2">📊 PowerPoint - Präsentation erstellen</h4>
+                        <div class="bg-gray-50 p-3 rounded-lg">
+                          <p class="text-sm font-mono text-gray-700">
+                            @Copilot Erstelle Slides nach SCS-Muster:<br><br>
+                            STRUKTUR:<br>
+                            - Slide-Titel als Aussagen formulieren<br>
+                            - Max. 3 Bullet Points pro Slide<br>
+                            - MECE-Prinzip bei Aufzählungen<br><br>
+                            Thema: [Ihr Präsentationsthema]
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="bg-blue-50 p-4 rounded-lg mt-4">
+                      <p class="text-sm text-blue-800">
+                        <strong>💡 Tipp:</strong> Speichern Sie häufig verwendete Regelsets als Textbausteine 
+                        in Word/Outlook für schnelles Einfügen.
+                      </p>
+                    </div>
                   </div>
 
                 </div>
@@ -182,19 +316,29 @@ import CopyButton from '../components/CopyButton.astro';
                 </p>
                 
                 <div class="bg-white rounded-lg p-6 border">
-                  <h3 class="text-lg font-semibold text-gray-900 mb-3">Beispiel-Prompts</h3>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-3">Beispiel-Prompts nach Einrichtung</h3>
                   <div class="space-y-4">
                     <div class="bg-gray-50 p-4 rounded-lg">
-                      <p class="text-sm text-gray-600 mb-2"><strong>Für Geschäftstexte:</strong></p>
-                      <p class="text-gray-700">"Schreibe eine E-Mail an unsere Kunden über die Preisanpassung zum 1. Juli."</p>
+                      <p class="text-sm text-gray-600 mb-2"><strong>Claude Project - Feedback zu Präsentation:</strong></p>
+                      <p class="text-gray-700 font-mono text-sm">
+                        "Gib mir umfassendes und detailliertes Feedback zu der anliegenden Präsentation, 
+                        mit der ich in etwa 15 Minuten die Bürger*innen meines Heimatdorfes davon 
+                        überzeugen möchte, dass dieses sich um das Marktrecht bemühen sollte."
+                      </p>
                     </div>
                     <div class="bg-gray-50 p-4 rounded-lg">
-                      <p class="text-sm text-gray-600 mb-2"><strong>Für Präsentationen:</strong></p>
-                      <p class="text-gray-700">"Erstelle eine 10-Folien-Präsentation über unsere Quartalsergebnisse für den Vorstand."</p>
+                      <p class="text-sm text-gray-600 mb-2"><strong>ChatGPT - Text überarbeiten:</strong></p>
+                      <p class="text-gray-700 font-mono text-sm">
+                        "Ich möchte folgenden Text nach Wolf Schneiders Prinzipien überarbeiten lassen. 
+                        Bitte mache ihn kürzer, klarer und verständlicher: [Text einfügen]"
+                      </p>
                     </div>
                     <div class="bg-gray-50 p-4 rounded-lg">
-                      <p class="text-sm text-gray-600 mb-2"><strong>Für Berichte:</strong></p>
-                      <p class="text-gray-700">"Verfasse einen Projektbericht über die Einführung des neuen CRM-Systems."</p>
+                      <p class="text-sm text-gray-600 mb-2"><strong>Copilot - Stellenausschreibung:</strong></p>
+                      <p class="text-gray-700 font-mono text-sm">
+                        "@Copilot Schreibe eine Stellenausschreibung für 'Projektleitung Marketing' 
+                        mit gendergerechter Sprache ohne Sternchen und Wolf Schneider Klarheit."
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -202,6 +346,185 @@ import CopyButton from '../components/CopyButton.astro';
             </div>
           </div>
 
+        </div>
+      </div>
+    </section>
+
+    <!-- Detailed Prompt Examples -->
+    <section class="py-16 bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">
+          📝 Detaillierte Prompt-Beispiele
+        </h2>
+        
+        <div class="space-y-8">
+          
+          <!-- ChatGPT Examples -->
+          <div class="bg-gray-50 rounded-xl p-8">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">
+              💬 ChatGPT Prompts
+            </h3>
+            
+            <div class="space-y-6">
+              
+              <div class="bg-white rounded-lg p-6 border">
+                <h4 class="text-lg font-semibold text-gray-900 mb-3">1. Text nach Gutes Deutsch überarbeiten</h4>
+                <div class="bg-gray-50 p-4 rounded-lg mb-4">
+                  <p class="text-sm font-mono text-gray-700 leading-relaxed">
+                    Ich möchte folgenden Text nach Wolf Schneiders Prinzipien überarbeiten lassen. 
+                    Bitte mache ihn kürzer, klarer und verständlicher:<br><br>
+                    
+                    [Hier den Text einfügen]<br><br>
+                    
+                    Zeige mir:<br>
+                    1. Die überarbeitete Version<br>
+                    2. Die wichtigsten Änderungen mit Begründung<br>
+                    3. Vorher-Nachher-Vergleich problematischer Stellen
+                  </p>
+                </div>
+                <CopyButton 
+                  content={"Ich möchte folgenden Text nach Wolf Schneiders Prinzipien überarbeiten lassen. Bitte mache ihn kürzer, klarer und verständlicher:\n\n[Hier den Text einfügen]\n\nZeige mir:\n1. Die überarbeitete Version\n2. Die wichtigsten Änderungen mit Begründung\n3. Vorher-Nachher-Vergleich problematischer Stellen"}
+                  label="Prompt kopieren"
+                  size="sm"
+                  variant="primary"
+                />
+              </div>
+              
+              <div class="bg-white rounded-lg p-6 border">
+                <h4 class="text-lg font-semibold text-gray-900 mb-3">2. Gendergerechte Stellenausschreibung</h4>
+                <div class="bg-gray-50 p-4 rounded-lg mb-4">
+                  <p class="text-sm font-mono text-gray-700 leading-relaxed">
+                    Bitte schreibe eine Stellenausschreibung für eine Projektleitung im IT-Bereich.<br><br>
+                    
+                    Verwende dabei:<br>
+                    - Gendergerechte Sprache MIT Sternchen (Mitarbeiter*innen)<br>
+                    - Klare, aktive Formulierungen<br>
+                    - MECE-Prinzip für Aufgabenlisten<br><br>
+                    
+                    Die Stelle umfasst: Teamführung, Budgetverantwortung, Kundenkontakt.
+                  </p>
+                </div>
+                <CopyButton 
+                  content={"Bitte schreibe eine Stellenausschreibung für eine Projektleitung im IT-Bereich.\n\nVerwende dabei:\n- Gendergerechte Sprache MIT Sternchen (Mitarbeiter*innen)\n- Klare, aktive Formulierungen\n- MECE-Prinzip für Aufgabenlisten\n\nDie Stelle umfasst: Teamführung, Budgetverantwortung, Kundenkontakt."}
+                  label="Prompt kopieren"
+                  size="sm"
+                  variant="primary"
+                />
+              </div>
+              
+              <div class="bg-white rounded-lg p-6 border">
+                <h4 class="text-lg font-semibold text-gray-900 mb-3">3. Präsentation strukturieren</h4>
+                <div class="bg-gray-50 p-4 rounded-lg mb-4">
+                  <p class="text-sm font-mono text-gray-700 leading-relaxed">
+                    Ich muss eine 10-minütige Präsentation über die Digitalisierung unserer 
+                    Gemeindeverwaltung halten. Zielgruppe: Gemeinderat (12 Personen, unterschiedliche 
+                    Technikaffinität).<br><br>
+                    
+                    Bitte erstelle:<br>
+                    1. Eine Gliederung nach dem SCS-Muster (Situation/Complication/Solution)<br>
+                    2. Aussagekräftige Titel für jeden Slide<br>
+                    3. Kernbotschaften pro Slide (max. 3 Punkte)<br><br>
+                    
+                    Verwende dabei die Prinzipien aus "Gute Präsentationen".
+                  </p>
+                </div>
+                <CopyButton 
+                  content={"Ich muss eine 10-minütige Präsentation über die Digitalisierung unserer Gemeindeverwaltung halten. Zielgruppe: Gemeinderat (12 Personen, unterschiedliche Technikaffinität).\n\nBitte erstelle:\n1. Eine Gliederung nach dem SCS-Muster (Situation/Complication/Solution)\n2. Aussagekräftige Titel für jeden Slide\n3. Kernbotschaften pro Slide (max. 3 Punkte)\n\nVerwende dabei die Prinzipien aus \"Gute Präsentationen\"."}
+                  label="Prompt kopieren"
+                  size="sm"
+                  variant="primary"
+                />
+              </div>
+              
+            </div>
+          </div>
+          
+          <!-- Microsoft 365 Copilot Examples -->
+          <div class="bg-blue-50 rounded-xl p-8">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">
+              🏢 Microsoft 365 Copilot Prompts
+            </h3>
+            
+            <div class="space-y-6">
+              
+              <div class="bg-white rounded-lg p-6 border">
+                <h4 class="text-lg font-semibold text-gray-900 mb-3">1. Geschäftsbrief optimieren (Word)</h4>
+                <div class="bg-gray-50 p-4 rounded-lg mb-4">
+                  <p class="text-sm font-mono text-gray-700 leading-relaxed">
+                    @Copilot Überarbeite diesen Geschäftsbrief nach Wolf Schneider Prinzipien:<br><br>
+                    
+                    Anforderungen:<br>
+                    - Kurze, klare Sätze (max. 20 Wörter)<br>
+                    - Konkrete statt abstrakte Formulierungen<br>
+                    - Aktiv statt Passiv<br>
+                    - Gendergerechte Sprache ohne Sonderzeichen<br><br>
+                    
+                    [Brief-Text hier einfügen]<br><br>
+                    
+                    Erkläre die 3 wichtigsten Verbesserungen.
+                  </p>
+                </div>
+                <CopyButton 
+                  content={"@Copilot Überarbeite diesen Geschäftsbrief nach Wolf Schneider Prinzipien:\n\nAnforderungen:\n- Kurze, klare Sätze (max. 20 Wörter)\n- Konkrete statt abstrakte Formulierungen\n- Aktiv statt Passiv\n- Gendergerechte Sprache ohne Sonderzeichen\n\n[Brief-Text hier einfügen]\n\nErkläre die 3 wichtigsten Verbesserungen."}
+                  label="Prompt kopieren"
+                  size="sm"
+                  variant="primary"
+                />
+              </div>
+              
+              <div class="bg-white rounded-lg p-6 border">
+                <h4 class="text-lg font-semibold text-gray-900 mb-3">2. Management-Präsentation (PowerPoint)</h4>
+                <div class="bg-gray-50 p-4 rounded-lg mb-4">
+                  <p class="text-sm font-mono text-gray-700 leading-relaxed">
+                    @Copilot Erstelle eine 10-Slide-Präsentation zum Thema "Digitale Transformation":<br><br>
+                    
+                    Struktur nach SCS-Muster:<br>
+                    - Situation: Aktueller Stand der Digitalisierung<br>
+                    - Complication: Herausforderungen und Probleme<br>
+                    - Solution: Lösungsvorschläge und nächste Schritte<br><br>
+                    
+                    Regeln:<br>
+                    - Slide-Titel als Aussagen formulieren<br>
+                    - Max. 3 Bullet Points pro Slide<br>
+                    - MECE-Prinzip bei Aufzählungen<br>
+                    - Kernbotschaft pro Slide hervorheben
+                  </p>
+                </div>
+                <CopyButton 
+                  content={"@Copilot Erstelle eine 10-Slide-Präsentation zum Thema \"Digitale Transformation\":\n\nStruktur nach SCS-Muster:\n- Situation: Aktueller Stand der Digitalisierung\n- Complication: Herausforderungen und Probleme\n- Solution: Lösungsvorschläge und nächste Schritte\n\nRegeln:\n- Slide-Titel als Aussagen formulieren\n- Max. 3 Bullet Points pro Slide\n- MECE-Prinzip bei Aufzählungen\n- Kernbotschaft pro Slide hervorheben"}
+                  label="Prompt kopieren"
+                  size="sm"
+                  variant="primary"
+                />
+              </div>
+              
+              <div class="bg-white rounded-lg p-6 border">
+                <h4 class="text-lg font-semibold text-gray-900 mb-3">3. E-Mail-Vorlage (Outlook)</h4>
+                <div class="bg-gray-50 p-4 rounded-lg mb-4">
+                  <p class="text-sm font-mono text-gray-700 leading-relaxed">
+                    @Copilot Schreibe eine E-Mail mit folgender Struktur:<br><br>
+                    
+                    1. Betreff: Kernaussage in max. 8 Wörtern<br>
+                    2. Anrede: Gendergerecht ohne Sternchen<br>
+                    3. Hauptteil: SCS-Struktur (Situation, Problem, Lösung)<br>
+                    4. Call-to-Action: Konkret und eindeutig<br>
+                    5. Abschluss: Professionell aber freundlich<br><br>
+                    
+                    Thema: [Ihr Thema]<br>
+                    Zielgruppe: [Empfänger beschreiben]
+                  </p>
+                </div>
+                <CopyButton 
+                  content={"@Copilot Schreibe eine E-Mail mit folgender Struktur:\n\n1. Betreff: Kernaussage in max. 8 Wörtern\n2. Anrede: Gendergerecht ohne Sternchen\n3. Hauptteil: SCS-Struktur (Situation, Problem, Lösung)\n4. Call-to-Action: Konkret und eindeutig\n5. Abschluss: Professionell aber freundlich\n\nThema: [Ihr Thema]\nZielgruppe: [Empfänger beschreiben]"}
+                  label="Prompt kopieren"
+                  size="sm"
+                  variant="primary"
+                />
+              </div>
+              
+            </div>
+          </div>
+          
         </div>
       </div>
     </section>
@@ -270,8 +593,29 @@ import CopyButton from '../components/CopyButton.astro';
               Muss ich die Regeln bei jedem Prompt wiederholen?
             </h3>
             <p class="text-gray-700">
-              Nein! Sobald Sie den Styleguide in Claude Projects oder ChatGPT Custom Instructions eingerichtet haben, 
-              werden die Regeln automatisch bei jeder Unterhaltung angewendet.
+              <strong>Claude Projects & ChatGPT Custom GPT:</strong> Nein! Die Regeln werden automatisch angewendet.<br>
+              <strong>ChatGPT Custom Instructions:</strong> Teilweise - grundlegende Regeln werden angewendet, spezifische möglicherweise nicht.<br>
+              <strong>Microsoft 365 Copilot:</strong> Ja, leider müssen Sie die Regeln bei jedem neuen Prompt mitgeben.
+            </p>
+          </div>
+          
+          <div class="bg-gray-50 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">
+              Warum muss ich bei Copilot die Regeln immer wiederholen?
+            </h3>
+            <p class="text-gray-700">
+              Microsoft 365 Copilot speichert keinen dauerhaften Kontext. Jeder Prompt wird isoliert verarbeitet. 
+              <strong>Tipp:</strong> Speichern Sie häufig verwendete Regelsets als Textbausteine in Word/Outlook.
+            </p>
+          </div>
+          
+          <div class="bg-gray-50 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">
+              Custom GPT vs. Custom Instructions - was ist besser?
+            </h3>
+            <p class="text-gray-700">
+              <strong>Custom GPT (empfohlen):</strong> Persistenter Kontext, kann Dateien hochladen, spezielle Fähigkeiten.<br>
+              <strong>Custom Instructions:</strong> Einfacher einzurichten, aber weniger mächtig und konsistent.
             </p>
           </div>
           
@@ -280,8 +624,10 @@ import CopyButton from '../components/CopyButton.astro';
               Kann ich mehrere Styleguides gleichzeitig verwenden?
             </h3>
             <p class="text-gray-700">
-              Ja! Kopieren Sie einfach mehrere Guides in Ihre Projektanweisungen. 
-              Achten Sie darauf, dass sich die Regeln nicht widersprechen.
+              Ja! <strong>Empfohlene Kombinationen:</strong><br>
+              • "Gutes Deutsch" + "Gendergerecht mit Sternchen" für offizielle Texte<br>
+              • "Gutes Deutsch" + "Gendergerecht ohne Sternchen" für konservative Umgebungen<br>
+              • "Gute Präsentationen" + "Gutes Deutsch" für Folien mit klarer Sprache
             </p>
           </div>
           
@@ -290,8 +636,18 @@ import CopyButton from '../components/CopyButton.astro';
               Funktioniert das auch mit anderen KI-Tools?
             </h3>
             <p class="text-gray-700">
-              Ja! Die Styleguides funktionieren mit allen textbasierten KI-Assistenten. 
-              Fügen Sie die Regeln einfach am Anfang Ihrer Prompts ein.
+              Ja! Die Styleguides funktionieren mit allen textbasierten KI-Assistenten (Perplexity, Gemini, etc.). 
+              Fügen Sie die Regeln am Anfang Ihrer Prompts ein oder nutzen Sie die systemeigenen Custom Instructions.
+            </p>
+          </div>
+          
+          <div class="bg-gray-50 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">
+              Wie stelle ich sicher, dass die KI die Regeln befolgt?
+            </h3>
+            <p class="text-gray-700">
+              Bitten Sie um Selbstcheck: "Prüfe den Text nochmals gegen die Stilregeln und markiere Verbesserungsmöglichkeiten." 
+              Oder: "Bewerte diesen Text auf einer Skala von 1-10 für Klarheit und gib konkrete Verbesserungsvorschläge."
             </p>
           </div>
           
@@ -300,8 +656,8 @@ import CopyButton from '../components/CopyButton.astro';
               Wie aktuell sind die Styleguides?
             </h3>
             <p class="text-gray-700">
-              Die Guides basieren auf bewährten Prinzipien und werden regelmäßig überarbeitet. 
-              Alle Dateien sind mit Versionsdatum versehen.
+              Die Guides basieren auf bewährten, zeitlosen Prinzipien und werden regelmäßig überarbeitet. 
+              Alle Dateien sind versioniert - aktuelle Version ist in jeder Datei vermerkt.
             </p>
           </div>
         </div>

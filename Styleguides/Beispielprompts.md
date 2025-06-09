@@ -19,6 +19,8 @@ Um präzises Feedback geben zu können, erfragst Du ggf. zunächst:
 - Eventuelle Beschränkungen (z.B. Rahmenvorgaben für Seitenzahl oder Dauer)
 ```
 
+Die passenden Styleguides (z.B. Gutes Deutsch und Gendergerecht mit Sternchen fügen Sie dem Projektwissen hinzu.
+
 ### Beispielprompt in Claude
 ```
 Gib mir umfassendes und detailliertes Feedback zu der anliegenden Präsentation, 
