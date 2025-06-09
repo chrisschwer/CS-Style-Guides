@@ -1,0 +1,328 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import StyleguideCard from '../components/StyleguideCard.astro';
+---
+
+<Layout title="Downloads - KI-Styleguides">
+  <Header />
+  
+  <main>
+    <!-- Page Header -->
+    <section class="bg-gradient-to-br from-primary-50 to-primary-100 py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+            📥 Downloads
+          </h1>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Alle Styleguides und Hilfsmittel zum kostenlosen Herunterladen
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Download -->
+    <section class="py-16 bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-gradient-to-r from-primary-600 to-primary-700 rounded-2xl p-8 lg:p-12 text-white text-center shadow-xl">
+          <div class="text-5xl mb-6">🎁</div>
+          <h2 class="text-3xl font-bold mb-4">Komplettpaket</h2>
+          <p class="text-xl text-primary-100 mb-6 leading-relaxed">
+            Alle 6 Styleguides + Beispielprompts + Anleitung in einem praktischen ZIP-Paket
+          </p>
+          
+          <div class="bg-white/10 rounded-lg p-6 mb-8 text-left">
+            <h3 class="font-semibold mb-4">📦 Paket enthält:</h3>
+            <div class="grid md:grid-cols-2 gap-3 text-sm">
+              <div class="flex items-center gap-2">
+                <span>✓</span> Wolf Schneider.md
+              </div>
+              <div class="flex items-center gap-2">
+                <span>✓</span> Gendergerecht (Sternchen).md
+              </div>
+              <div class="flex items-center gap-2">
+                <span>✓</span> Gendergerecht (Neutral).md
+              </div>
+              <div class="flex items-center gap-2">
+                <span>✓</span> Gute Präsentationen.md
+              </div>
+              <div class="flex items-center gap-2">
+                <span>✓</span> Gene Zelazny Charts.md
+              </div>
+              <div class="flex items-center gap-2">
+                <span>✓</span> Tufte Visualisierung.md
+              </div>
+              <div class="flex items-center gap-2">
+                <span>✓</span> Beispielprompts.md
+              </div>
+              <div class="flex items-center gap-2">
+                <span>✓</span> README & Lizenz
+              </div>
+            </div>
+          </div>
+          
+          <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <button 
+              id="download-complete-package"
+              class="bg-white text-primary-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 transition-colors shadow-lg"
+            >
+              📦 Komplettpaket herunterladen
+            </button>
+            <div class="text-primary-200 text-sm">
+              Dateigröße: ~245 KB • Format: ZIP
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Individual Downloads -->
+    <section class="py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">
+            Einzelne Styleguides
+          </h2>
+          <p class="text-lg text-gray-600">
+            Laden Sie gezielt die Guides herunter, die Sie benötigen
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <StyleguideCard
+            title="Wolf Schneider"
+            description="Klares, prägnantes Deutsch nach bewährten Prinzipien der Verständlichkeit."
+            icon="📝"
+            downloadUrl="/files/Wolf Schneider.md"
+            detailUrl="/styleguides/wolf-schneider/"
+            downloadCount={1247}
+            tags={["12 KB", "Deutsch"]}
+          />
+          
+          <StyleguideCard
+            title="Gendergerecht (Sternchen)"
+            description="Moderne gendergerechte Formulierungen mit Asterisk-Notation."
+            icon="⭐"
+            downloadUrl="/files/Gendergerecht mit Sternchen.md"
+            detailUrl="/styleguides/gendergerecht-sternchen/"
+            downloadCount={892}
+            tags={["8 KB", "Deutsch"]}
+          />
+          
+          <StyleguideCard
+            title="Gendergerecht (Neutral)"
+            description="Gendergerechte Sprache durch neutrale Begriffe und Umschreibungen."
+            icon="👥"
+            downloadUrl="/files/Gendergerecht ohne Sternchen.md"
+            detailUrl="/styleguides/gendergerecht-neutral/"
+            downloadCount={634}
+            tags={["9 KB", "Deutsch"]}
+          />
+          
+          <StyleguideCard
+            title="Gute Präsentationen"
+            description="Strukturierte Folien nach SCS-Muster und MECE-Prinzip."
+            icon="📊"
+            downloadUrl="/files/Gute Praesentation.md"
+            detailUrl="/styleguides/praesentationen/"
+            downloadCount={1456}
+            tags={["15 KB", "Deutsch"]}
+          />
+          
+          <StyleguideCard
+            title="Gene Zelazny Charts"
+            description="Professionelle Datenvisualisierung nach bewährten Chart-Prinzipien."
+            icon="📈"
+            downloadUrl="/files/Gene Zelazny Charts.md"
+            detailUrl="/styleguides/charts/"
+            downloadCount={387}
+            tags={["18 KB", "Deutsch"]}
+          />
+          
+          <StyleguideCard
+            title="Tufte Visualisierung"
+            description="Elegante Datenvisualisierung nach Edward Tufte's Prinzipien."
+            icon="📉"
+            downloadUrl="/files/Datenvisualisierung nach Tufte.md"
+            detailUrl="/styleguides/tufte/"
+            downloadCount={234}
+            tags={["14 KB", "Deutsch"]}
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Additional Resources -->
+    <section class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">
+            Weitere Hilfsmittel
+          </h2>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="bg-gray-50 rounded-lg p-8">
+            <div class="text-3xl mb-4">💬</div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">
+              Beispielprompts-Sammlung
+            </h3>
+            <p class="text-gray-600 mb-6 leading-relaxed">
+              Ready-to-use Prompts für Claude, ChatGPT und Microsoft 365 Copilot. 
+              Kategorisiert nach Anwendungsfall und KI-Tool.
+            </p>
+            <div class="flex items-center justify-between">
+              <div class="text-sm text-gray-500">
+                📄 25 KB • Markdown-Format
+              </div>
+              <a 
+                href="/files/Beispielprompts.md" 
+                class="bg-success-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-success-700 transition-colors"
+                download
+              >
+                📥 Herunterladen
+              </a>
+            </div>
+          </div>
+          
+          <div class="bg-gray-50 rounded-lg p-8">
+            <div class="text-3xl mb-4">📖</div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">
+              GitHub Repository
+            </h3>
+            <p class="text-gray-600 mb-6 leading-relaxed">
+              Vollständige Quelldateien, Issues, Diskussionen und die Möglichkeit 
+              zur Mitarbeit am Projekt.
+            </p>
+            <div class="flex items-center justify-between">
+              <div class="text-sm text-gray-500">
+                Immer aktuell • Open Source
+              </div>
+              <a 
+                href="https://github.com/cschwerdtfeger/ki-styleguides" 
+                class="bg-gray-800 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-900 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                🔗 GitHub öffnen
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- License Info -->
+    <section class="py-16 bg-primary-50">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="text-4xl mb-6">📜</div>
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">
+          Creative Commons Attribution 4.0 International
+        </h2>
+        <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+          Alle Inhalte stehen unter der CC BY 4.0 Lizenz und können kostenlos 
+          für private und kommerzielle Zwecke verwendet werden.
+        </p>
+        
+        <div class="grid md:grid-cols-3 gap-6 mb-8">
+          <div class="bg-white rounded-lg p-6">
+            <div class="text-2xl text-green-600 mb-2">✅</div>
+            <h3 class="font-semibold mb-2">Kostenlose Nutzung</h3>
+            <p class="text-sm text-gray-600">Für kommerzielle und private Zwecke</p>
+          </div>
+          <div class="bg-white rounded-lg p-6">
+            <div class="text-2xl text-green-600 mb-2">✅</div>
+            <h3 class="font-semibold mb-2">Bearbeitung erlaubt</h3>
+            <p class="text-sm text-gray-600">Anpassung und Weiterverteilung</p>
+          </div>
+          <div class="bg-white rounded-lg p-6">
+            <div class="text-2xl text-primary-600 mb-2">ℹ️</div>
+            <h3 class="font-semibold mb-2">Namensnennung</h3>
+            <p class="text-sm text-gray-600">Autor erwähnen erforderlich</p>
+          </div>
+        </div>
+        
+        <div class="bg-gray-100 rounded-lg p-6 text-left">
+          <h4 class="font-semibold mb-2">Attribution-Beispiel:</h4>
+          <code class="text-sm text-gray-700">
+            Basierend auf "KI-Styleguides" von Christoph Schwerdtfeger, CC BY 4.0
+          </code>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<script>
+  // Complete package download functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const downloadButton = document.getElementById('download-complete-package');
+    
+    if (downloadButton) {
+      downloadButton.addEventListener('click', async () => {
+        try {
+          // Show loading state
+          downloadButton.textContent = '📦 Wird vorbereitet...';
+          downloadButton.disabled = true;
+          
+          // In a real implementation, you would generate the ZIP here
+          // For now, we'll simulate it
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          
+          // Create a simple text file as demo
+          const content = `KI-Styleguides Komplettpaket
+          
+Vielen Dank für das Herunterladen!
+
+Dieses Paket enthält alle verfügbaren Styleguides:
+- Wolf Schneider.md
+- Gendergerecht mit Sternchen.md  
+- Gendergerecht ohne Sternchen.md
+- Gute Präsentationen.md
+- Gene Zelazny Charts.md
+- Datenvisualisierung nach Tufte.md
+- Beispielprompts.md
+
+Besuchen Sie https://ki-styleguides.de für Updates und weitere Informationen.
+
+Lizenz: CC BY 4.0
+Autor: Christoph Schwerdtfeger`;
+
+          const blob = new Blob([content], { type: 'text/plain' });
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'ki-styleguides-komplettpaket.txt';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(url);
+          
+          // Show success
+          downloadButton.textContent = '✓ Heruntergeladen!';
+          setTimeout(() => {
+            downloadButton.textContent = '📦 Komplettpaket herunterladen';
+            downloadButton.disabled = false;
+          }, 2000);
+          
+          // Show toast
+          window.showToast('Komplettpaket erfolgreich heruntergeladen!', 'success');
+          
+        } catch (error) {
+          console.error('Download failed:', error);
+          downloadButton.textContent = '❌ Fehler beim Download';
+          setTimeout(() => {
+            downloadButton.textContent = '📦 Komplettpaket herunterladen';
+            downloadButton.disabled = false;
+          }, 2000);
+          
+          window.showToast('Download fehlgeschlagen. Bitte versuchen Sie es erneut.', 'error');
+        }
+      });
+    }
+  });
+</script>

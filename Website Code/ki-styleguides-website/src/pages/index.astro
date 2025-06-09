@@ -1,0 +1,232 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import StyleguideCard from '../components/StyleguideCard.astro';
+---
+
+<Layout title="KI-Styleguides - Professionelle Stilrichtlinien für deutsche Texte">
+  <Header />
+  
+  <main>
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-primary-50 to-primary-100 py-16 lg:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1 class="text-4xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+            Professionelle Styleguides<br>
+            <span class="text-primary-600">für KI-assistiertes Schreiben</span>
+          </h1>
+          
+          <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+            Verwandeln Sie Ihre KI-Tools in professionelle Redakteure. Unsere praxiserprobten 
+            Styleguides sorgen für konsistente, hochwertige deutsche Texte.
+          </p>
+          
+          <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+            <a 
+              href="/downloads/" 
+              class="bg-primary-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-primary-700 transition-colors shadow-lg"
+            >
+              📦 Alle Guides herunterladen
+            </a>
+            <a 
+              href="/anwendung/" 
+              class="border-2 border-primary-600 text-primary-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-primary-50 transition-colors"
+            >
+              🚀 Schnellstart-Anleitung
+            </a>
+          </div>
+          
+          <div class="flex items-center justify-center gap-8 text-sm text-gray-500">
+            <div class="flex items-center gap-2">
+              <span>📊</span>
+              <span>Bereits 2.500+ Downloads</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span>⭐</span>
+              <span>Open Source</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span>🔄</span>
+              <span>Regelmäßige Updates</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Styleguide Overview -->
+    <section class="py-16 lg:py-24 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+            Verfügbare Styleguides
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Professionelle Regeln für jeden Anwendungsfall - von klarem Schreiben 
+            bis zur perfekten Datenvisualisierung.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <StyleguideCard
+            title="Wolf Schneider"
+            description="Klares, prägnantes Deutsch nach bewährten Prinzipien. Hauptsachen in Hauptsätze, Verben statt Substantive, konkret statt abstrakt."
+            icon="📝"
+            downloadUrl="/files/wolf-schneider.md"
+            detailUrl="/styleguides/wolf-schneider/"
+            downloadCount={1247}
+            difficulty="Einfach"
+            tags={["Geschäftstexte", "E-Mails", "Berichte"]}
+          />
+          
+          <StyleguideCard
+            title="Gendergerecht (Sternchen)"
+            description="Moderne gendergerechte Formulierungen mit Sternchen-Notation. Student*innen, Mitarbeiter*innen, Professor*innen für zeitgemäße Kommunikation."
+            icon="⭐"
+            downloadUrl="/files/gendergerecht-sternchen.md"
+            detailUrl="/styleguides/gendergerecht-sternchen/"
+            downloadCount={892}
+            difficulty="Einfach"
+            tags={["Stellenausschreibungen", "Offizielle Kommunikation"]}
+          />
+          
+          <StyleguideCard
+            title="Gendergerecht (Neutral)"
+            description="Gendergerechte Formulierungen durch neutrale Begriffe und Umschreibungen. Studierende, Fachkräfte, Lehrende - elegant und barrierefrei."
+            icon="👥"
+            downloadUrl="/files/gendergerecht-neutral.md"
+            detailUrl="/styleguides/gendergerecht-neutral/"
+            downloadCount={634}
+            difficulty="Mittel"
+            tags={["Konservative Umgebungen", "International"]}
+          />
+          
+          <StyleguideCard
+            title="Gute Präsentationen"
+            description="Strukturierte Folien nach dem SCS-Muster und MECE-Prinzip. Slide-Titel als Aussagen, klare Argumentation, wirkungsvolle Botschaften."
+            icon="📊"
+            downloadUrl="/files/praesentationen.md"
+            detailUrl="/styleguides/praesentationen/"
+            downloadCount={1456}
+            difficulty="Mittel"
+            tags={["Business-Präsentationen", "Pitches", "Vorträge"]}
+          />
+          
+          <StyleguideCard
+            title="Gene Zelazny Charts"
+            description="Professionelle Charts und Diagramme nach bewährten Prinzipien. Die richtige Chart-Art für jede Botschaft, klare Gestaltung, überzeugende Datengeschichten."
+            icon="📈"
+            downloadUrl="/files/gene-zelazny.md"
+            detailUrl="/styleguides/charts/"
+            downloadCount={387}
+            difficulty="Fortgeschritten"
+            tags={["Berichte", "Analysen", "Dashboards"]}
+          />
+          
+          <StyleguideCard
+            title="Tufte Visualisierung"
+            description="Informationsdesign nach Edward Tufte. Minimaler Ink-to-Data-Ratio, elegante Datenvisualisierung, Chart Junk vermeiden."
+            icon="📉"
+            downloadUrl="/files/tufte-visualisierung.md"
+            detailUrl="/styleguides/tufte/"
+            downloadCount={234}
+            difficulty="Fortgeschritten"
+            tags={["Wissenschaft", "Forschung", "Design"]}
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Start Section -->
+    <section class="py-16 lg:py-24 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+            Schnellstart in 3 Schritten
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Von der Auswahl bis zum fertigen Text - so einfach funktioniert's
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+          <div class="text-center">
+            <div class="bg-primary-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+              <span class="text-2xl font-bold text-primary-600">1</span>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Guide auswählen</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Laden Sie den passenden Styleguide für Ihr Projekt herunter. Wolf Schneider 
+              für klare Texte, Gendergerecht für inklusive Sprache.
+            </p>
+          </div>
+          
+          <div class="text-center">
+            <div class="bg-primary-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+              <span class="text-2xl font-bold text-primary-600">2</span>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">In KI-Tool einfügen</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Kopieren Sie die Regeln in Ihr Claude Project oder ChatGPT. Einmal eingerichtet, 
+              immer verfügbar für alle Ihre Texte.
+            </p>
+          </div>
+          
+          <div class="text-center">
+            <div class="bg-primary-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+              <span class="text-2xl font-bold text-primary-600">3</span>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Loslegen</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Schreiben Sie Texte nach professionellen Standards. Die KI wendet die Regeln 
+              automatisch an und liefert konsistente Ergebnisse.
+            </p>
+          </div>
+        </div>
+        
+        <div class="text-center mt-12">
+          <a 
+            href="/anwendung/" 
+            class="inline-flex items-center text-primary-600 font-semibold hover:text-primary-700 transition-colors"
+          >
+            Detaillierte Anleitung ansehen
+            <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 lg:py-24 bg-primary-600">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl lg:text-4xl font-bold text-white mb-6">
+          Bereit für professionelle Texte?
+        </h2>
+        <p class="text-xl text-primary-100 mb-8 leading-relaxed">
+          Laden Sie das Komplettpaket herunter und starten Sie sofort mit besseren 
+          Texten für Ihr Business.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a 
+            href="/downloads/" 
+            class="bg-white text-primary-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 transition-colors shadow-lg"
+          >
+            📦 Komplettpaket herunterladen
+          </a>
+          <a 
+            href="/styleguides/" 
+            class="border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-primary-700 transition-colors"
+          >
+            Alle Guides durchstöbern
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>

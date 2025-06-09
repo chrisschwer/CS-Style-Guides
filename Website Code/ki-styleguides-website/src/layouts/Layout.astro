@@ -1,0 +1,86 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Professionelle Styleguides für KI-assistiertes Schreiben auf Deutsch" } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    
+    <title>{title}</title>
+  </head>
+  <body class="font-sans text-gray-900 bg-gray-50">
+    <slot />
+    
+    <script>
+      // Copy to clipboard functionality
+      function copyToClipboard(text) {
+        if (navigator.clipboard) {
+          return navigator.clipboard.writeText(text);
+        } else {
+          // Fallback for older browsers
+          const textarea = document.createElement('textarea');
+          textarea.value = text;
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+          return Promise.resolve();
+        }
+      }
+
+      // Mobile menu toggle
+      function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        const menuButton = document.getElementById('mobile-menu-button');
+        const isOpen = menu.classList.contains('hidden');
+        
+        if (isOpen) {
+          menu.classList.remove('hidden');
+          menuButton.setAttribute('aria-expanded', 'true');
+        } else {
+          menu.classList.add('hidden');
+          menuButton.setAttribute('aria-expanded', 'false');
+        }
+      }
+
+      // Toast notifications
+      function showToast(message, type = 'success') {
+        const toast = document.createElement('div');
+        toast.className = `fixed top-4 right-4 px-6 py-3 rounded-lg shadow-lg z-50 ${
+          type === 'success' ? 'bg-green-600 text-white' : 'bg-red-600 text-white'
+        }`;
+        toast.textContent = message;
+        document.body.appendChild(toast);
+        
+        setTimeout(() => {
+          toast.remove();
+        }, 3000);
+      }
+
+      // Make functions globally available
+      window.copyToClipboard = copyToClipboard;
+      window.toggleMobileMenu = toggleMobileMenu;
+      window.showToast = showToast;
+    </script>
+  </body>
+</html>

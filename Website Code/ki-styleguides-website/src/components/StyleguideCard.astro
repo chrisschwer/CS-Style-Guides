@@ -1,0 +1,101 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  icon: string;
+  downloadUrl: string;
+  detailUrl: string;
+  downloadCount?: number;
+  tags?: string[];
+  difficulty?: 'Einfach' | 'Mittel' | 'Fortgeschritten';
+}
+
+const { 
+  title, 
+  description, 
+  icon, 
+  downloadUrl, 
+  detailUrl, 
+  downloadCount,
+  tags = [],
+  difficulty
+} = Astro.props;
+---
+
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-all duration-200 group">
+  <!-- Header -->
+  <div class="flex items-start justify-between mb-4">
+    <div class="flex items-center gap-3">
+      <span class="text-2xl" role="img">{icon}</span>
+      <div>
+        <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">
+          {title}
+        </h3>
+        {difficulty && (
+          <span class={`inline-block text-xs px-2 py-1 rounded-full font-medium ${
+            difficulty === 'Einfach' ? 'bg-green-100 text-green-800' :
+            difficulty === 'Mittel' ? 'bg-yellow-100 text-yellow-800' :
+            'bg-red-100 text-red-800'
+          }`}>
+            {difficulty}
+          </span>
+        )}
+      </div>
+    </div>
+  </div>
+  
+  <!-- Description -->
+  <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+    {description}
+  </p>
+  
+  <!-- Tags -->
+  {tags.length > 0 && (
+    <div class="flex flex-wrap gap-1 mb-4">
+      {tags.map(tag => (
+        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
+          {tag}
+        </span>
+      ))}
+    </div>
+  )}
+  
+  <!-- Stats -->
+  {downloadCount && (
+    <div class="flex items-center gap-2 text-xs text-gray-500 mb-4">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+      </svg>
+      <span>{downloadCount.toLocaleString('de-DE')} Downloads</span>
+    </div>
+  )}
+  
+  <!-- Actions -->
+  <div class="flex gap-2">
+    <a 
+      href={downloadUrl} 
+      class="flex-1 bg-success-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-success-700 transition-colors text-center flex items-center justify-center gap-2"
+      download
+    >
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+      </svg>
+      Download
+    </a>
+    <a 
+      href={detailUrl}
+      class="flex-1 border border-gray-300 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors text-center"
+    >
+      Mehr erfahren
+    </a>
+  </div>
+</div>
+
+<style>
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

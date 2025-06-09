@@ -1,0 +1,164 @@
+---
+const currentPath = Astro.url.pathname;
+---
+
+<header class="bg-white shadow-sm border-b border-gray-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center py-4">
+      <!-- Logo -->
+      <div class="flex items-center">
+        <a href="/" class="flex items-center space-x-2">
+          <div class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
+            <span class="text-white font-bold text-lg">KI</span>
+          </div>
+          <span class="text-xl font-semibold text-gray-900">Styleguides</span>
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center space-x-8">
+        <a 
+          href="/" 
+          class={`text-sm font-medium transition-colors ${
+            currentPath === '/' 
+              ? 'text-primary-600' 
+              : 'text-gray-700 hover:text-primary-600'
+          }`}
+        >
+          Start
+        </a>
+        <a 
+          href="/styleguides/" 
+          class={`text-sm font-medium transition-colors ${
+            currentPath.startsWith('/styleguides') 
+              ? 'text-primary-600' 
+              : 'text-gray-700 hover:text-primary-600'
+          }`}
+        >
+          Styleguides
+        </a>
+        <a 
+          href="/anwendung/" 
+          class={`text-sm font-medium transition-colors ${
+            currentPath === '/anwendung/' 
+              ? 'text-primary-600' 
+              : 'text-gray-700 hover:text-primary-600'
+          }`}
+        >
+          Anwendung
+        </a>
+        <a 
+          href="/downloads/" 
+          class={`text-sm font-medium transition-colors ${
+            currentPath === '/downloads/' 
+              ? 'text-primary-600' 
+              : 'text-gray-700 hover:text-primary-600'
+          }`}
+        >
+          Downloads
+        </a>
+        <a 
+          href="/ueber/" 
+          class={`text-sm font-medium transition-colors ${
+            currentPath === '/ueber/' 
+              ? 'text-primary-600' 
+              : 'text-gray-700 hover:text-primary-600'
+          }`}
+        >
+          Über
+        </a>
+      </nav>
+
+      <!-- Download Button -->
+      <div class="hidden md:flex items-center">
+        <a 
+          href="/downloads/" 
+          class="bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-700 transition-colors"
+        >
+          📦 Alle Guides
+        </a>
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="md:hidden">
+        <button
+          id="mobile-menu-button"
+          type="button"
+          class="text-gray-700 hover:text-primary-600 focus:outline-none focus:text-primary-600"
+          aria-expanded="false"
+          onclick="toggleMobileMenu()"
+        >
+          <span class="sr-only">Menü öffnen</span>
+          <!-- Hamburger icon -->
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="md:hidden hidden" id="mobile-menu">
+    <div class="px-2 pt-2 pb-3 space-y-1 bg-gray-50 border-t border-gray-200">
+      <a 
+        href="/" 
+        class={`block px-3 py-2 text-base font-medium rounded-md transition-colors ${
+          currentPath === '/' 
+            ? 'bg-primary-100 text-primary-600' 
+            : 'text-gray-700 hover:bg-gray-100'
+        }`}
+      >
+        Start
+      </a>
+      <a 
+        href="/styleguides/" 
+        class={`block px-3 py-2 text-base font-medium rounded-md transition-colors ${
+          currentPath.startsWith('/styleguides') 
+            ? 'bg-primary-100 text-primary-600' 
+            : 'text-gray-700 hover:bg-gray-100'
+        }`}
+      >
+        Styleguides
+      </a>
+      <a 
+        href="/anwendung/" 
+        class={`block px-3 py-2 text-base font-medium rounded-md transition-colors ${
+          currentPath === '/anwendung/' 
+            ? 'bg-primary-100 text-primary-600' 
+            : 'text-gray-700 hover:bg-gray-100'
+        }`}
+      >
+        Anwendung
+      </a>
+      <a 
+        href="/downloads/" 
+        class={`block px-3 py-2 text-base font-medium rounded-md transition-colors ${
+          currentPath === '/downloads/' 
+            ? 'bg-primary-100 text-primary-600' 
+            : 'text-gray-700 hover:bg-gray-100'
+        }`}
+      >
+        Downloads
+      </a>
+      <a 
+        href="/ueber/" 
+        class={`block px-3 py-2 text-base font-medium rounded-md transition-colors ${
+          currentPath === '/ueber/' 
+            ? 'bg-primary-100 text-primary-600' 
+            : 'text-gray-700 hover:bg-gray-100'
+        }`}
+      >
+        Über
+      </a>
+      <div class="px-3 py-2">
+        <a 
+          href="/downloads/" 
+          class="block w-full bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-700 transition-colors text-center"
+        >
+          📦 Alle Guides herunterladen
+        </a>
+      </div>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,106 @@
+---
+export interface Props {
+  content: string;
+  label?: string;
+  size?: 'sm' | 'md' | 'lg';
+  variant?: 'primary' | 'secondary' | 'ghost';
+}
+
+const { 
+  content, 
+  label = "Kopieren",
+  size = 'md',
+  variant = 'secondary'
+} = Astro.props;
+
+const sizeClasses = {
+  sm: 'px-2 py-1 text-xs',
+  md: 'px-3 py-2 text-sm',
+  lg: 'px-4 py-3 text-base'
+};
+
+const variantClasses = {
+  primary: 'bg-primary-600 text-white hover:bg-primary-700',
+  secondary: 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-300',
+  ghost: 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+};
+---
+
+<button 
+  class={`copy-button inline-flex items-center gap-2 rounded-lg font-medium transition-all duration-200 ${sizeClasses[size]} ${variantClasses[variant]}`}
+  data-content={content}
+  title={label}
+>
+  <svg class="w-4 h-4 copy-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+  </svg>
+  <svg class="w-4 h-4 check-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+  </svg>
+  <span class="button-text">{label}</span>
+</button>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('click', async (e) => {
+      const button = e.target.closest('.copy-button');
+      if (!button) return;
+      
+      const content = button.dataset.content;
+      const textElement = button.querySelector('.button-text');
+      const copyIcon = button.querySelector('.copy-icon');
+      const checkIcon = button.querySelector('.check-icon');
+      
+      if (!content || !textElement || !copyIcon || !checkIcon) return;
+      
+      try {
+        await window.copyToClipboard(content);
+        
+        // Update button state
+        textElement.textContent = '✓ Kopiert!';
+        copyIcon.classList.add('hidden');
+        checkIcon.classList.remove('hidden');
+        
+        // Add success styling
+        if (button.classList.contains('bg-gray-100')) {
+          button.classList.remove('bg-gray-100', 'text-gray-700');
+          button.classList.add('bg-success-100', 'text-success-700', 'border-success-300');
+        } else if (button.classList.contains('bg-primary-600')) {
+          button.classList.remove('bg-primary-600');
+          button.classList.add('bg-success-600');
+        }
+        
+        // Show toast
+        window.showToast('In Zwischenablage kopiert', 'success');
+        
+        // Reset after 2 seconds
+        setTimeout(() => {
+          textElement.textContent = button.dataset.originalLabel || 'Kopieren';
+          copyIcon.classList.remove('hidden');
+          checkIcon.classList.add('hidden');
+          
+          // Reset styling
+          if (button.classList.contains('bg-success-100')) {
+            button.classList.remove('bg-success-100', 'text-success-700', 'border-success-300');
+            button.classList.add('bg-gray-100', 'text-gray-700');
+          } else if (button.classList.contains('bg-success-600')) {
+            button.classList.remove('bg-success-600');
+            button.classList.add('bg-primary-600');
+          }
+        }, 2000);
+        
+      } catch (err) {
+        console.error('Failed to copy to clipboard:', err);
+        window.showToast('Kopieren fehlgeschlagen', 'error');
+      }
+    });
+    
+    // Store original labels
+    document.querySelectorAll('.copy-button').forEach(button => {
+      const textElement = button.querySelector('.button-text');
+      if (textElement) {
+        button.dataset.originalLabel = textElement.textContent;
+      }
+    });
+  });
+</script>
