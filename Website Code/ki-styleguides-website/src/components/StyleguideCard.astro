@@ -1,4 +1,7 @@
 ---
+import VersionBadge from './VersionBadge.astro';
+import { getUpdateRecency, isMajorUpdate } from '../lib/versioning';
+
 export interface Props {
   title: string;
   description: string;
@@ -8,6 +11,9 @@ export interface Props {
   downloadCount?: number;
   tags?: string[];
   difficulty?: 'Einfach' | 'Mittel' | 'Fortgeschritten';
+  version?: string;
+  lastUpdated?: string;
+  changeNotes?: string;
 }
 
 const { 
@@ -18,28 +24,79 @@ const {
   detailUrl, 
   downloadCount,
   tags = [],
-  difficulty
+  difficulty,
+  version,
+  lastUpdated,
+  changeNotes
 } = Astro.props;
+
+// Determine update recency and major version status
+const updateRecency = lastUpdated ? getUpdateRecency(lastUpdated) : 'older';
+const isMajor = version ? isMajorUpdate(version) : false;
 ---
 
-<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-all duration-200 group">
+<div class={`bg-white rounded-lg shadow-sm border p-6 hover:shadow-md transition-all duration-200 group relative ${
+  updateRecency === 'new' ? 'border-green-300 bg-green-50' :
+  updateRecency === 'recent' ? 'border-blue-300 bg-blue-50' :
+  'border-gray-200'
+}`}>
+  <!-- Update Indicator Badge -->
+  {updateRecency === 'new' && (
+    <div class="absolute -top-2 -right-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full font-medium shadow-sm animate-pulse">
+      🆕 Neu
+    </div>
+  )}
+  {updateRecency === 'recent' && (
+    <div class="absolute -top-2 -right-2 bg-blue-500 text-white text-xs px-2 py-1 rounded-full font-medium shadow-sm">
+      📅 Aktualisiert
+    </div>
+  )}
+  {isMajor && updateRecency !== 'new' && (
+    <div class="absolute -top-2 -right-2 bg-purple-500 text-white text-xs px-2 py-1 rounded-full font-medium shadow-sm">
+      🚀 Major Update
+    </div>
+  )}
+
   <!-- Header -->
   <div class="flex items-start justify-between mb-4">
     <div class="flex items-center gap-3">
       <span class="text-2xl" role="img">{icon}</span>
-      <div>
-        <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">
-          {title}
-        </h3>
-        {difficulty && (
-          <span class={`inline-block text-xs px-2 py-1 rounded-full font-medium ${
-            difficulty === 'Einfach' ? 'bg-green-100 text-green-800' :
-            difficulty === 'Mittel' ? 'bg-yellow-100 text-yellow-800' :
-            'bg-red-100 text-red-800'
-          }`}>
-            {difficulty}
-          </span>
-        )}
+      <div class="flex-1">
+        <div class="flex items-center gap-2 mb-1">
+          <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">
+            {title}
+          </h3>
+          {version && (
+            <VersionBadge 
+              version={version}
+              variant="compact"
+              lastUpdated={lastUpdated}
+              changeNotes={changeNotes}
+              showTooltip={true}
+            />
+          )}
+        </div>
+        <div class="flex items-center gap-2">
+          {difficulty && (
+            <span class={`inline-block text-xs px-2 py-1 rounded-full font-medium ${
+              difficulty === 'Einfach' ? 'bg-green-100 text-green-800' :
+              difficulty === 'Mittel' ? 'bg-yellow-100 text-yellow-800' :
+              'bg-red-100 text-red-800'
+            }`}>
+              {difficulty}
+            </span>
+          )}
+          {updateRecency === 'new' && (
+            <span class="inline-block text-xs px-2 py-1 rounded-full font-medium bg-green-100 text-green-800">
+              Gerade aktualisiert
+            </span>
+          )}
+          {updateRecency === 'recent' && (
+            <span class="inline-block text-xs px-2 py-1 rounded-full font-medium bg-blue-100 text-blue-800">
+              Kürzlich aktualisiert
+            </span>
+          )}
+        </div>
       </div>
     </div>
   </div>
@@ -61,12 +118,26 @@ const {
   )}
   
   <!-- Stats -->
-  {downloadCount && (
-    <div class="flex items-center gap-2 text-xs text-gray-500 mb-4">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-      </svg>
-      <span>{downloadCount.toLocaleString('de-DE')} Downloads</span>
+  {(downloadCount || lastUpdated) && (
+    <div class="flex items-center justify-between text-xs text-gray-500 mb-4">
+      <div class="flex items-center gap-4">
+        {downloadCount && (
+          <div class="flex items-center gap-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+            </svg>
+            <span>{downloadCount.toLocaleString('de-DE')} Downloads</span>
+          </div>
+        )}
+        {lastUpdated && (
+          <div class="flex items-center gap-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span>Aktualisiert {lastUpdated}</span>
+          </div>
+        )}
+      </div>
     </div>
   )}
   

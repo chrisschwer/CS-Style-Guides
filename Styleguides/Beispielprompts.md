@@ -1,3 +1,9 @@
+---
+version: "1.0.0"
+lastUpdated: "2025-01-09"
+changeNotes: "Initial version"
+---
+
 # Beispielprompts für KI-Assistenten
 
 ## Claude Projects

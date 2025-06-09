@@ -3,6 +3,23 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import StyleguideCard from '../components/StyleguideCard.astro';
+import { loadVersionManifest } from '../lib/versioning';
+
+// Load version information
+const versionManifest = await loadVersionManifest();
+
+// Helper function to get version info for a styleguide
+function getVersionInfo(slug: string) {
+  if (!versionManifest) return {};
+  const entry = versionManifest.styleguides[slug];
+  if (!entry) return {};
+  
+  return {
+    version: entry.version,
+    lastUpdated: entry.lastUpdated,
+    changeNotes: entry.changeNotes
+  };
+}
 ---
 
 <Layout title="Downloads - KI-Styleguides">
@@ -99,6 +116,7 @@ import StyleguideCard from '../components/StyleguideCard.astro';
             detailUrl="/styleguides/wolf-schneider/"
             downloadCount={1247}
             tags={["12 KB", "Deutsch"]}
+            {...getVersionInfo('gutes-deutsch')}
           />
           
           <StyleguideCard
@@ -109,6 +127,7 @@ import StyleguideCard from '../components/StyleguideCard.astro';
             detailUrl="/styleguides/gendergerecht-sternchen/"
             downloadCount={892}
             tags={["8 KB", "Deutsch"]}
+            {...getVersionInfo('gendergerecht-mit-sternchen')}
           />
           
           <StyleguideCard
@@ -119,6 +138,7 @@ import StyleguideCard from '../components/StyleguideCard.astro';
             detailUrl="/styleguides/gendergerecht-neutral/"
             downloadCount={634}
             tags={["9 KB", "Deutsch"]}
+            {...getVersionInfo('gendergerecht-ohne-sternchen')}
           />
           
           <StyleguideCard
@@ -129,6 +149,7 @@ import StyleguideCard from '../components/StyleguideCard.astro';
             detailUrl="/styleguides/praesentationen/"
             downloadCount={1456}
             tags={["15 KB", "Deutsch"]}
+            {...getVersionInfo('gute-praesentation')}
           />
           
           <StyleguideCard
@@ -139,16 +160,18 @@ import StyleguideCard from '../components/StyleguideCard.astro';
             detailUrl="/styleguides/charts/"
             downloadCount={387}
             tags={["18 KB", "Deutsch"]}
+            {...getVersionInfo('gute-charts')}
           />
           
           <StyleguideCard
             title="Datenvisualisierung"
             description="Elegante Datenvisualisierung nach bewährten Prinzipien."
             icon="📉"
-            downloadUrl="/files/Datenvisualisierung nach Tufte.md"
+            downloadUrl="/files/Datenvisualisierung.md"
             detailUrl="/styleguides/tufte/"
             downloadCount={234}
             tags={["14 KB", "Deutsch"]}
+            {...getVersionInfo('datenvisualisierung')}
           />
         </div>
       </div>
@@ -258,6 +281,7 @@ import StyleguideCard from '../components/StyleguideCard.astro';
 </Layout>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="/generate-versioned-readme.js" is:inline></script>
 <script>
   // Complete package download functionality
   document.addEventListener('DOMContentLoaded', () => {
@@ -307,8 +331,13 @@ import StyleguideCard from '../components/StyleguideCard.astro';
           const results = await Promise.all(fetchPromises);
           const successfulFiles = results.filter(r => r.success);
           
-          // Add a README with information
-          const readmeContent = `# KI-Styleguides Komplettpaket
+          // Generate versioned README with current version information
+          let readmeContent: string;
+          try {
+            readmeContent = await (window as any).generateVersionedReadme();
+          } catch (error) {
+            console.warn('Could not generate versioned README, using fallback:', error);
+            readmeContent = `# KI-Styleguides Komplettpaket
 
 Vielen Dank für das Herunterladen!
 
@@ -324,8 +353,8 @@ ${successfulFiles.map(f => `- ✅ ${f.filename}`).join('\n')}
 
 ## Weitere Informationen
 
-- Website: https://ki-styleguides.de
-- Anleitung: https://ki-styleguides.de/anwendung/
+- Website: https://cs-style-guides.vercel.app
+- Anleitung: https://cs-style-guides.vercel.app/anwendung/
 - GitHub: https://github.com/chrisschwer/CS-Style-Guides
 
 ## Lizenz
@@ -339,11 +368,123 @@ Alle Inhalte stehen unter der CC BY 4.0 Lizenz.
 Basierend auf "KI-Styleguides" von Christoph Schwerdtfeger, CC BY 4.0
 
 ---
-Erstellt am: ${new Date().toLocaleDateString('de-DE')}
-Version: 1.0
-Autor: Christoph Schwerdtfeger`;
+Erstellt am: ${new Date().toLocaleDateString('de-DE')}`;
+          }
 
           zip.file('00-README-ZUERST-LESEN.md', readmeContent);
+          
+          // Add version manifest to ZIP
+          try {
+            const versionResponse = await fetch('/versions.json');
+            if (versionResponse.ok) {
+              const versionManifest: any = await versionResponse.json();
+              zip.file('versions.json', JSON.stringify(versionManifest, null, 2));
+              
+              // Create a human-readable version summary
+              const versionSummary = `# Versionsinformationen - KI-Styleguides
+
+Dieses Paket enthält die folgenden Styleguides mit ihren aktuellen Versionen:
+
+## Übersicht
+
+| Styleguide | Version | Letztes Update | Änderungen |
+|-----------|---------|----------------|------------|
+${Object.values(versionManifest.styleguides)
+  .map((entry: any) => `| ${entry.title} | v${entry.version} | ${entry.lastUpdated} | ${entry.changeNotes} |`)
+  .join('\n')}
+
+## Versionshistorie
+
+${Object.values(versionManifest.styleguides)
+  .map((entry: any) => {
+    let historyText = `### ${entry.title}\n\n`;
+    if (entry.history && entry.history.length > 0) {
+      entry.history
+        .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime())
+        .forEach((historyEntry: any) => {
+          historyText += `- **v${historyEntry.version}** (${historyEntry.date}): ${historyEntry.notes}\n`;
+        });
+    } else {
+      historyText += `- **v${entry.version}** (${entry.lastUpdated}): ${entry.changeNotes}\n`;
+    }
+    return historyText;
+  })
+  .join('\n')}
+
+## Technische Details
+
+- **Paket erstellt am:** ${new Date().toLocaleDateString('de-DE')}
+- **Manifest-Schema:** v${versionManifest.schema?.version || '1.0'}
+- **Anzahl Styleguides:** ${Object.keys(versionManifest.styleguides).length}
+- **Neueste Version:** ${Object.values(versionManifest.styleguides)
+    .map((e: any) => e.version)
+    .sort((a: string, b: string) => {
+      const parseVer = (v: string) => v.split('.').map(Number);
+      const [aMaj, aMin, aPat] = parseVer(a);
+      const [bMaj, bMin, bPat] = parseVer(b);
+      return (bMaj - aMaj) || (bMin - aMin) || (bPat - aPat);
+    })[0]}
+
+---
+Automatisch generiert von cs-style-guides.vercel.app`;
+              
+              zip.file('01-VERSIONEN.md', versionSummary);
+              
+              // Create a changelog file for developers/advanced users
+              const changelog = `# CHANGELOG - KI-Styleguides
+
+Alle bemerkenswerten Änderungen an den Styleguides werden in dieser Datei dokumentiert.
+
+Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
+und dieses Projekt folgt der [Semantischen Versionierung](https://semver.org/lang/de/).
+
+${Object.entries(versionManifest.styleguides)
+  .sort(([,a]: [string, any], [,b]: [string, any]) => new Date(b.lastUpdated).getTime() - new Date(a.lastUpdated).getTime())
+  .map(([, entry]: [string, any]) => {
+    let changelogSection = `## [${entry.title}]\n\n`;
+    
+    if (entry.history && entry.history.length > 0) {
+      entry.history
+        .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime())
+        .forEach((historyEntry: any) => {
+          const [major, minor, patch] = historyEntry.version.split('.').map(Number);
+          let changeType = 'Changed';
+          if (major > 1 || (major === 1 && minor === 0 && patch === 0)) changeType = 'Added';
+          else if (minor > 0) changeType = 'Changed';
+          else changeType = 'Fixed';
+          
+          changelogSection += `### [${historyEntry.version}] - ${historyEntry.date}\n\n`;
+          changelogSection += `#### ${changeType}\n`;
+          changelogSection += `- ${historyEntry.notes}\n\n`;
+        });
+    } else {
+      changelogSection += `### [${entry.version}] - ${entry.lastUpdated}\n\n`;
+      changelogSection += `#### Added\n`;
+      changelogSection += `- ${entry.changeNotes}\n\n`;
+    }
+    
+    return changelogSection;
+  })
+  .join('')}
+
+---
+
+## Legende
+
+- **Added** für neue Features
+- **Changed** für Änderungen an bestehenden Features  
+- **Deprecated** für Features, die bald entfernt werden
+- **Removed** für entfernte Features
+- **Fixed** für Bugfixes
+- **Security** für Sicherheitsupdates
+
+Generiert am: ${new Date().toLocaleDateString('de-DE')} um ${new Date().toLocaleTimeString('de-DE')}`;
+              
+              zip.file('CHANGELOG.md', changelog);
+            }
+          } catch (error) {
+            console.warn('Could not add version manifest to ZIP:', error);
+          }
           
           // Generate the ZIP file
           const zipBlob = await zip.generateAsync({
@@ -352,11 +493,48 @@ Autor: Christoph Schwerdtfeger`;
             compressionOptions: { level: 6 }
           });
           
+          // Generate filename with comprehensive version info
+          let zipFilename = `ki-styleguides-komplettpaket-${new Date().toISOString().split('T')[0]}.zip`;
+          try {
+            const versionResponse = await fetch('/versions.json');
+            if (versionResponse.ok) {
+              const versionManifest: any = await versionResponse.json();
+              
+              // Find latest update date
+              const latestUpdate = Object.values(versionManifest.styleguides)
+                .map((e: any) => new Date(e.lastUpdated))
+                .reduce((latest, current) => current > latest ? current : latest);
+              const latestVersion = latestUpdate.toISOString().split('T')[0];
+              
+              // Count version types for filename
+              const versionCounts = Object.values(versionManifest.styleguides).reduce((counts: {major: number, minor: number, patch: number}, entry: any) => {
+                const [major, minor] = entry.version.split('.').map(Number);
+                if (major > 1) counts.major++;
+                else if (minor > 0) counts.minor++;
+                else counts.patch++;
+                return counts;
+              }, { major: 0, minor: 0, patch: 0 });
+              
+              // Create descriptive filename
+              const versionSummary: string[] = [];
+              const counts = versionCounts as {major: number, minor: number, patch: number};
+              if (counts.major > 0) versionSummary.push(`${counts.major}major`);
+              if (counts.minor > 0) versionSummary.push(`${counts.minor}minor`);
+              if (counts.patch > 0) versionSummary.push(`${counts.patch}patch`);
+              
+              const versionString = versionSummary.length > 0 ? `-${versionSummary.join('-')}` : '';
+              
+              zipFilename = `ki-styleguides-${latestVersion}-${successfulFiles.length}guides${versionString}.zip`;
+            }
+          } catch (error) {
+            console.warn('Could not determine version for filename:', error);
+          }
+          
           // Download the ZIP file
           const url = window.URL.createObjectURL(zipBlob);
           const a = document.createElement('a');
           a.href = url;
-          a.download = `ki-styleguides-komplettpaket-${new Date().toISOString().split('T')[0]}.zip`;
+          a.download = zipFilename;
           document.body.appendChild(a);
           a.click();
           document.body.removeChild(a);

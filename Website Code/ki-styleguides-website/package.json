@@ -3,11 +3,26 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "npm run version:check && astro dev",
+    "dev:watch": "npm run version:check && concurrently \"astro dev\" \"npm run version:watch\"",
     "start": "astro dev",
+    "prebuild": "npm run version:check && npm run version:update-hashes && npm run files:sync",
     "build": "astro check && astro build",
+    "postbuild": "npm run version:post-build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "version:check": "node scripts/version-manager.cjs check",
+    "version:init-hashes": "node scripts/version-manager.cjs init-hashes",
+    "version:update-hashes": "node scripts/version-manager.cjs init-hashes",
+    "version:update": "node scripts/version-manager.cjs update",
+    "version:apply": "node scripts/version-manager.cjs apply",
+    "version:bump": "node scripts/version-manager.cjs bump",
+    "version:history": "node scripts/version-manager.cjs history",
+    "version:post-build": "node scripts/version-manager.cjs post-build",
+    "version:watch": "chokidar '../../../../Styleguides/*.md' -c 'npm run version:check'",
+    "version:generate-zip": "node scripts/version-manager.cjs generate-zip",
+    "files:sync": "node scripts/sync-files.cjs sync",
+    "test:version-manager": "node scripts/version-manager.test.cjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.1.0",
@@ -19,6 +34,8 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.5.0",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "chokidar-cli": "^3.0.0",
+    "concurrently": "^8.2.0"
   }
 }

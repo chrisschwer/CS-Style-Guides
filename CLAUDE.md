@@ -41,9 +41,30 @@ This is a comprehensive project for creating and distributing professional style
 
 ### Content Updates (Styleguides/)
 - All style guides are in German and follow consistent formatting
-- Each guide has frontmatter with metadata (title, description, category)
+- Each guide has frontmatter with metadata (title, description, category, version)
 - Include practical examples and clear rules that AI systems can interpret
 - Test guides with actual AI tools before finalizing
+
+### Versioning System
+The project includes an automatic versioning system for all styleguides:
+
+#### Version Structure
+- All styleguides use semantic versioning (MAJOR.MINOR.PATCH)
+- Current version: 1.0.0 for all guides (initial release)
+- Version information stored in:
+  - Frontmatter of each `.md` file (version, lastUpdated, changeNotes)
+  - Central `versions.json` manifest in the root directory
+
+#### Version Increment Rules
+- **PATCH (1.0.0 → 1.0.1)**: Typo fixes, minor text corrections
+- **MINOR (1.0.0 → 1.1.0)**: Content additions, new examples, clarifications
+- **MAJOR (1.0.0 → 2.0.0)**: Structural changes, new sections, breaking changes to recommendations
+
+#### Files and Components
+- `/versions.json` - Central version manifest
+- `/Website Code/ki-styleguides-website/src/lib/versioning.ts` - TypeScript interfaces and utilities
+- Version badges displayed on website (individual pages, overview, downloads)
+- Automatic change detection during build process (planned)
 
 ### Design Work (Website Design/)
 - Design follows mobile-first, accessibility-focused principles
@@ -108,10 +129,19 @@ All content is licensed under CC BY 4.0, allowing free commercial and non-commer
 
 ### Adding a New Style Guide
 1. Create new .md file in `Styleguides/`
-2. Follow existing format and structure
-3. Update `Styleguides/README.md` with new guide
-4. Add corresponding content to `Website Design/website-content.md`
-5. Test with AI tools before publishing
+2. Add version frontmatter:
+   ```yaml
+   ---
+   version: "1.0.0"
+   lastUpdated: "YYYY-MM-DD"
+   changeNotes: "Initial version"
+   ---
+   ```
+3. Follow existing format and structure
+4. Update `Styleguides/README.md` with new guide
+5. Add entry to `/versions.json` manifest
+6. Add corresponding content to `Website Design/website-content.md`
+7. Test with AI tools before publishing
 
 ### Updating Website Design
 1. Modify files in `Website Design/` 
@@ -157,6 +187,134 @@ All content is licensed under CC BY 4.0, allowing free commercial and non-commer
 - **Download Links**: Fixed file paths to match actual filenames
 - **Search Accessibility**: All content properly structured for SEO
 
+### ✅ Automatic Versioning System (January 2025)
+- **Semantic Versioning**: MAJOR.MINOR.PATCH version numbering for all styleguides
+- **Git-Based Change Detection**: Automatically detects changes using git diff analysis
+- **Content Hashing**: SHA-256 hashes for version validation and fallback change detection
+- **Build Integration**: Version checks run during prebuild, build, and postbuild phases
+- **Smart Version Increments**: Analyzes change scope to determine appropriate version bump
+- **Version Display**: Shows versions on all pages, downloads, and in ZIP packages
+- **Comprehensive Manifest**: Central versions.json file tracks all guide versions and history
+
+## Automatic Versioning System
+
+The project includes a comprehensive automatic versioning system that tracks changes to styleguides and manages version numbers following semantic versioning principles.
+
+### How It Works
+
+1. **Change Detection**: The system uses git diff to detect changes in styleguide files
+2. **Smart Analysis**: Changes are analyzed to determine version increment type:
+   - **MAJOR**: Structural changes (headings, major sections)
+   - **MINOR**: Content additions (bullet points, new sections, code blocks)
+   - **PATCH**: Minor corrections and fixes
+3. **Automatic Updates**: Version numbers and metadata are updated in both file frontmatter and central manifest
+4. **Build Integration**: Version checks run automatically during the build process
+
+### Key Components
+
+- **`scripts/version-manager.cjs`**: Core versioning logic and CLI commands
+- **`scripts/sync-files.cjs`**: Synchronizes source files with public download files
+- **`src/integrations/version-manager.ts`**: Astro integration for build-time version management
+- **`versions.json`**: Central manifest tracking all styleguide versions and history
+- **Version frontmatter**: Each styleguide contains version metadata in YAML frontmatter
+
+### Editing Workflow
+
+**IMPORTANT**: Always edit styleguides in the `Styleguides/` directory only!
+
+```bash
+# 1. Edit a styleguide file in the main directory
+# Example: Edit "Styleguides/Gutes Deutsch.md"
+
+# 2. Navigate to website directory  
+cd "Website Code/ki-styleguides-website"
+
+# 3. Check what changed
+npm run version:check
+
+# 4. Update versions automatically
+npm run version:update
+
+# 5. Build (automatically syncs all files)
+npm run build
+```
+
+**File Synchronization:**
+- Source files: `Styleguides/*.md` (EDIT THESE)
+- Public files: `Website Code/ki-styleguides-website/public/files/` (AUTO-GENERATED)
+- The versioning system only detects changes in source files
+- Public files are automatically synchronized during build
+
+### Available Commands
+
+```bash
+# Check for changes
+npm run version:check
+
+# Update content hashes  
+npm run version:update-hashes
+
+# Apply version updates for detected changes
+npm run version:update
+
+# Manually bump a specific file
+npm run version:bump <filename> <patch|minor|major> [notes]
+
+# View version history
+npm run version:history [filename]
+
+# Sync files between source and public directories
+npm run files:sync
+
+# Generate versioned ZIP package
+npm run version:generate-zip
+```
+
+### Build Process Integration
+
+The versioning system is fully integrated into the build process:
+
+1. **Prebuild**: Checks for changes, updates hashes, syncs files
+2. **Build**: Astro integration runs version checks during build start and completion
+3. **Postbuild**: Validates all versions and provides build statistics
+
+### Deployment Integration (Vercel/Netlify)
+
+✅ **Works automatically!** The build process is fully integrated:
+
+**Deployment Workflow:**
+```bash
+# 1. Edit styleguide locally
+# Example: Edit "Styleguides/Gutes Deutsch.md"
+
+# 2. Update versioning locally (recommended)
+cd "Website Code/ki-styleguides-website"
+npm run version:update
+
+# 3. Commit and push to Git
+git add .
+git commit -m "Update Gutes Deutsch styleguide" 
+git push
+
+# 4. Vercel/Netlify automatically:
+# - Runs npm run prebuild (file sync)
+# - Runs npm run build (with Astro integration)
+# - Runs npm run postbuild (validation)
+```
+
+**Two Options:**
+- **Option A (Recommended)**: Update versions locally before pushing
+- **Option B**: Only edit styleguides, deployment syncs automatically (but without version updates)
+
+**Important**: For proper version tracking, run `npm run version:update` locally before pushing changes to ensure version numbers are incremented correctly.
+
+### Version Display
+
+- **Individual Pages**: Version badges displayed on each styleguide page
+- **Download Page**: Version information for each guide with visual indicators for recent updates
+- **ZIP Downloads**: Include version manifest, changelog, and version-aware filenames
+- **Homepage**: Recently updated guides section highlights version changes
+
 ## Recent Updates (January 2025)
 
 ### ✅ File Naming Standardization
@@ -176,5 +334,11 @@ All content is licensed under CC BY 4.0, allowing free commercial and non-commer
 - **Website-Content Alignment**: Design documentation synchronized with actual website
 - **File Count Correction**: Updated from 6 to 7 styleguides in download descriptions
 - **Author Section Removal**: Removed "Über den Autor" section from about page
+
+## Memories
+
+- When prompted to create a PRD for a new feature, use @.ai-dev-tasks/create-prd.mdc
+- When prompted to create a task list from a PRD, look/ask for a PRD file and use @.ai-dev-tasks/generate-tasks.mdc
+- When asked to work on a set of tasks from a file, use @.ai-dev-task/process-task-list.mdc
 
 This structure supports both independent work on different aspects and coordinated development of the complete website experience. **The website is now production-ready.**

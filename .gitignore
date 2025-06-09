@@ -24,6 +24,7 @@ Temporary Items
 
 # Editor directories and files
 .claude/
+.ai-dev-tasks/
 .idea/
 .vscode/
 *.swp

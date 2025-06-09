@@ -3,8 +3,10 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import CopyButton from '../../components/CopyButton.astro';
+import VersionBadge from '../../components/VersionBadge.astro';
 import { readFileSync } from 'fs';
 import { join } from 'path';
+import { getStyleguideVersion } from '../../lib/versioning';
 
 // Define styleguide mappings
 const styleguideMap = {
@@ -96,6 +98,28 @@ if (!styleguideMap[slug]) {
 
 const styleguide = styleguideMap[slug];
 
+// Map page slugs to version slugs
+const versionSlugMap = {
+  'wolf-schneider': 'gutes-deutsch',
+  'gendergerecht-sternchen': 'gendergerecht-mit-sternchen', 
+  'gendergerecht-neutral': 'gendergerecht-ohne-sternchen',
+  'praesentationen': 'gute-praesentation',
+  'charts': 'gute-charts',
+  'tufte': 'datenvisualisierung',
+  'beispielprompts': 'beispielprompts'
+};
+
+// Load version information
+let versionInfo = null;
+try {
+  const versionSlug = versionSlugMap[slug];
+  if (versionSlug) {
+    versionInfo = await getStyleguideVersion(versionSlug);
+  }
+} catch (error) {
+  console.error(`Error loading version info for ${styleguide.file}:`, error);
+}
+
 // Read the markdown file
 let content = '';
 try {
@@ -181,9 +205,20 @@ const pageTitle = `${styleguide.title} - KI-Styleguides`;
           <div class="flex items-center justify-center gap-4 mb-6">
             <span class="text-4xl">{styleguide.icon}</span>
             <div>
-              <h1 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
-                {styleguide.title}
-              </h1>
+              <div class="flex items-center justify-center gap-3 mb-2">
+                <h1 class="text-3xl lg:text-4xl font-bold text-gray-900">
+                  {styleguide.title}
+                </h1>
+                {versionInfo && (
+                  <VersionBadge 
+                    version={versionInfo.version}
+                    variant="detailed"
+                    lastUpdated={versionInfo.lastUpdated}
+                    changeNotes={versionInfo.changeNotes}
+                    showTooltip={true}
+                  />
+                )}
+              </div>
               <span class={`inline-block text-sm px-3 py-1 rounded-full font-medium ${
                 styleguide.difficulty === 'Einfach' ? 'bg-green-100 text-green-800' :
                 styleguide.difficulty === 'Mittel' ? 'bg-yellow-100 text-yellow-800' :
@@ -228,8 +263,20 @@ const pageTitle = `${styleguide.title} - KI-Styleguides`;
           </div>
           
           <!-- Stats -->
-          <div class="mt-6 text-sm text-gray-500">
+          <div class="mt-6 text-sm text-gray-500 flex items-center justify-center gap-4">
             <span>{styleguide.downloadCount.toLocaleString('de-DE')} Downloads</span>
+            {versionInfo && (
+              <span>•</span>
+            )}
+            {versionInfo && (
+              <span>Version {versionInfo.version}</span>
+            )}
+            {versionInfo && versionInfo.lastUpdated && (
+              <span>•</span>
+            )}
+            {versionInfo && versionInfo.lastUpdated && (
+              <span>Aktualisiert am {versionInfo.lastUpdated}</span>
+            )}
           </div>
         </div>
       </div>

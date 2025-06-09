@@ -3,6 +3,23 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import StyleguideCard from '../../components/StyleguideCard.astro';
+import { loadVersionManifest } from '../../lib/versioning';
+
+// Load version information
+const versionManifest = await loadVersionManifest();
+
+// Helper function to get version info for a styleguide
+function getVersionInfo(slug: string) {
+  if (!versionManifest) return {};
+  const entry = versionManifest.styleguides[slug];
+  if (!entry) return {};
+  
+  return {
+    version: entry.version,
+    lastUpdated: entry.lastUpdated,
+    changeNotes: entry.changeNotes
+  };
+}
 ---
 
 <Layout title="Alle Styleguides - KI-Styleguides">
@@ -36,6 +53,7 @@ import StyleguideCard from '../../components/StyleguideCard.astro';
             downloadCount={1247}
             difficulty="Einfach"
             tags={["Geschäftstexte", "E-Mails", "Berichte"]}
+            {...getVersionInfo('gutes-deutsch')}
           />
           
           <StyleguideCard
@@ -47,6 +65,7 @@ import StyleguideCard from '../../components/StyleguideCard.astro';
             downloadCount={892}
             difficulty="Einfach"
             tags={["Stellenausschreibungen", "Offizielle Kommunikation"]}
+            {...getVersionInfo('gendergerecht-mit-sternchen')}
           />
           
           <StyleguideCard
@@ -58,6 +77,7 @@ import StyleguideCard from '../../components/StyleguideCard.astro';
             downloadCount={634}
             difficulty="Mittel"
             tags={["Konservative Umgebungen", "International"]}
+            {...getVersionInfo('gendergerecht-ohne-sternchen')}
           />
           
           <StyleguideCard
@@ -69,6 +89,7 @@ import StyleguideCard from '../../components/StyleguideCard.astro';
             downloadCount={1456}
             difficulty="Mittel"
             tags={["Business-Präsentationen", "Pitches", "Vorträge"]}
+            {...getVersionInfo('gute-praesentation')}
           />
           
           <StyleguideCard
@@ -80,6 +101,7 @@ import StyleguideCard from '../../components/StyleguideCard.astro';
             downloadCount={387}
             difficulty="Fortgeschritten"
             tags={["Berichte", "Analysen", "Dashboards"]}
+            {...getVersionInfo('gute-charts')}
           />
           
           <StyleguideCard
@@ -91,6 +113,7 @@ import StyleguideCard from '../../components/StyleguideCard.astro';
             downloadCount={234}
             difficulty="Fortgeschritten"
             tags={["Wissenschaft", "Forschung", "Design"]}
+            {...getVersionInfo('datenvisualisierung')}
           />
           
           <StyleguideCard
@@ -102,6 +125,7 @@ import StyleguideCard from '../../components/StyleguideCard.astro';
             downloadCount={523}
             difficulty="Einfach"
             tags={["Claude", "ChatGPT", "Copilot"]}
+            {...getVersionInfo('beispielprompts')}
           />
         </div>
       </div>

@@ -1,3 +1,10 @@
+---
+version: "1.0.0"
+lastUpdated: "2025-01-09"
+changeNotes: "Initial version"
+---
+
+
 # Gendergerechte Sprache ohne Sternchen
 
 ## Anwendungsbereich

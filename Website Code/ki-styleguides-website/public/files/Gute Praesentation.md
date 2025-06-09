@@ -1,3 +1,10 @@
+---
+version: "2.0.0"
+lastUpdated: "2024-12-15"
+changeNotes: "Komplett überarbeitete Struktur mit neuen MECE-Prinzipien und erweiterten SCS-Mustern"
+---
+
+
 # Regeln für gute Präsentationen
 
 ## Struktur des Gesamtdokuments

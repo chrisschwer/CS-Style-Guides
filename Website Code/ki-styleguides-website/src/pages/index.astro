@@ -3,6 +3,30 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import StyleguideCard from '../components/StyleguideCard.astro';
+import { loadVersionManifest, getUpdateRecency } from '../lib/versioning';
+
+// Load version information
+const versionManifest = await loadVersionManifest();
+
+// Helper function to get version info for a styleguide
+function getVersionInfo(slug: string) {
+  if (!versionManifest) return {};
+  const entry = versionManifest.styleguides[slug];
+  if (!entry) return {};
+  
+  return {
+    version: entry.version,
+    lastUpdated: entry.lastUpdated,
+    changeNotes: entry.changeNotes
+  };
+}
+
+// Get recently updated guides for highlighting
+const recentlyUpdatedGuides = versionManifest ? 
+  Object.entries(versionManifest.styleguides)
+    .filter(([, entry]: [string, any]) => getUpdateRecency(entry.lastUpdated) !== 'older')
+    .sort((a, b) => new Date(b[1].lastUpdated).getTime() - new Date(a[1].lastUpdated).getTime())
+    .slice(0, 3) : [];
 ---
 
 <Layout title="KI-Styleguides - Professionelle Stilrichtlinien für deutsche Texte">
@@ -65,6 +89,7 @@ import StyleguideCard from '../components/StyleguideCard.astro';
             downloadCount={1247}
             difficulty="Einfach"
             tags={["Geschäftstexte", "E-Mails", "Berichte"]}
+            {...getVersionInfo('gutes-deutsch')}
           />
           
           <StyleguideCard
@@ -76,6 +101,7 @@ import StyleguideCard from '../components/StyleguideCard.astro';
             downloadCount={892}
             difficulty="Einfach"
             tags={["Stellenausschreibungen", "Offizielle Kommunikation"]}
+            {...getVersionInfo('gendergerecht-mit-sternchen')}
           />
           
           <StyleguideCard
@@ -87,6 +113,7 @@ import StyleguideCard from '../components/StyleguideCard.astro';
             downloadCount={634}
             difficulty="Mittel"
             tags={["Konservative Umgebungen", "International"]}
+            {...getVersionInfo('gendergerecht-ohne-sternchen')}
           />
           
           <StyleguideCard
@@ -98,6 +125,7 @@ import StyleguideCard from '../components/StyleguideCard.astro';
             downloadCount={1456}
             difficulty="Mittel"
             tags={["Business-Präsentationen", "Pitches", "Vorträge"]}
+            {...getVersionInfo('gute-praesentation')}
           />
           
           <StyleguideCard
@@ -109,17 +137,19 @@ import StyleguideCard from '../components/StyleguideCard.astro';
             downloadCount={387}
             difficulty="Fortgeschritten"
             tags={["Berichte", "Analysen", "Dashboards"]}
+            {...getVersionInfo('gute-charts')}
           />
           
           <StyleguideCard
             title="Datenvisualisierung"
             description="Elegante Informationsvisualisierung. Minimaler Ink-to-Data-Ratio, klare Datenvisualisierung, Chart Junk vermeiden."
             icon="📉"
-            downloadUrl="/files/Datenvisualisierung nach Tufte.md"
+            downloadUrl="/files/Datenvisualisierung.md"
             detailUrl="/styleguides/tufte/"
             downloadCount={234}
             difficulty="Fortgeschritten"
             tags={["Wissenschaft", "Forschung", "Design"]}
+            {...getVersionInfo('datenvisualisierung')}
           />
           
           <StyleguideCard
@@ -131,10 +161,99 @@ import StyleguideCard from '../components/StyleguideCard.astro';
             downloadCount={523}
             difficulty="Einfach"
             tags={["Claude", "ChatGPT", "Copilot"]}
+            {...getVersionInfo('beispielprompts')}
           />
         </div>
       </div>
     </section>
+
+    <!-- Recently Updated Section -->
+    {recentlyUpdatedGuides.length > 0 && (
+      <section class="py-16 bg-gradient-to-br from-blue-50 to-green-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-12">
+            <div class="inline-flex items-center gap-2 bg-white rounded-full px-4 py-2 shadow-sm mb-4">
+              <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+              <span class="text-sm font-medium text-gray-700">Kürzlich aktualisiert</span>
+            </div>
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">
+              🆕 Neueste Updates
+            </h2>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+              Diese Styleguides wurden kürzlich überarbeitet und verbessert
+            </p>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {recentlyUpdatedGuides.map(([slug, entry]) => {
+              // Map slugs to display data
+              const displayData = {
+                'gutes-deutsch': {
+                  title: 'Gutes Deutsch',
+                  description: 'Klares, prägnantes Deutsch nach bewährten Prinzipien. Hauptsachen in Hauptsätze, Verben statt Substantive, konkret statt abstrakt.',
+                  icon: '📝',
+                  downloadUrl: '/files/Gutes Deutsch.md',
+                  detailUrl: '/styleguides/wolf-schneider/',
+                  downloadCount: 1247,
+                  difficulty: 'Einfach' as const,
+                  tags: ['Geschäftstexte', 'E-Mails', 'Berichte']
+                },
+                'gendergerecht-mit-sternchen': {
+                  title: 'Gendergerecht (Sternchen)',
+                  description: 'Moderne gendergerechte Formulierungen mit Sternchen-Notation. Student*innen, Mitarbeiter*innen, Professor*innen für zeitgemäße Kommunikation.',
+                  icon: '⭐',
+                  downloadUrl: '/files/Gendergerecht mit Sternchen.md',
+                  detailUrl: '/styleguides/gendergerecht-sternchen/',
+                  downloadCount: 892,
+                  difficulty: 'Einfach' as const,
+                  tags: ['Stellenausschreibungen', 'Offizielle Kommunikation']
+                },
+                'gute-praesentation': {
+                  title: 'Gute Präsentationen',
+                  description: 'Strukturierte Folien nach dem SCS-Muster und MECE-Prinzip. Slide-Titel als Aussagen, klare Argumentation, wirkungsvolle Botschaften.',
+                  icon: '📊',
+                  downloadUrl: '/files/Gute Praesentation.md',
+                  detailUrl: '/styleguides/praesentationen/',
+                  downloadCount: 1456,
+                  difficulty: 'Mittel' as const,
+                  tags: ['Business-Präsentationen', 'Pitches', 'Vorträge']
+                }
+              }[slug];
+              
+              if (!displayData) return null;
+              
+              return (
+                <StyleguideCard
+                  title={displayData.title}
+                  description={displayData.description}
+                  icon={displayData.icon}
+                  downloadUrl={displayData.downloadUrl}
+                  detailUrl={displayData.detailUrl}
+                  downloadCount={displayData.downloadCount}
+                  difficulty={displayData.difficulty}
+                  tags={displayData.tags}
+                  version={entry.version}
+                  lastUpdated={entry.lastUpdated}
+                  changeNotes={entry.changeNotes}
+                />
+              );
+            })}
+          </div>
+          
+          <div class="text-center mt-8">
+            <a 
+              href="/styleguides/" 
+              class="inline-flex items-center gap-2 bg-white text-primary-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors shadow-sm border border-primary-200"
+            >
+              📚 Alle Styleguides ansehen
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
+    )}
 
     <!-- Quick Start Section -->
     <section class="py-16 lg:py-24 bg-gray-50">

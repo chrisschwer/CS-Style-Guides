@@ -35,6 +35,7 @@ Vollständige Website-Implementierung:
 - **Copy-to-Clipboard** - Für einfache KI-Integration
 - **ZIP Downloads** - Komplettpaket-Funktionalität
 - **Dynamic Routing** - Individual-Seiten für alle Styleguides
+- **Automatic Versioning** - Semantische Versionierung mit Git-Integration
 
 ## Quick Start
 
@@ -54,6 +55,89 @@ Vollständige Website-Implementierung:
 - **Status**: Vollständig implementiert und produktionsbereit
 - **Features**: Alle 7 Styleguide-Seiten, Downloads, legale Seiten
 - **Bereit für**: Sofortiges Deployment auf Netlify/Vercel
+
+## Automatische Versionierung
+
+Das Projekt verfügt über ein vollständiges automatisches Versionierungssystem:
+
+### Features
+- **Semantische Versionierung** - MAJOR.MINOR.PATCH für alle Styleguides
+- **Git-basierte Änderungserkennung** - Automatische Analyse von Änderungen
+- **Build-Integration** - Versionsprüfungen während des Build-Prozesses
+- **Smart Version Bumps** - Intelligente Bestimmung der Versionstypen
+- **Umfassende Dokumentation** - Vollständige Versionshistorie und Changelog
+
+### Styleguides bearbeiten und Versionen aktualisieren
+
+**⚠️ WICHTIG**: Bearbeiten Sie nur Dateien im `Styleguides/` Ordner! 
+
+```bash
+# 1. Styleguide-Datei im Hauptordner bearbeiten
+# Beispiel: Bearbeiten Sie "Styleguides/Gutes Deutsch.md"
+
+# 2. Wechseln Sie in das Website-Verzeichnis
+cd "Website Code/ki-styleguides-website"
+
+# 3. Änderungen prüfen
+npm run version:check
+
+# 4. Versionen automatisch aktualisieren
+npm run version:update
+
+# 5. Build ausführen (synchronisiert automatisch alle Dateien)
+npm run build
+```
+
+**Automatische Synchronisation:**
+- Dateien in `public/files/` werden automatisch aus `Styleguides/` synchronisiert
+- Ändern Sie niemals direkt Dateien in `public/files/` - diese werden überschrieben
+- Das Versionierungssystem erkennt nur Änderungen in den Original-Dateien im `Styleguides/` Ordner
+
+### Deployment auf Vercel/Netlify
+
+✅ **Funktioniert automatisch!** Der Build-Prozess ist vollständig integriert:
+
+**Workflow für Deployment:**
+```bash
+# 1. Styleguide lokal bearbeiten
+# Beispiel: Bearbeiten Sie "Styleguides/Gutes Deutsch.md"
+
+# 2. Versionierung lokal aktualisieren (empfohlen)
+cd "Website Code/ki-styleguides-website"
+npm run version:update
+
+# 3. Zu Git hinzufügen und pushen
+git add .
+git commit -m "Update Gutes Deutsch styleguide"
+git push
+
+# 4. Vercel baut automatisch:
+# - npm run prebuild (Dateien synchronisieren)
+# - npm run build (mit Astro Versionierung)
+# - npm run postbuild (Validierung)
+```
+
+**Zwei Optionen:**
+- **Option A (Empfohlen)**: Versionen lokal aktualisieren vor dem Push
+- **Option B**: Nur Styleguides bearbeiten, Vercel synchronisiert automatisch (aber ohne Versionierung)
+
+### Weitere Kommandos
+```bash
+# Versionshistorie anzeigen
+npm run version:history
+
+# Dateien manuell synchronisieren
+npm run files:sync
+
+# Nur Content-Hashes aktualisieren
+npm run version:update-hashes
+```
+
+### Versionsdisplay
+- Versionsnummern werden auf allen Seiten angezeigt
+- ZIP-Downloads enthalten Versionsmanifest und Changelog
+- Homepage zeigt kürzlich aktualisierte Guides hervor
+- Download-Seite bietet detaillierte Versionsinformationen
 
 ## Lizenz
 

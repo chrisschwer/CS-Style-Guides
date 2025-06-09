@@ -1,12 +1,14 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
+import versionManager from './src/integrations/version-manager.ts';
 
 export default defineConfig({
   site: 'https://ki-styleguides.netlify.app',
   integrations: [
     tailwind(),
-    sitemap()
+    sitemap(),
+    versionManager()
   ],
   markdown: {
     shikiConfig: {

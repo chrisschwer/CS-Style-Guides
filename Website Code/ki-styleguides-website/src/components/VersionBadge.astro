@@ -1,0 +1,91 @@
+---
+export interface Props {
+  version: string;
+  variant?: 'default' | 'compact' | 'detailed';
+  lastUpdated?: string;
+  changeNotes?: string;
+  showTooltip?: boolean;
+  className?: string;
+}
+
+const { 
+  version, 
+  variant = 'default',
+  lastUpdated,
+  changeNotes,
+  showTooltip = false,
+  className = ''
+} = Astro.props;
+
+// Format version display
+const displayVersion = version.startsWith('v') ? version : `v${version}`;
+
+// Generate tooltip content
+const tooltipContent = showTooltip && (lastUpdated || changeNotes) 
+  ? `${lastUpdated ? `Updated: ${lastUpdated}` : ''}${lastUpdated && changeNotes ? ' • ' : ''}${changeNotes || ''}`
+  : null;
+
+// Variant-specific classes
+const variantClasses = {
+  default: 'px-2.5 py-1 text-xs font-medium rounded-full',
+  compact: 'px-2 py-0.5 text-xs font-medium rounded',
+  detailed: 'px-3 py-1.5 text-sm font-medium rounded-lg'
+};
+
+// Base styling classes
+const baseClasses = `
+  inline-flex items-center gap-1
+  bg-primary-50 text-primary-700 border border-primary-200
+  transition-all duration-200
+  ${variantClasses[variant]}
+  ${className}
+`;
+---
+
+<span 
+  class={baseClasses}
+  title={tooltipContent}
+  data-version={version}
+>
+  {variant !== 'compact' && (
+    <svg 
+      class="w-3 h-3" 
+      fill="currentColor" 
+      viewBox="0 0 20 20"
+      aria-hidden="true"
+    >
+      <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clip-rule="evenodd" />
+    </svg>
+  )}
+  
+  <span class="select-none">
+    {displayVersion}
+  </span>
+  
+  {variant === 'detailed' && lastUpdated && (
+    <span class="text-primary-500 font-normal">
+      • {lastUpdated}
+    </span>
+  )}
+</span>
+
+<style>
+  /* Enhanced tooltip styling */
+  [title]:hover {
+    position: relative;
+  }
+  
+  /* Version badge hover effects */
+  [data-version]:hover {
+    background-color: rgb(219, 234, 254); /* primary-100 */
+    border-color: rgb(147, 197, 253); /* primary-300 */
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Accessibility improvements */
+  [data-version]:focus-visible {
+    outline: 2px solid rgb(59, 130, 246); /* primary-500 */
+    outline-offset: 2px;
+  }
+</style>
