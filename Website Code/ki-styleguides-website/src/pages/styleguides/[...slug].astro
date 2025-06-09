@@ -6,7 +6,7 @@ import CopyButton from '../../components/CopyButton.astro';
 import VersionBadge from '../../components/VersionBadge.astro';
 import { readFileSync } from 'fs';
 import { join } from 'path';
-import { getStyleguideVersion } from '../../lib/versioning';
+import { getStyleguideVersion, formatDateGerman } from '../../lib/versioning';
 
 // Define styleguide mappings
 const styleguideMap = {
@@ -263,7 +263,7 @@ const pageTitle = `${styleguide.title} - KI-Styleguides`;
                 <span>•</span>
               )}
               {versionInfo.lastUpdated && (
-                <span>Aktualisiert am {versionInfo.lastUpdated}</span>
+                <span>Aktualisiert am {formatDateGerman(versionInfo.lastUpdated)}</span>
               )}
             </div>
           )}

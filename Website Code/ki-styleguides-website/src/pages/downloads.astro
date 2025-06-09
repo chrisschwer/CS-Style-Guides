@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import StyleguideCard from '../components/StyleguideCard.astro';
-import { loadVersionManifest } from '../lib/versioning';
+import { loadVersionManifest, formatDateGerman } from '../lib/versioning';
 
 // Load version information
 const versionManifest = await loadVersionManifest();
@@ -16,10 +16,66 @@ function getVersionInfo(slug: string) {
   
   return {
     version: entry.version,
-    lastUpdated: entry.lastUpdated,
+    lastUpdated: formatDateGerman(entry.lastUpdated),
     changeNotes: entry.changeNotes
   };
 }
+
+// Pre-format all dates for display in README content
+const styleguideTableRows = versionManifest 
+  ? Object.values(versionManifest.styleguides)
+      .map((entry: any) => `| ${entry.title} | v${entry.version} | ${formatDateGerman(entry.lastUpdated)} | ${entry.changeNotes} |`)
+      .join('\n')
+  : '';
+
+const styleguideHistory = versionManifest 
+  ? Object.values(versionManifest.styleguides)
+      .map((entry: any) => {
+        let historyText = `### ${entry.title}\n\n`;
+        if (entry.history && entry.history.length > 0) {
+          entry.history
+            .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime())
+            .forEach((historyEntry: any) => {
+              historyText += `- **v${historyEntry.version}** (${formatDateGerman(historyEntry.date)}): ${historyEntry.notes}\n`;
+            });
+        } else {
+          historyText += `- **v${entry.version}** (${formatDateGerman(entry.lastUpdated)}): ${entry.changeNotes}\n`;
+        }
+        return historyText;
+      })
+      .join('\n')
+  : '';
+
+const changelogContent = versionManifest
+  ? Object.entries(versionManifest.styleguides)
+      .sort(([,a]: [string, any], [,b]: [string, any]) => new Date(b.lastUpdated).getTime() - new Date(a.lastUpdated).getTime())
+      .map(([, entry]: [string, any]) => {
+        let changelogSection = `## [${entry.title}]\n\n`;
+        
+        if (entry.history && entry.history.length > 0) {
+          entry.history
+            .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime())
+            .forEach((historyEntry: any) => {
+              const [major, minor, patch] = historyEntry.version.split('.').map(Number);
+              let changeType = 'Changed';
+              if (major > 1 || (major === 1 && minor === 0 && patch === 0)) changeType = 'Added';
+              else if (minor > 0) changeType = 'Changed';
+              else changeType = 'Fixed';
+              
+              changelogSection += `### [${historyEntry.version}] - ${formatDateGerman(historyEntry.date)}\n\n`;
+              changelogSection += `#### ${changeType}\n`;
+              changelogSection += `- ${historyEntry.notes}\n\n`;
+            });
+        } else {
+          changelogSection += `### [${entry.version}] - ${formatDateGerman(entry.lastUpdated)}\n\n`;
+          changelogSection += `#### Added\n`;
+          changelogSection += `- ${entry.changeNotes}\n\n`;
+        }
+        
+        return changelogSection;
+      })
+      .join('')
+  : '';
 ---
 
 <Layout title="Downloads - KI-Styleguides">
@@ -276,10 +332,10 @@ function getVersionInfo(slug: string) {
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="/generate-versioned-readme.js" is:inline></script>
-<script>
+<script define:vars={{ styleguideTableRows, styleguideHistory, changelogContent }} is:inline>
   // Complete package download functionality
   document.addEventListener('DOMContentLoaded', () => {
-    const downloadButton = document.getElementById('download-complete-package') as HTMLButtonElement;
+    const downloadButton = document.getElementById('download-complete-package');
     
     if (downloadButton) {
       downloadButton.addEventListener('click', async () => {
@@ -289,7 +345,7 @@ function getVersionInfo(slug: string) {
           if (downloadButton) downloadButton.disabled = true;
           
           // Create a new ZIP instance
-          const zip = new (window as any).JSZip();
+          const zip = new window.JSZip();
           
           // List of files to include
           const files = [
@@ -326,9 +382,9 @@ function getVersionInfo(slug: string) {
           const successfulFiles = results.filter(r => r.success);
           
           // Generate versioned README with current version information
-          let readmeContent: string;
+          let readmeContent;
           try {
-            readmeContent = await (window as any).generateVersionedReadme();
+            readmeContent = await window.generateVersionedReadme();
           } catch (error) {
             console.warn('Could not generate versioned README, using fallback:', error);
             readmeContent = `# KI-Styleguides Komplettpaket
@@ -371,7 +427,7 @@ Erstellt am: ${new Date().toLocaleDateString('de-DE')}`;
           try {
             const versionResponse = await fetch('/versions.json');
             if (versionResponse.ok) {
-              const versionManifest: any = await versionResponse.json();
+              const versionManifest = await versionResponse.json();
               zip.file('versions.json', JSON.stringify(versionManifest, null, 2));
               
               // Create a human-readable version summary
@@ -383,27 +439,11 @@ Dieses Paket enthält die folgenden Styleguides mit ihren aktuellen Versionen:
 
 | Styleguide | Version | Letztes Update | Änderungen |
 |-----------|---------|----------------|------------|
-${Object.values(versionManifest.styleguides)
-  .map((entry: any) => `| ${entry.title} | v${entry.version} | ${entry.lastUpdated} | ${entry.changeNotes} |`)
-  .join('\n')}
+${styleguideTableRows}
 
 ## Versionshistorie
 
-${Object.values(versionManifest.styleguides)
-  .map((entry: any) => {
-    let historyText = `### ${entry.title}\n\n`;
-    if (entry.history && entry.history.length > 0) {
-      entry.history
-        .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime())
-        .forEach((historyEntry: any) => {
-          historyText += `- **v${historyEntry.version}** (${historyEntry.date}): ${historyEntry.notes}\n`;
-        });
-    } else {
-      historyText += `- **v${entry.version}** (${entry.lastUpdated}): ${entry.changeNotes}\n`;
-    }
-    return historyText;
-  })
-  .join('\n')}
+${styleguideHistory}
 
 ## Technische Details
 
@@ -411,9 +451,9 @@ ${Object.values(versionManifest.styleguides)
 - **Manifest-Schema:** v${versionManifest.schema?.version || '1.0'}
 - **Anzahl Styleguides:** ${Object.keys(versionManifest.styleguides).length}
 - **Neueste Version:** ${Object.values(versionManifest.styleguides)
-    .map((e: any) => e.version)
-    .sort((a: string, b: string) => {
-      const parseVer = (v: string) => v.split('.').map(Number);
+    .map((e) => e.version)
+    .sort((a, b) => {
+      const parseVer = (v) => v.split('.').map(Number);
       const [aMaj, aMin, aPat] = parseVer(a);
       const [bMaj, bMin, bPat] = parseVer(b);
       return (bMaj - aMaj) || (bMin - aMin) || (bPat - aPat);
@@ -432,34 +472,7 @@ Alle bemerkenswerten Änderungen an den Styleguides werden in dieser Datei dokum
 Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 und dieses Projekt folgt der [Semantischen Versionierung](https://semver.org/lang/de/).
 
-${Object.entries(versionManifest.styleguides)
-  .sort(([,a]: [string, any], [,b]: [string, any]) => new Date(b.lastUpdated).getTime() - new Date(a.lastUpdated).getTime())
-  .map(([, entry]: [string, any]) => {
-    let changelogSection = `## [${entry.title}]\n\n`;
-    
-    if (entry.history && entry.history.length > 0) {
-      entry.history
-        .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime())
-        .forEach((historyEntry: any) => {
-          const [major, minor, patch] = historyEntry.version.split('.').map(Number);
-          let changeType = 'Changed';
-          if (major > 1 || (major === 1 && minor === 0 && patch === 0)) changeType = 'Added';
-          else if (minor > 0) changeType = 'Changed';
-          else changeType = 'Fixed';
-          
-          changelogSection += `### [${historyEntry.version}] - ${historyEntry.date}\n\n`;
-          changelogSection += `#### ${changeType}\n`;
-          changelogSection += `- ${historyEntry.notes}\n\n`;
-        });
-    } else {
-      changelogSection += `### [${entry.version}] - ${entry.lastUpdated}\n\n`;
-      changelogSection += `#### Added\n`;
-      changelogSection += `- ${entry.changeNotes}\n\n`;
-    }
-    
-    return changelogSection;
-  })
-  .join('')}
+${changelogContent}
 
 ---
 
@@ -492,16 +505,16 @@ Generiert am: ${new Date().toLocaleDateString('de-DE')} um ${new Date().toLocale
           try {
             const versionResponse = await fetch('/versions.json');
             if (versionResponse.ok) {
-              const versionManifest: any = await versionResponse.json();
+              const versionManifest = await versionResponse.json();
               
               // Find latest update date
               const latestUpdate = Object.values(versionManifest.styleguides)
-                .map((e: any) => new Date(e.lastUpdated))
+                .map((e) => new Date(e.lastUpdated))
                 .reduce((latest, current) => current > latest ? current : latest);
               const latestVersion = latestUpdate.toISOString().split('T')[0];
               
               // Count version types for filename
-              const versionCounts = Object.values(versionManifest.styleguides).reduce((counts: {major: number, minor: number, patch: number}, entry: any) => {
+              const versionCounts = Object.values(versionManifest.styleguides).reduce((counts, entry) => {
                 const [major, minor] = entry.version.split('.').map(Number);
                 if (major > 1) counts.major++;
                 else if (minor > 0) counts.minor++;
@@ -510,8 +523,8 @@ Generiert am: ${new Date().toLocaleDateString('de-DE')} um ${new Date().toLocale
               }, { major: 0, minor: 0, patch: 0 });
               
               // Create descriptive filename
-              const versionSummary: string[] = [];
-              const counts = versionCounts as {major: number, minor: number, patch: number};
+              const versionSummary = [];
+              const counts = versionCounts;
               if (counts.major > 0) versionSummary.push(`${counts.major}major`);
               if (counts.minor > 0) versionSummary.push(`${counts.minor}minor`);
               if (counts.patch > 0) versionSummary.push(`${counts.patch}patch`);
@@ -542,7 +555,7 @@ Generiert am: ${new Date().toLocaleDateString('de-DE')} um ${new Date().toLocale
           }, 2000);
           
           // Show success toast with file count
-          (window as any).showToast(`ZIP-Paket mit ${successfulFiles.length} Dateien erfolgreich heruntergeladen!`, 'success');
+          window.showToast(`ZIP-Paket mit ${successfulFiles.length} Dateien erfolgreich heruntergeladen!`, 'success');
           
         } catch (error) {
           console.error('Download failed:', error);
@@ -552,7 +565,7 @@ Generiert am: ${new Date().toLocaleDateString('de-DE')} um ${new Date().toLocale
             if (downloadButton) downloadButton.disabled = false;
           }, 2000);
           
-          (window as any).showToast('Download fehlgeschlagen. Bitte versuchen Sie es erneut.', 'error');
+          window.showToast('Download fehlgeschlagen. Bitte versuchen Sie es erneut.', 'error');
         }
       });
     }

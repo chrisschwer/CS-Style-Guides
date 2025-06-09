@@ -2,21 +2,21 @@
   "styleguides": {
     "gutes-deutsch": {
       "filename": "Gutes Deutsch.md",
-      "version": "1.1.0",
-      "lastUpdated": "2025-01-08",
-      "changeNotes": "Erweiterte Beispiele und neue Formulierungsregeln hinzugefügt",
+      "version": "1.0.1",
+      "lastUpdated": "2025-06-09",
+      "changeNotes": "Minor corrections and fixes",
       "title": "Regeln für gutes Deutsch",
-      "contentHash": "edb25610b9caeca8ace99197093e6bd86d3ad54f5ae3e2a8532feef92966328b",
+      "contentHash": "8690f088dea48b3821187a29a03497f3834130be92a9ce617d176dd965c932be",
       "history": [
         {
           "version": "1.0.0",
-          "date": "2025-01-09",
+          "date": "2025-06-09",
           "notes": "Initial version"
         },
         {
-          "version": "1.1.0",
-          "date": "2025-01-08",
-          "notes": "Erweiterte Beispiele und neue Formulierungsregeln hinzugefügt"
+          "version": "1.0.1",
+          "date": "2025-06-09",
+          "notes": "Minor corrections and fixes"
         }
       ]
     },
@@ -24,99 +24,119 @@
       "filename": "Gendergerecht mit Sternchen.md",
       "version": "1.0.1",
       "lastUpdated": "2025-06-09",
-      "changeNotes": "Kleine Verbesserungen und Rechtschreibkorrekturen",
+      "changeNotes": "Minor corrections and fixes",
       "title": "Gendergerechte Sprache mit Sternchen",
-      "contentHash": "30929938686f712c6c6754214ab18d7d7d80aef6bb751e40f1640efbb0432fb8",
+      "contentHash": "fa74d6ef03e932c1e315c600a70c91d86ef19eeded7f5247cb997cfaf3186cd4",
       "history": [
         {
           "version": "1.0.0",
-          "date": "2025-01-09",
+          "date": "2025-06-09",
           "notes": "Initial version"
         },
         {
           "version": "1.0.1",
           "date": "2025-06-09",
-          "notes": "Kleine Verbesserungen und Rechtschreibkorrekturen"
+          "notes": "Minor corrections and fixes"
         }
       ]
     },
     "gendergerecht-ohne-sternchen": {
       "filename": "Gendergerecht ohne Sternchen.md",
-      "version": "1.0.0",
-      "lastUpdated": "2025-01-09",
-      "changeNotes": "Initial version",
+      "version": "1.0.1",
+      "lastUpdated": "2025-06-09",
+      "changeNotes": "Minor corrections and fixes",
       "title": "Gendergerechte Sprache ohne Sternchen",
-      "contentHash": "c142fdb2d069904673347deac315aa51b3f5be89df3d653a582e7fd7c44d84bf",
+      "contentHash": "2e9d67f1f3873ecbe93570aff0b89e4b00f1f6e1dc4f570afda6d29e7e7e57e4",
       "history": [
         {
           "version": "1.0.0",
-          "date": "2025-01-09",
+          "date": "2025-06-09",
           "notes": "Initial version"
+        },
+        {
+          "version": "1.0.1",
+          "date": "2025-06-09",
+          "notes": "Minor corrections and fixes"
         }
       ]
     },
     "gute-praesentation": {
       "filename": "Gute Praesentation.md",
-      "version": "2.0.0",
-      "lastUpdated": "2024-12-15",
-      "changeNotes": "Komplett überarbeitete Struktur mit neuen MECE-Prinzipien und erweiterten SCS-Mustern",
+      "version": "1.0.1",
+      "lastUpdated": "2025-06-09",
+      "changeNotes": "Minor corrections and fixes",
       "title": "Gute Präsentation",
-      "contentHash": "29956ea82687ece015c033654dbf073dda7b85d8cd20abd9fdd198c3a9cf6ced",
+      "contentHash": "7f7b79d57a3f515e97cd2bd7ccc5d8799b2ed4f37b8c8e154a9199d40e59fce1",
       "history": [
         {
           "version": "1.0.0",
-          "date": "2025-01-09",
+          "date": "2025-06-09",
           "notes": "Initial version"
         },
         {
-          "version": "2.0.0",
-          "date": "2024-12-15",
-          "notes": "Komplett überarbeitete Struktur mit neuen MECE-Prinzipien und erweiterten SCS-Mustern"
+          "version": "1.0.1",
+          "date": "2025-06-09",
+          "notes": "Minor corrections and fixes"
         }
       ]
     },
     "gute-charts": {
       "filename": "Gute Charts.md",
-      "version": "1.0.0",
-      "lastUpdated": "2025-01-09",
-      "changeNotes": "Initial version",
+      "version": "1.0.1",
+      "lastUpdated": "2025-06-09",
+      "changeNotes": "Minor corrections and fixes",
       "title": "Gute Charts",
-      "contentHash": "70082a8e08bc5dbf2f6fe22aa0e066319a57e7f50b339e8232d38a5998d7ebef",
+      "contentHash": "fe1b6552e8be22ffefbafa04164a6f84212b879207a8d3f0d3e47cdd79a2a652",
       "history": [
         {
           "version": "1.0.0",
-          "date": "2025-01-09",
+          "date": "2025-06-09",
           "notes": "Initial version"
+        },
+        {
+          "version": "1.0.1",
+          "date": "2025-06-09",
+          "notes": "Minor corrections and fixes"
         }
       ]
     },
     "datenvisualisierung": {
       "filename": "Datenvisualisierung.md",
-      "version": "1.0.0",
-      "lastUpdated": "2025-01-09",
-      "changeNotes": "Initial version",
+      "version": "1.0.1",
+      "lastUpdated": "2025-06-09",
+      "changeNotes": "Minor corrections and fixes",
       "title": "Datenvisualisierung",
-      "contentHash": "ee5f978ec47fe2774999e3cb660823cf3a48c9539b7b21d3c7020cb4dbb5a9d8",
+      "contentHash": "3c96c6121ed67d8442742b63832b7715712bc66ab5752c76900030edb1862643",
       "history": [
         {
           "version": "1.0.0",
-          "date": "2025-01-09",
+          "date": "2025-06-09",
           "notes": "Initial version"
+        },
+        {
+          "version": "1.0.1",
+          "date": "2025-06-09",
+          "notes": "Minor corrections and fixes"
         }
       ]
     },
     "beispielprompts": {
       "filename": "Beispielprompts.md",
-      "version": "1.0.0",
-      "lastUpdated": "2025-01-09",
-      "changeNotes": "Initial version",
+      "version": "1.0.1",
+      "lastUpdated": "2025-06-09",
+      "changeNotes": "Minor corrections and fixes",
       "title": "Beispielprompts für KI-Assistenten",
-      "contentHash": "47e810e97c641a213b25ceb9e7bed16a900de1ac2db702734c90bd958dbb054c",
+      "contentHash": "c7790af0d58e5c559936b852c932ac543cb44fe597cfb2a08a93c5d2c0ddd3d4",
       "history": [
         {
           "version": "1.0.0",
-          "date": "2025-01-09",
+          "date": "2025-06-09",
           "notes": "Initial version"
+        },
+        {
+          "version": "1.0.1",
+          "date": "2025-06-09",
+          "notes": "Minor corrections and fixes"
         }
       ]
     }

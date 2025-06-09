@@ -1,4 +1,6 @@
 ---
+import { formatDateGerman } from '../lib/versioning';
+
 export interface Props {
   version: string;
   variant?: 'default' | 'compact' | 'detailed';
@@ -22,7 +24,7 @@ const displayVersion = version.startsWith('v') ? version : `v${version}`;
 
 // Generate tooltip content
 const tooltipContent = showTooltip && (lastUpdated || changeNotes) 
-  ? `${lastUpdated ? `Updated: ${lastUpdated}` : ''}${lastUpdated && changeNotes ? ' • ' : ''}${changeNotes || ''}`
+  ? `${lastUpdated ? `Updated: ${formatDateGerman(lastUpdated)}` : ''}${lastUpdated && changeNotes ? ' • ' : ''}${changeNotes || ''}`
   : null;
 
 // Variant-specific classes
@@ -64,7 +66,7 @@ const baseClasses = `
   
   {variant === 'detailed' && lastUpdated && (
     <span class="text-primary-500 font-normal">
-      • {lastUpdated}
+      • {formatDateGerman(lastUpdated)}
     </span>
   )}
 </span>

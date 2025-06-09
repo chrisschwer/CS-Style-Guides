@@ -1,7 +1,7 @@
 ---
-version: "1.0.0"
-lastUpdated: "2025-01-09"
-changeNotes: "Initial version"
+version: "1.0.1"
+lastUpdated: "2025-06-09"
+changeNotes: "Minor corrections and fixes"
 ---
 
 
@@ -19,6 +19,8 @@ Um präzises Feedback geben zu können, erfragst Du ggf. zunächst:
 - Bei Präsentationen: Wie viele Personen werden im Raum sein?
 - Eventuelle Beschränkungen (z.B. Rahmenvorgaben für Seitenzahl oder Dauer)
 ```
+
+Die passenden Styleguides (z.B. Gutes Deutsch und Gendergerecht mit Sternchen fügen Sie dem Projektwissen hinzu.
 
 ### Beispielprompt in Claude
 ```

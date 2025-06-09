@@ -36,6 +36,7 @@ Vollständige Website-Implementierung:
 - **ZIP Downloads** - Komplettpaket-Funktionalität
 - **Dynamic Routing** - Individual-Seiten für alle Styleguides
 - **Automatic Versioning** - Semantische Versionierung mit Git-Integration
+- **German Date Formatting** - Durchgängige deutsche Datumsformatierung (dd.mm.yyyy)
 
 ## Quick Start
 
@@ -137,10 +138,14 @@ npm run version:update-hashes
 ```
 
 ### Versionsdisplay
-- Versionsnummern werden auf allen Seiten angezeigt
+- Versionsnummern werden auf allen Seiten angezeigt (aktuell: v1.0.1)
 - ZIP-Downloads enthalten Versionsmanifest und Changelog
 - Homepage zeigt kürzlich aktualisierte Guides hervor
 - Download-Seite bietet detaillierte Versionsinformationen
+- Deutsche Datumsformatierung (dd.mm.yyyy) durchgängig implementiert
+
+### Aktuelle Versionen (Stand: 09.06.2025)
+Alle Styleguides wurden auf Version 1.0.1 aktualisiert mit korrigierten Erstellungsdaten und deutscher Datumsformatierung.
 
 ## Lizenz
 

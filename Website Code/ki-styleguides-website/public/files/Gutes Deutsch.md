@@ -1,7 +1,7 @@
 ---
-version: "1.1.0"
-lastUpdated: "2025-01-08"
-changeNotes: "Erweiterte Beispiele und neue Formulierungsregeln hinzugefügt"
+version: "1.0.1"
+lastUpdated: "2025-06-09"
+changeNotes: "Minor corrections and fixes"
 ---
 
 

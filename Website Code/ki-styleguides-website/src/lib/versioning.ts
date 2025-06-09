@@ -215,6 +215,21 @@ export function getVersionDate(): string {
 }
 
 /**
+ * Format date in German format (dd.mm.yyyy)
+ */
+export function formatDateGerman(dateString: string): string {
+  try {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}.${month}.${year}`;
+  } catch {
+    return dateString; // fallback to original string if parsing fails
+  }
+}
+
+/**
  * Create a version entry for the manifest
  */
 export function createVersionEntry(

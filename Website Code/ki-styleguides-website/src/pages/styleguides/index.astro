@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import StyleguideCard from '../../components/StyleguideCard.astro';
-import { loadVersionManifest } from '../../lib/versioning';
+import { loadVersionManifest, formatDateGerman } from '../../lib/versioning';
 
 // Load version information
 const versionManifest = await loadVersionManifest();

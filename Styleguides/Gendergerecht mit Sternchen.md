@@ -1,7 +1,7 @@
 ---
-version: "1.0.0"
-lastUpdated: "2025-01-09"
-changeNotes: "Initial version"
+version: "1.0.1"
+lastUpdated: "2025-06-09"
+changeNotes: "Minor corrections and fixes"
 ---
 
 # Gendergerechte Sprache mit Sternchen

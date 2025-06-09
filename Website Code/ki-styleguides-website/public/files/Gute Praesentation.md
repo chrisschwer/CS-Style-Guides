@@ -1,7 +1,7 @@
 ---
-version: "2.0.0"
-lastUpdated: "2024-12-15"
-changeNotes: "Komplett überarbeitete Struktur mit neuen MECE-Prinzipien und erweiterten SCS-Mustern"
+version: "1.0.1"
+lastUpdated: "2025-06-09"
+changeNotes: "Minor corrections and fixes"
 ---
 
 

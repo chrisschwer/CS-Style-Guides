@@ -335,6 +335,13 @@ git push
 - **File Count Correction**: Updated from 6 to 7 styleguides in download descriptions
 - **Author Section Removal**: Removed "Über den Autor" section from about page
 
+### ✅ Date Corrections and German Formatting (June 2025)
+- **Date Standardization**: Corrected all styleguide dates from "2025-01-09" to "2025-06-09" (actual creation date)
+- **German Date Format**: Implemented `formatDateGerman()` function for dd.mm.yyyy display format throughout website
+- **Automatic Version Updates**: Version system automatically incremented all guides to v1.0.1 due to metadata changes
+- **Build Process Integration**: German date formatting works in ZIP downloads, version badges, and all display components
+- **Template Scope Fixes**: Resolved TypeScript compilation issues in inline scripts for downloads page
+
 ## Memories
 
 - When prompted to create a PRD for a new feature, use @.ai-dev-tasks/create-prd.mdc

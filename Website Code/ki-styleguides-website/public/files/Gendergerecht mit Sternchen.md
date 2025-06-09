@@ -1,7 +1,7 @@
 ---
 version: "1.0.1"
 lastUpdated: "2025-06-09"
-changeNotes: "Kleine Verbesserungen und Rechtschreibkorrekturen"
+changeNotes: "Minor corrections and fixes"
 ---
 
 
