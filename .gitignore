@@ -23,6 +23,7 @@ Temporary Items
 .apdisk
 
 # Editor directories and files
+.claude/
 .idea/
 .vscode/
 *.swp

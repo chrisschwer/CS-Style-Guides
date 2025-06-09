@@ -157,4 +157,24 @@ All content is licensed under CC BY 4.0, allowing free commercial and non-commer
 - **Download Links**: Fixed file paths to match actual filenames
 - **Search Accessibility**: All content properly structured for SEO
 
+## Recent Updates (January 2025)
+
+### ✅ File Naming Standardization
+- **Renamed Files**: Standardized naming to remove author references
+  - `Wolf Schneider.md` → `Gutes Deutsch.md`
+  - `Gene Zelazny Charts.md` → `Gute Charts.md` 
+  - `Datenvisualisierung nach Tufte.md` → `Datenvisualisierung.md`
+- **Updated References**: All website content, navigation, and downloads reflect new names
+- **Maintained Compatibility**: URL slugs preserved for backwards compatibility
+
+### ✅ GitHub Repository Updates
+- **New Repository**: Updated all links to https://github.com/chrisschwer/CS-Style-Guides
+- **Profile Update**: Changed GitHub profile references to github.com/chrisschwer
+- **Consistent Links**: All issues, discussions, and repository links updated
+
+### ✅ Content Synchronization
+- **Website-Content Alignment**: Design documentation synchronized with actual website
+- **File Count Correction**: Updated from 6 to 7 styleguides in download descriptions
+- **Author Section Removal**: Removed "Über den Autor" section from about page
+
 This structure supports both independent work on different aspects and coordinated development of the complete website experience. **The website is now production-ready.**

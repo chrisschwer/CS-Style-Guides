@@ -10,7 +10,7 @@ Professionelle Styleguides für KI-assistiertes Schreiben
 
 **Unterüberschrift**
 ```
-Klare Regeln für Claude, ChatGPT & Co. - Von Wolf Schneider bis gendergerechter Sprache
+Klare Regeln für Claude, ChatGPT & Co. - Von gutem Deutsch bis gendergerechter Sprache
 ```
 
 **Beschreibung**
@@ -28,10 +28,10 @@ korrespondenz, Präsentationen oder wissenschaftliche Arbeiten.
 
 ### Styleguide-Übersicht
 
-#### Wolf Schneider
+#### Gutes Deutsch
 ```
 Titel: Klares, prägnantes Deutsch
-Beschreibung: Verständliche Texte nach den bewährten Prinzipien von Wolf Schneider. 
+Beschreibung: Verständliche Texte nach bewährten Prinzipien für gutes Deutsch. 
 Hauptsachen in Hauptsätze, Verben statt Substantive, konkret statt abstrakt.
 
 Ideal für: Geschäftstexte, E-Mails, Berichte
@@ -68,7 +68,7 @@ Ideal für: Business-Präsentationen, Pitches, Vorträge
 Schwierigkeit: Mittel
 ```
 
-#### Gene Zelazny Charts
+#### Gute Charts
 ```
 Titel: Effektive Datenvisualisierung
 Beschreibung: Professionelle Charts und Diagramme nach bewährten Prinzipien. 
@@ -83,7 +83,7 @@ Schwierigkeit: Fortgeschritten
 Überschrift: In 3 Schritten zum perfekten Text
 
 Schritt 1 - Guide auswählen:
-Laden Sie den passenden Styleguide für Ihr Projekt herunter. Wolf Schneider 
+Laden Sie den passenden Styleguide für Ihr Projekt herunter. Gutes Deutsch 
 für klare Texte, Gendergerecht für inklusive Sprache.
 
 Schritt 2 - In KI-Tool einfügen:
@@ -201,7 +201,7 @@ Option 3 - Systemanweisung (ChatGPT Plus)
 3. Fügen Sie eine Kurzversion des Guides ein
 4. Wird automatisch bei jeder Unterhaltung angewendet
 
-💡 Tipp: Referenzieren Sie spezifische Regeln direkt: "Schreibe nach Wolf Schneider Prinzip 3..."
+💡 Tipp: Referenzieren Sie spezifische Regeln direkt: "Schreibe nach den Prinzipien für gutes Deutsch..."
 ```
 
 #### Andere Tools
@@ -218,7 +218,7 @@ Perplexity:
 
 Microsoft Copilot:
 • In Office-Anwendungen als Kommentar einfügen
-• "Schreibe E-Mail nach Wolf Schneider Regeln"
+• "Schreibe E-Mail nach den Regeln für gutes Deutsch"
 
 Notion AI / Obsidian:
 • Guides als Template-Notiz speichern
@@ -234,19 +234,19 @@ wenn sie klar strukturiert präsentiert werden.
 
 Beliebte Kombinationen:
 
-Wolf Schneider + Gendergerecht (neutral)
+Gutes Deutsch + Gendergerecht (neutral)
 Ideal für: Offizielle Geschäftskommunikation
-Prompt: "Schreibe nach Wolf Schneider Prinzipien (klar, kurz) und verwende 
+Prompt: "Schreibe nach den Prinzipien für gutes Deutsch (klar, kurz) und verwende 
 gendergerechte Sprache ohne Sternchen."
 
-Präsentationen + Gene Zelazny  
+Präsentationen + Gute Charts  
 Ideal für: Datengetriebene Präsentationen
 Prompt: "Erstelle Präsentation nach SCS-Muster mit professionellen Charts 
-nach Zelazny-Prinzipien."
+nach bewährten Prinzipien."
 
 Alle Guides zusammen
 Ideal für: Umfassende Texte
-Prompt: "Verwende alle verfügbaren Styleguides je nach Kontext: Wolf Schneider 
+Prompt: "Verwende alle verfügbaren Styleguides je nach Kontext: Gutes Deutsch 
 für Klarheit, Gendergerecht für Inklusion, Präsentationsregeln für Struktur."
 
 Eigene Kombinationen:
@@ -270,7 +270,7 @@ Alle Styleguides, Beispielprompts und Anleitungen in einem praktischen Paket.
 Perfekt für Teams oder den vollständigen Überblick.
 
 Enthalten:
-✓ 5 Styleguide-Dateien (.md Format)
+✓ 7 Styleguide-Dateien (.md Format)
 ✓ Beispielprompts für Claude und ChatGPT  
 ✓ Schnellstart-Anleitung (PDF)
 ✓ Lizenzinformationen
@@ -327,7 +327,7 @@ beeindruckend sind, aber ohne klare Anweisungen oft generische oder inkonsistent
 Texte produzieren. Professionelle Styleguides lösen dieses Problem.
 
 Unser Ansatz:
-• Bewährte Regeln (Wolf Schneider, Gene Zelazny) für die digitale Ära
+• Bewährte Regeln für gutes Deutsch und Datenvisualisierung für die digitale Ära
 • Spezifisch für deutsche Sprache optimiert  
 • Praktische Anwendung mit modernen KI-Tools
 • Open Source für maximale Verbreitung
@@ -338,16 +338,11 @@ experten und werden kontinuierlich für den Einsatz mit KI-Systemen weiterentwic
 
 ### Autor & Kontakt
 ```
-Über den Autor:
-Christoph Schwerdtfeger entwickelt seit [Jahr] Styleguides für professionelle 
-Kommunikation. Mit Hintergrund in [Bereich] bringt er praktische Erfahrung 
-und wissenschaftliche Fundierung zusammen.
+
 
 Kontakt:
-📧 E-Mail: [E-Mail-Adresse]
-🐙 GitHub: [GitHub-Profil]
-💼 LinkedIn: [LinkedIn-Profil]
-🐦 Twitter: [Twitter-Handle]
+📧 E-Mail: christoph.schwerdtfeger@gmail.com
+🐙 GitHub: github.com/chrisschwer
 
 Mitwirkung:
 Dieses Projekt ist Open Source. Verbesserungsvorschläge, Fehlerberichte 
@@ -370,8 +365,8 @@ Das bedeutet:
 ℹ️ Nennung des ursprünglichen Autors erforderlich
 
 Credits:
-• Wolf Schneider: Grundlagen des klaren Schreibens
-• Gene Zelazny: "Say it with Charts" Prinzipien  
+• Bewährte Prinzipien für gutes Deutsch: Grundlagen des klaren Schreibens
+• Etablierte Datenvisualisierungs-Prinzipien für professionelle Charts  
 • Community: Feedback und Verbesserungen
 • Beta-Tester: Praxiserprobung der Guides
 
@@ -385,11 +380,12 @@ Hosting durch Netlify. Analytics durch Fathom (DSGVO-konform).
 ### Links
 ```
 Styleguides:
-• Wolf Schneider
+• Gutes Deutsch
 • Gendergerecht (Sternchen)  
 • Gendergerecht (Neutral)
 • Präsentationen
-• Gene Zelazny Charts
+• Gute Charts
+• Datenvisualisierung
 
 Ressourcen:
 • Anwendung
