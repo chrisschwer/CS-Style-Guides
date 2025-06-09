@@ -2,9 +2,9 @@
   "styleguides": {
     "gutes-deutsch": {
       "filename": "Gutes Deutsch.md",
-      "version": "1.1.0",
-      "lastUpdated": "2025-01-08",
-      "changeNotes": "Erweiterte Beispiele und neue Formulierungsregeln hinzugefügt",
+      "version": "1.0.0",
+      "lastUpdated": "2025-01-09",
+      "changeNotes": "Initial version",
       "title": "Regeln für gutes Deutsch",
       "contentHash": "edb25610b9caeca8ace99197093e6bd86d3ad54f5ae3e2a8532feef92966328b",
       "history": [
@@ -12,19 +12,14 @@
           "version": "1.0.0",
           "date": "2025-01-09",
           "notes": "Initial version"
-        },
-        {
-          "version": "1.1.0",
-          "date": "2025-01-08",
-          "notes": "Erweiterte Beispiele und neue Formulierungsregeln hinzugefügt"
         }
       ]
     },
     "gendergerecht-mit-sternchen": {
       "filename": "Gendergerecht mit Sternchen.md",
-      "version": "1.0.1",
-      "lastUpdated": "2025-06-09",
-      "changeNotes": "Kleine Verbesserungen und Rechtschreibkorrekturen",
+      "version": "1.0.0",
+      "lastUpdated": "2025-01-09",
+      "changeNotes": "Initial version",
       "title": "Gendergerechte Sprache mit Sternchen",
       "contentHash": "30929938686f712c6c6754214ab18d7d7d80aef6bb751e40f1640efbb0432fb8",
       "history": [
@@ -32,11 +27,6 @@
           "version": "1.0.0",
           "date": "2025-01-09",
           "notes": "Initial version"
-        },
-        {
-          "version": "1.0.1",
-          "date": "2025-06-09",
-          "notes": "Kleine Verbesserungen und Rechtschreibkorrekturen"
         }
       ]
     },
@@ -57,9 +47,9 @@
     },
     "gute-praesentation": {
       "filename": "Gute Praesentation.md",
-      "version": "2.0.0",
-      "lastUpdated": "2024-12-15",
-      "changeNotes": "Komplett überarbeitete Struktur mit neuen MECE-Prinzipien und erweiterten SCS-Mustern",
+      "version": "1.0.0",
+      "lastUpdated": "2025-01-09",
+      "changeNotes": "Initial version",
       "title": "Gute Präsentation",
       "contentHash": "29956ea82687ece015c033654dbf073dda7b85d8cd20abd9fdd198c3a9cf6ced",
       "history": [
@@ -67,11 +57,6 @@
           "version": "1.0.0",
           "date": "2025-01-09",
           "notes": "Initial version"
-        },
-        {
-          "version": "2.0.0",
-          "date": "2024-12-15",
-          "notes": "Komplett überarbeitete Struktur mit neuen MECE-Prinzipien und erweiterten SCS-Mustern"
         }
       ]
     },

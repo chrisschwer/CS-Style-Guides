@@ -16,8 +16,7 @@ const styleguideMap = {
     description: 'Klares, prägnantes Deutsch nach bewährten Prinzipien. Hauptsachen in Hauptsätze, Verben statt Substantive, konkret statt abstrakt.',
     icon: '📝',
     difficulty: 'Einfach',
-    tags: ['Geschäftstexte', 'E-Mails', 'Berichte'],
-    downloadCount: 1247
+    tags: ['Geschäftstexte', 'E-Mails', 'Berichte']
   },
   'gendergerecht-sternchen': {
     file: 'Gendergerecht mit Sternchen.md',
@@ -25,8 +24,7 @@ const styleguideMap = {
     description: 'Moderne gendergerechte Formulierungen mit Sternchen-Notation. Student*innen, Mitarbeiter*innen, Professor*innen für zeitgemäße Kommunikation.',
     icon: '⭐',
     difficulty: 'Einfach',
-    tags: ['Stellenausschreibungen', 'Offizielle Kommunikation'],
-    downloadCount: 892
+    tags: ['Stellenausschreibungen', 'Offizielle Kommunikation']
   },
   'gendergerecht-neutral': {
     file: 'Gendergerecht ohne Sternchen.md',
@@ -34,8 +32,7 @@ const styleguideMap = {
     description: 'Gendergerechte Formulierungen durch neutrale Begriffe und Umschreibungen. Studierende, Fachkräfte, Lehrende - elegant und barrierefrei.',
     icon: '👥',
     difficulty: 'Mittel',
-    tags: ['Konservative Umgebungen', 'International'],
-    downloadCount: 634
+    tags: ['Konservative Umgebungen', 'International']
   },
   'praesentationen': {
     file: 'Gute Praesentation.md',
@@ -43,8 +40,7 @@ const styleguideMap = {
     description: 'Strukturierte Folien nach dem SCS-Muster und MECE-Prinzip. Slide-Titel als Aussagen, klare Argumentation, wirkungsvolle Botschaften.',
     icon: '📊',
     difficulty: 'Mittel',
-    tags: ['Business-Präsentationen', 'Pitches', 'Vorträge'],
-    downloadCount: 1456
+    tags: ['Business-Präsentationen', 'Pitches', 'Vorträge']
   },
   'charts': {
     file: 'Gute Charts.md',
@@ -52,8 +48,7 @@ const styleguideMap = {
     description: 'Professionelle Charts und Diagramme nach bewährten Prinzipien. Die richtige Chart-Art für jede Botschaft, klare Gestaltung, überzeugende Datengeschichten.',
     icon: '📈',
     difficulty: 'Fortgeschritten',
-    tags: ['Berichte', 'Analysen', 'Dashboards'],
-    downloadCount: 387
+    tags: ['Berichte', 'Analysen', 'Dashboards']
   },
   'tufte': {
     file: 'Datenvisualisierung.md',
@@ -61,8 +56,7 @@ const styleguideMap = {
     description: 'Elegante Informationsvisualisierung. Minimaler Ink-to-Data-Ratio, klare Datenvisualisierung, Chart Junk vermeiden.',
     icon: '📉',
     difficulty: 'Fortgeschritten',
-    tags: ['Wissenschaft', 'Forschung', 'Design'],
-    downloadCount: 234
+    tags: ['Wissenschaft', 'Forschung', 'Design']
   },
   'beispielprompts': {
     file: 'Beispielprompts.md',
@@ -70,8 +64,7 @@ const styleguideMap = {
     description: 'Fertige Prompts für Claude, ChatGPT und Microsoft 365 Copilot. Sofort einsetzbare Vorlagen für alle gängigen KI-Assistenten.',
     icon: '💬',
     difficulty: 'Einfach',
-    tags: ['Claude', 'ChatGPT', 'Copilot'],
-    downloadCount: 523
+    tags: ['Claude', 'ChatGPT', 'Copilot']
   }
 };
 
@@ -263,21 +256,17 @@ const pageTitle = `${styleguide.title} - KI-Styleguides`;
           </div>
           
           <!-- Stats -->
-          <div class="mt-6 text-sm text-gray-500 flex items-center justify-center gap-4">
-            <span>{styleguide.downloadCount.toLocaleString('de-DE')} Downloads</span>
-            {versionInfo && (
-              <span>•</span>
-            )}
-            {versionInfo && (
+          {versionInfo && (
+            <div class="mt-6 text-sm text-gray-500 flex items-center justify-center gap-4">
               <span>Version {versionInfo.version}</span>
-            )}
-            {versionInfo && versionInfo.lastUpdated && (
-              <span>•</span>
-            )}
-            {versionInfo && versionInfo.lastUpdated && (
-              <span>Aktualisiert am {versionInfo.lastUpdated}</span>
-            )}
-          </div>
+              {versionInfo.lastUpdated && (
+                <span>•</span>
+              )}
+              {versionInfo.lastUpdated && (
+                <span>Aktualisiert am {versionInfo.lastUpdated}</span>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </section>
