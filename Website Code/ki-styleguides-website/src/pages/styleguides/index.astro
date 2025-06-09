@@ -1,0 +1,101 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import StyleguideCard from '../../components/StyleguideCard.astro';
+---
+
+<Layout title="Alle Styleguides - KI-Styleguides">
+  <Header />
+  
+  <main>
+    <!-- Page Header -->
+    <section class="bg-gradient-to-br from-primary-50 to-primary-100 py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+            📚 Alle Styleguides
+          </h1>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Professionelle Stilrichtlinien für KI-assistiertes Schreiben auf Deutsch
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Styleguides Grid -->
+    <section class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <StyleguideCard
+            title="Wolf Schneider"
+            description="Klares, prägnantes Deutsch nach bewährten Prinzipien. Hauptsachen in Hauptsätze, Verben statt Substantive, konkret statt abstrakt."
+            icon="📝"
+            downloadUrl="/files/Wolf Schneider.md"
+            detailUrl="/styleguides/wolf-schneider/"
+            downloadCount={1247}
+            difficulty="Einfach"
+            tags={["Geschäftstexte", "E-Mails", "Berichte"]}
+          />
+          
+          <StyleguideCard
+            title="Gendergerecht (Sternchen)"
+            description="Moderne gendergerechte Formulierungen mit Sternchen-Notation. Student*innen, Mitarbeiter*innen, Professor*innen für zeitgemäße Kommunikation."
+            icon="⭐"
+            downloadUrl="/files/Gendergerecht mit Sternchen.md"
+            detailUrl="/styleguides/gendergerecht-sternchen/"
+            downloadCount={892}
+            difficulty="Einfach"
+            tags={["Stellenausschreibungen", "Offizielle Kommunikation"]}
+          />
+          
+          <StyleguideCard
+            title="Gendergerecht (Neutral)"
+            description="Gendergerechte Formulierungen durch neutrale Begriffe und Umschreibungen. Studierende, Fachkräfte, Lehrende - elegant und barrierefrei."
+            icon="👥"
+            downloadUrl="/files/Gendergerecht ohne Sternchen.md"
+            detailUrl="/styleguides/gendergerecht-neutral/"
+            downloadCount={634}
+            difficulty="Mittel"
+            tags={["Konservative Umgebungen", "International"]}
+          />
+          
+          <StyleguideCard
+            title="Gute Präsentationen"
+            description="Strukturierte Folien nach dem SCS-Muster und MECE-Prinzip. Slide-Titel als Aussagen, klare Argumentation, wirkungsvolle Botschaften."
+            icon="📊"
+            downloadUrl="/files/Gute Praesentation.md"
+            detailUrl="/styleguides/praesentationen/"
+            downloadCount={1456}
+            difficulty="Mittel"
+            tags={["Business-Präsentationen", "Pitches", "Vorträge"]}
+          />
+          
+          <StyleguideCard
+            title="Gene Zelazny Charts"
+            description="Professionelle Charts und Diagramme nach bewährten Prinzipien. Die richtige Chart-Art für jede Botschaft, klare Gestaltung, überzeugende Datengeschichten."
+            icon="📈"
+            downloadUrl="/files/Gene Zelazny Charts.md"
+            detailUrl="/styleguides/charts/"
+            downloadCount={387}
+            difficulty="Fortgeschritten"
+            tags={["Berichte", "Analysen", "Dashboards"]}
+          />
+          
+          <StyleguideCard
+            title="Tufte Visualisierung"
+            description="Informationsdesign nach Edward Tufte. Minimaler Ink-to-Data-Ratio, elegante Datenvisualisierung, Chart Junk vermeiden."
+            icon="📉"
+            downloadUrl="/files/Datenvisualisierung nach Tufte.md"
+            detailUrl="/styleguides/tufte/"
+            downloadCount={234}
+            difficulty="Fortgeschritten"
+            tags={["Wissenschaft", "Forschung", "Design"]}
+          />
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>

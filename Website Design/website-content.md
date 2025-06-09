@@ -25,10 +25,6 @@ korrespondenz, Präsentationen oder wissenschaftliche Arbeiten.
 [Alle Guides herunterladen]  [Schnellstart-Anleitung]
 ```
 
-**Social Proof**
-```
-📊 Bereits 2.500+ Downloads • ⭐ Open Source • 🔄 Regelmäßige Updates
-```
 
 ### Styleguide-Übersicht
 

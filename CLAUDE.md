@@ -123,7 +123,9 @@ All content is licensed under CC BY 4.0, allowing free commercial and non-commer
 1. Work in `Website Code/ki-styleguides-website/`
 2. Styleguides are automatically copied to `public/files/` for downloads
 3. Current status: Functional prototype with homepage and downloads page
-4. Ready for deployment to Netlify/Vercel
-5. Test with `npm run build && npm run preview` before deployment
+4. Individual styleguide detail pages (404 errors) still need to be created
+5. Social Proof elements removed from homepage and content specifications
+6. Ready for deployment to Netlify/Vercel after completing missing pages
+7. Test with `npm run build && npm run preview` before deployment
 
 This structure supports both independent work on different aspects and coordinated development of the complete website experience.

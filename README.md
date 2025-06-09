@@ -6,8 +6,8 @@ Professionelle Styleguides für KI-assistiertes Schreiben auf Deutsch.
 
 **Content**: ✅ 6 Styleguides komplett, inkl. Microsoft 365 Copilot Support
 **Design**: ✅ Vollständiges Design-System und Wireframes
-**Website**: ✅ Funktionaler Prototyp (Homepage + Downloads)
-**Deployment**: 🔄 Bereit für Netlify/Vercel
+**Website**: 🔄 Prototyp (Homepage + Downloads), Detail-Seiten fehlen noch
+**Deployment**: 🔄 Bereit für Netlify/Vercel nach Vervollständigung
 
 ## Projektstruktur
 
@@ -50,6 +50,7 @@ Funktionale Website-Implementierung:
 
 ### Website live ansehen
 - **Prototyp-Status**: Homepage und Downloads funktional
+- **Ausstehend**: Individual-Seiten für Styleguides erstellen
 - **Nächste Schritte**: Deployment auf Netlify/Vercel
 
 ## Lizenz
