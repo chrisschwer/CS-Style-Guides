@@ -339,7 +339,7 @@ export async function loadVersionManifest(): Promise<VersionManifest | null> {
     const fs = await import('fs/promises');
     const path = await import('path');
     
-    const manifestPath = path.resolve('./versions.json');
+    const manifestPath = path.resolve('./public/versions.json');
     const content = await fs.readFile(manifestPath, 'utf-8');
     return JSON.parse(content) as VersionManifest;
   } catch (error) {
