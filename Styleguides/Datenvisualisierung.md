@@ -1,4 +1,4 @@
-# Datenvisualisierung nach Edward Tufte
+# Datenvisualisierung
 
 ## Anwendungsbereich
 Diese Stilregeln basieren auf Edward Tuftes Prinzipien für exzellente Datenvisualisierung. Sie sind anzuwenden bei der Erstellung von Diagrammen, Grafiken und datenbasierten Präsentationen.

@@ -16,7 +16,7 @@ This is a comprehensive project for creating and distributing professional style
 - `Gendergerecht ohne Sternchen.md` - Gender-inclusive language without special characters  
 - `Gute Praesentation.md` - Presentation structure and argumentation
 - `Gute Charts.md` - Data visualization principles
-- `Datenvisualisierung nach Tufte.md` - Edward Tufte's visualization principles
+- `Datenvisualisierung.md` - Data visualization principles
 - `Beispielprompts.md` - Ready-to-use prompts for Claude, ChatGPT, and Microsoft 365 Copilot
 - `README.md` - Main documentation and usage instructions
 - `LICENSE` - CC BY 4.0 license
@@ -152,7 +152,7 @@ All content is licensed under CC BY 4.0, allowing free commercial and non-commer
 - **Performance**: Compact rendering with `prose-sm` and `leading-tight`
 
 ### ✅ Content Integration
-- **All Styleguides**: Gutes Deutsch, Gender guides, Presentations, Charts, Tufte, Examples
+- **All Styleguides**: Gutes Deutsch, Gender guides, Presentations, Charts, Datenvisualisierung, Examples
 - **Proper Routing**: Each guide accessible via clean URLs
 - **Download Links**: Fixed file paths to match actual filenames
 - **Search Accessibility**: All content properly structured for SEO

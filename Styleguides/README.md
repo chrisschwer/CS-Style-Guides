@@ -12,7 +12,7 @@ Professionelle Styleguides für KI-assistiertes Schreiben auf Deutsch.
 ### 📊 Präsentationen & Datenvisualisierung
 - **[Gute Praesentation.md](Gute%20Praesentation.md)** - Strukturierte Präsentationen mit SCS-Muster und MECE-Prinzip
 - **[Gute Charts.md](Gute%20Charts.md)** - Effektive Datenvisualisierung nach "Say it with Charts"
-- **[Datenvisualisierung nach Tufte.md](Datenvisualisierung%20nach%20Tufte.md)** - Informationsdesign nach Edward Tufte
+- **[Datenvisualisierung.md](Datenvisualisierung.md)** - Elegante Datenvisualisierung
 
 ### 🤖 Anwendungsbeispiele
 - **[Beispielprompts.md](Beispielprompts.md)** - Ready-to-use Prompts für Claude, ChatGPT und Microsoft 365 Copilot
