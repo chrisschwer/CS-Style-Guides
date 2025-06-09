@@ -257,6 +257,7 @@ import StyleguideCard from '../components/StyleguideCard.astro';
   <Footer />
 </Layout>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script>
   // Complete package download functionality
   document.addEventListener('DOMContentLoaded', () => {
@@ -269,48 +270,107 @@ import StyleguideCard from '../components/StyleguideCard.astro';
           downloadButton.textContent = '📦 Wird vorbereitet...';
           downloadButton.disabled = true;
           
-          // In a real implementation, you would generate the ZIP here
-          // For now, we'll simulate it
-          await new Promise(resolve => setTimeout(resolve, 1000));
+          // Create a new ZIP instance
+          const zip = new JSZip();
           
-          // Create a simple text file as demo
-          const content = `KI-Styleguides Komplettpaket
+          // List of files to include
+          const files = [
+            'Wolf Schneider.md',
+            'Gendergerecht mit Sternchen.md',
+            'Gendergerecht ohne Sternchen.md',
+            'Gute Praesentation.md',
+            'Gene Zelazny Charts.md',
+            'Datenvisualisierung nach Tufte.md',
+            'Beispielprompts.md',
+            'README.md'
+          ];
           
+          // Fetch and add each file to the ZIP
+          const fetchPromises = files.map(async (filename) => {
+            try {
+              const response = await fetch(`/files/${filename}`);
+              if (response.ok) {
+                const content = await response.text();
+                zip.file(filename, content);
+                return { filename, success: true };
+              } else {
+                console.warn(`Failed to fetch ${filename}: ${response.status}`);
+                return { filename, success: false };
+              }
+            } catch (error) {
+              console.warn(`Error fetching ${filename}:`, error);
+              return { filename, success: false };
+            }
+          });
+          
+          // Wait for all files to be processed
+          const results = await Promise.all(fetchPromises);
+          const successfulFiles = results.filter(r => r.success);
+          
+          // Add a README with information
+          const readmeContent = `# KI-Styleguides Komplettpaket
+
 Vielen Dank für das Herunterladen!
 
-Dieses Paket enthält alle verfügbaren Styleguides:
-- Wolf Schneider.md
-- Gendergerecht mit Sternchen.md  
-- Gendergerecht ohne Sternchen.md
-- Gute Präsentationen.md
-- Gene Zelazny Charts.md
-- Datenvisualisierung nach Tufte.md
-- Beispielprompts.md
+## Enthaltene Dateien
 
-Besuchen Sie https://ki-styleguides.de für Updates und weitere Informationen.
+${successfulFiles.map(f => `- ✅ ${f.filename}`).join('\n')}
 
-Lizenz: CC BY 4.0
+## Verwendung
+
+1. Wählen Sie den passenden Styleguide für Ihr Projekt
+2. Kopieren Sie den Inhalt in Ihr KI-Tool (Claude Projects, ChatGPT Custom Instructions, etc.)
+3. Schreiben Sie bessere Texte mit konsistenter Qualität
+
+## Weitere Informationen
+
+- Website: https://ki-styleguides.de
+- Anleitung: https://ki-styleguides.de/anwendung/
+- GitHub: https://github.com/cschwerdtfeger/ki-styleguides
+
+## Lizenz
+
+Alle Inhalte stehen unter der CC BY 4.0 Lizenz.
+- ✅ Kostenlose Nutzung für private und kommerzielle Zwecke
+- ✅ Bearbeitung und Weiterverteilung erlaubt  
+- ℹ️ Namensnennung erforderlich
+
+**Attribution-Beispiel:**
+Basierend auf "KI-Styleguides" von Christoph Schwerdtfeger, CC BY 4.0
+
+---
+Erstellt am: ${new Date().toLocaleDateString('de-DE')}
+Version: 1.0
 Autor: Christoph Schwerdtfeger`;
 
-          const blob = new Blob([content], { type: 'text/plain' });
-          const url = window.URL.createObjectURL(blob);
+          zip.file('00-README-ZUERST-LESEN.md', readmeContent);
+          
+          // Generate the ZIP file
+          const zipBlob = await zip.generateAsync({
+            type: 'blob',
+            compression: 'DEFLATE',
+            compressionOptions: { level: 6 }
+          });
+          
+          // Download the ZIP file
+          const url = window.URL.createObjectURL(zipBlob);
           const a = document.createElement('a');
           a.href = url;
-          a.download = 'ki-styleguides-komplettpaket.txt';
+          a.download = `ki-styleguides-komplettpaket-${new Date().toISOString().split('T')[0]}.zip`;
           document.body.appendChild(a);
           a.click();
           document.body.removeChild(a);
           window.URL.revokeObjectURL(url);
           
           // Show success
-          downloadButton.textContent = '✓ Heruntergeladen!';
+          downloadButton.textContent = '✅ Heruntergeladen!';
           setTimeout(() => {
             downloadButton.textContent = '📦 Komplettpaket herunterladen';
             downloadButton.disabled = false;
           }, 2000);
           
-          // Show toast
-          window.showToast('Komplettpaket erfolgreich heruntergeladen!', 'success');
+          // Show success toast with file count
+          window.showToast(`ZIP-Paket mit ${successfulFiles.length} Dateien erfolgreich heruntergeladen!`, 'success');
           
         } catch (error) {
           console.error('Download failed:', error);

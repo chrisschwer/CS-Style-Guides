@@ -1,0 +1,266 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Datenschutz - KI-Styleguides" description="Datenschutzerklärung der KI-Styleguides Website">
+  <Header />
+  
+  <main>
+    <!-- Header -->
+    <section class="bg-gradient-to-br from-primary-50 to-primary-100 py-16">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <!-- Breadcrumb -->
+          <nav class="text-sm text-gray-600 mb-6">
+            <a href="/" class="hover:text-primary-600">Home</a>
+            <span class="mx-2">›</span>
+            <span class="text-gray-900">Datenschutz</span>
+          </nav>
+          
+          <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+            🔒 Datenschutzerklärung
+          </h1>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Transparenz über die Verarbeitung Ihrer Daten
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Datenschutz Content -->
+    <section class="py-16 bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Überblick -->
+        <div class="bg-green-50 border border-green-200 rounded-lg p-6 mb-8">
+          <div class="flex items-start gap-3">
+            <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+              <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <div>
+              <h2 class="text-lg font-semibold text-green-900 mb-2">
+                Datenschutzfreundliche Website
+              </h2>
+              <p class="text-green-800 text-sm leading-relaxed">
+                Diese Website sammelt <strong>keine personenbezogenen Daten</strong>. Es werden keine Cookies gesetzt, 
+                keine Tracking-Tools verwendet und keine Daten an Dritte übermittelt. Als statische Website 
+                funktioniert sie vollständig offline-fähig und respektiert Ihre Privatsphäre.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Verantwortlicher -->
+        <div class="bg-gray-50 rounded-lg p-8 mb-8">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">
+            Verantwortlicher
+          </h2>
+          <div class="space-y-2 text-gray-700">
+            <p class="text-lg font-semibold">Christoph Schwerdtfeger</p>
+            <p>Lehenstraße 19</p>
+            <p>70180 Stuttgart</p>
+            <p>Deutschland</p>
+            <p class="mt-4">
+              <strong>E-Mail:</strong> christoph.schwerdtfeger@protonmail.com
+            </p>
+          </div>
+        </div>
+
+        <!-- Datenverarbeitung -->
+        <div class="bg-gray-50 rounded-lg p-8 mb-8">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">
+            Welche Daten werden verarbeitet?
+          </h2>
+          
+          <div class="space-y-6">
+            <div class="bg-white rounded-lg p-6 border">
+              <h3 class="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                Server-Log-Dateien (unvermeidbar)
+              </h3>
+              <p class="text-gray-700 mb-4">
+                Ihr Hosting-Provider (Netlify/Vercel) speichert automatisch technische Informationen:
+              </p>
+              <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4">
+                <li>IP-Adresse (anonymisiert nach 24 Stunden)</li>
+                <li>Datum und Uhrzeit des Zugriffs</li>
+                <li>Aufgerufene Seite/Datei</li>
+                <li>Browser-Typ und Version</li>
+                <li>Betriebssystem</li>
+                <li>Verweisende Website (Referrer)</li>
+              </ul>
+              <p class="text-gray-600 text-sm mt-4">
+                <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der technischen Bereitstellung der Website)
+              </p>
+            </div>
+
+            <div class="bg-white rounded-lg p-6 border">
+              <h3 class="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                <span class="w-2 h-2 bg-red-500 rounded-full"></span>
+                Keine weiteren Daten
+              </h3>
+              <p class="text-gray-700">
+                Diese Website verwendet bewusst <strong>keine</strong> weiteren Tracking- oder Analyse-Tools:
+              </p>
+              <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4 mt-2">
+                <li>❌ Keine Cookies</li>
+                <li>❌ Kein Google Analytics</li>
+                <li>❌ Keine Social Media Buttons</li>
+                <li>❌ Keine Newsletter-Anmeldung</li>
+                <li>❌ Kein Kontaktformular</li>
+                <li>❌ Keine Kommentarfunktion</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Downloads -->
+        <div class="bg-gray-50 rounded-lg p-8 mb-8">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">
+            Downloads und externe Links
+          </h2>
+          
+          <div class="space-y-6">
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-3">
+                📥 Datei-Downloads
+              </h3>
+              <p class="text-gray-700 leading-relaxed">
+                Alle Styleguide-Dateien werden direkt von dieser Website bereitgestellt. Beim Herunterladen 
+                werden keine zusätzlichen Daten erfasst oder verarbeitet. Die Downloads erfolgen vollständig anonym.
+              </p>
+            </div>
+            
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-3">
+                🔗 GitHub-Links
+              </h3>
+              <p class="text-gray-700 leading-relaxed">
+                Diese Website enthält Links zu GitHub (github.com). Beim Klick auf diese Links verlassen Sie 
+                unsere Website und gelangen zu GitHub, das eigene Datenschutzbestimmungen hat. Wir haben keinen 
+                Einfluss auf die dortige Datenverarbeitung.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CDN -->
+        <div class="bg-gray-50 rounded-lg p-8 mb-8">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">
+            Content Delivery Network (CDN)
+          </h2>
+          <p class="text-gray-700 leading-relaxed mb-4">
+            Für die ZIP-Download-Funktionalität verwenden wir die JSZip-Bibliothek von einem CDN (cdnjs.cloudflare.com). 
+            Dies dient der schnelleren Bereitstellung und besseren Performance.
+          </p>
+          <div class="bg-white rounded-lg p-4 border">
+            <p class="text-sm text-gray-600">
+              <strong>CDN-Anbieter:</strong> Cloudflare<br>
+              <strong>Zweck:</strong> Bereitstellung der JSZip-JavaScript-Bibliothek<br>
+              <strong>Datenübertragung:</strong> Ihre IP-Adresse wird beim Laden der Bibliothek an Cloudflare übermittelt<br>
+              <strong>Datenschutz:</strong> <a href="https://www.cloudflare.com/privacypolicy/" class="text-primary-600 hover:text-primary-700" target="_blank" rel="noopener noreferrer">Cloudflare Privacy Policy</a>
+            </p>
+          </div>
+        </div>
+
+        <!-- Ihre Rechte -->
+        <div class="bg-gray-50 rounded-lg p-8 mb-8">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">
+            Ihre Rechte nach DSGVO
+          </h2>
+          
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-white rounded-lg p-6 border">
+              <h3 class="font-semibold text-gray-900 mb-3">📋 Auskunftsrecht (Art. 15 DSGVO)</h3>
+              <p class="text-gray-700 text-sm">
+                Da wir keine personenbezogenen Daten speichern, gibt es keine Daten, über die wir Auskunft erteilen könnten.
+              </p>
+            </div>
+            
+            <div class="bg-white rounded-lg p-6 border">
+              <h3 class="font-semibold text-gray-900 mb-3">✏️ Berichtigungsrecht (Art. 16 DSGVO)</h3>
+              <p class="text-gray-700 text-sm">
+                Da keine Daten gespeichert werden, gibt es auch nichts zu berichtigen.
+              </p>
+            </div>
+            
+            <div class="bg-white rounded-lg p-6 border">
+              <h3 class="font-semibold text-gray-900 mb-3">🗑️ Löschungsrecht (Art. 17 DSGVO)</h3>
+              <p class="text-gray-700 text-sm">
+                Da keine Daten gespeichert werden, gibt es auch nichts zu löschen.
+              </p>
+            </div>
+            
+            <div class="bg-white rounded-lg p-6 border">
+              <h3 class="font-semibold text-gray-900 mb-3">⚖️ Beschwerderecht</h3>
+              <p class="text-gray-700 text-sm">
+                Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SSL -->
+        <div class="bg-gray-50 rounded-lg p-8 mb-8">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">
+            SSL-Verschlüsselung
+          </h2>
+          <p class="text-gray-700 leading-relaxed">
+            Diese Website nutzt eine SSL-Verschlüsselung (erkennbar am 🔒 Symbol in der Adressleiste). 
+            Dadurch sind die Daten, die zwischen Ihrem Browser und unserem Server übertragen werden, 
+            vor dem Zugriff durch Dritte geschützt.
+          </p>
+        </div>
+
+        <!-- Aktualisierungen -->
+        <div class="bg-gray-50 rounded-lg p-8">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">
+            Aktualisierungen dieser Datenschutzerklärung
+          </h2>
+          <p class="text-gray-700 leading-relaxed mb-4">
+            Diese Datenschutzerklärung kann bei Änderungen der Website oder rechtlichen Anforderungen 
+            angepasst werden. Die aktuelle Version finden Sie immer unter dieser Adresse.
+          </p>
+          <p class="text-sm text-gray-600">
+            <strong>Stand:</strong> Januar 2025
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Kontakt CTA -->
+    <section class="py-16 bg-primary-600">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold text-white mb-6">
+          Fragen zum Datenschutz?
+        </h2>
+        <p class="text-xl text-primary-100 mb-8">
+          Bei Fragen zur Datenverarbeitung kontaktieren Sie uns gerne.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a 
+            href="/impressum/"
+            class="bg-white text-primary-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 transition-colors"
+          >
+            📋 Kontaktdaten im Impressum
+          </a>
+          <a 
+            href="https://github.com/cschwerdtfeger/ki-styleguides/discussions"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-primary-700 transition-colors"
+          >
+            💬 GitHub Discussions
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>

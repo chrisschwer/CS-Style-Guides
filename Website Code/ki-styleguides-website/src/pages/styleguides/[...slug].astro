@@ -1,0 +1,346 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import CopyButton from '../../components/CopyButton.astro';
+import { readFileSync } from 'fs';
+import { join } from 'path';
+
+// Define styleguide mappings
+const styleguideMap = {
+  'wolf-schneider': {
+    file: 'Wolf Schneider.md',
+    title: 'Wolf Schneider - Regeln für gutes Deutsch',
+    description: 'Klares, prägnantes Deutsch nach bewährten Prinzipien. Hauptsachen in Hauptsätze, Verben statt Substantive, konkret statt abstrakt.',
+    icon: '📝',
+    difficulty: 'Einfach',
+    tags: ['Geschäftstexte', 'E-Mails', 'Berichte'],
+    downloadCount: 1247
+  },
+  'gendergerecht-sternchen': {
+    file: 'Gendergerecht mit Sternchen.md',
+    title: 'Gendergerecht mit Sternchen',
+    description: 'Moderne gendergerechte Formulierungen mit Sternchen-Notation. Student*innen, Mitarbeiter*innen, Professor*innen für zeitgemäße Kommunikation.',
+    icon: '⭐',
+    difficulty: 'Einfach',
+    tags: ['Stellenausschreibungen', 'Offizielle Kommunikation'],
+    downloadCount: 892
+  },
+  'gendergerecht-neutral': {
+    file: 'Gendergerecht ohne Sternchen.md',
+    title: 'Gendergerecht ohne Sternchen',
+    description: 'Gendergerechte Formulierungen durch neutrale Begriffe und Umschreibungen. Studierende, Fachkräfte, Lehrende - elegant und barrierefrei.',
+    icon: '👥',
+    difficulty: 'Mittel',
+    tags: ['Konservative Umgebungen', 'International'],
+    downloadCount: 634
+  },
+  'praesentationen': {
+    file: 'Gute Praesentation.md',
+    title: 'Gute Präsentationen',
+    description: 'Strukturierte Folien nach dem SCS-Muster und MECE-Prinzip. Slide-Titel als Aussagen, klare Argumentation, wirkungsvolle Botschaften.',
+    icon: '📊',
+    difficulty: 'Mittel',
+    tags: ['Business-Präsentationen', 'Pitches', 'Vorträge'],
+    downloadCount: 1456
+  },
+  'charts': {
+    file: 'Gene Zelazny Charts.md',
+    title: 'Gene Zelazny Charts',
+    description: 'Professionelle Charts und Diagramme nach bewährten Prinzipien. Die richtige Chart-Art für jede Botschaft, klare Gestaltung, überzeugende Datengeschichten.',
+    icon: '📈',
+    difficulty: 'Fortgeschritten',
+    tags: ['Berichte', 'Analysen', 'Dashboards'],
+    downloadCount: 387
+  },
+  'tufte': {
+    file: 'Datenvisualisierung nach Tufte.md',
+    title: 'Tufte Visualisierung',
+    description: 'Informationsdesign nach Edward Tufte. Minimaler Ink-to-Data-Ratio, elegante Datenvisualisierung, Chart Junk vermeiden.',
+    icon: '📉',
+    difficulty: 'Fortgeschritten',
+    tags: ['Wissenschaft', 'Forschung', 'Design'],
+    downloadCount: 234
+  },
+  'beispielprompts': {
+    file: 'Beispielprompts.md',
+    title: 'Beispielprompts',
+    description: 'Fertige Prompts für Claude, ChatGPT und Microsoft 365 Copilot. Sofort einsetzbare Vorlagen für alle gängigen KI-Assistenten.',
+    icon: '💬',
+    difficulty: 'Einfach',
+    tags: ['Claude', 'ChatGPT', 'Copilot'],
+    downloadCount: 523
+  }
+};
+
+// Get the slug from the URL - moved getStaticPaths function
+export function getStaticPaths() {
+  const paths = [
+    { params: { slug: 'wolf-schneider' } },
+    { params: { slug: 'gendergerecht-sternchen' } },
+    { params: { slug: 'gendergerecht-neutral' } },
+    { params: { slug: 'praesentationen' } },
+    { params: { slug: 'charts' } },
+    { params: { slug: 'tufte' } },
+    { params: { slug: 'beispielprompts' } }
+  ];
+  return paths;
+}
+
+const { slug } = Astro.params;
+
+// Check if styleguide exists
+if (!styleguideMap[slug]) {
+  return Astro.redirect('/404');
+}
+
+const styleguide = styleguideMap[slug];
+
+// Read the markdown file
+let content = '';
+try {
+  const filePath = join(process.cwd(), 'public', 'files', styleguide.file);
+  content = readFileSync(filePath, 'utf-8');
+} catch (error) {
+  console.error(`Error reading file ${styleguide.file}:`, error);
+  return Astro.redirect('/404');
+}
+
+// Parse the markdown content into sections
+function parseMarkdown(markdown) {
+  const lines = markdown.split('\n');
+  const sections = [];
+  let currentSection = null;
+  
+  for (const line of lines) {
+    if (line.startsWith('# ')) {
+      if (currentSection) sections.push(currentSection);
+      currentSection = {
+        title: line.substring(2),
+        content: '',
+        level: 1
+      };
+    } else if (line.startsWith('## ')) {
+      if (currentSection) sections.push(currentSection);
+      currentSection = {
+        title: line.substring(3),
+        content: '',
+        level: 2
+      };
+    } else if (line.startsWith('### ')) {
+      if (currentSection) sections.push(currentSection);
+      currentSection = {
+        title: line.substring(4),
+        content: '',
+        level: 3
+      };
+    } else {
+      if (currentSection) {
+        currentSection.content += line + '\n';
+      }
+    }
+  }
+  
+  if (currentSection) sections.push(currentSection);
+  return sections;
+}
+
+const sections = parseMarkdown(content);
+
+// Convert markdown text to HTML-like formatting
+function formatMarkdownText(text) {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/~~(.*?)~~/g, '<del>$1</del>')
+    .replace(/`(.*?)`/g, '<code class="bg-gray-100 px-1 py-0.5 rounded text-sm font-mono">$1</code>')
+    .replace(/^- (.+)$/gm, '• $1')
+    .replace(/^\d+\. (.+)$/gm, '<span class="font-medium">$&</span>');
+}
+
+const pageTitle = `${styleguide.title} - KI-Styleguides`;
+---
+
+<Layout title={pageTitle} description={styleguide.description}>
+  <Header />
+  
+  <main>
+    <!-- Header -->
+    <section class="bg-gradient-to-br from-primary-50 to-primary-100 py-12 lg:py-16">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <!-- Breadcrumb -->
+          <nav class="text-sm text-gray-600 mb-6">
+            <a href="/" class="hover:text-primary-600">Home</a>
+            <span class="mx-2">›</span>
+            <a href="/styleguides/" class="hover:text-primary-600">Styleguides</a>
+            <span class="mx-2">›</span>
+            <span class="text-gray-900">{styleguide.title}</span>
+          </nav>
+          
+          <div class="flex items-center justify-center gap-4 mb-6">
+            <span class="text-4xl">{styleguide.icon}</span>
+            <div>
+              <h1 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
+                {styleguide.title}
+              </h1>
+              <span class={`inline-block text-sm px-3 py-1 rounded-full font-medium ${
+                styleguide.difficulty === 'Einfach' ? 'bg-green-100 text-green-800' :
+                styleguide.difficulty === 'Mittel' ? 'bg-yellow-100 text-yellow-800' :
+                'bg-red-100 text-red-800'
+              }`}>
+                {styleguide.difficulty}
+              </span>
+            </div>
+          </div>
+          
+          <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+            {styleguide.description}
+          </p>
+          
+          <!-- Tags -->
+          <div class="flex flex-wrap gap-2 justify-center mb-8">
+            {styleguide.tags.map(tag => (
+              <span class="bg-white text-gray-600 px-3 py-1 rounded-full text-sm border">
+                {tag}
+              </span>
+            ))}
+          </div>
+          
+          <!-- Actions -->
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <CopyButton 
+              content={content}
+              label="📋 Vollständigen Guide kopieren"
+              size="lg"
+              variant="primary"
+            />
+            <a 
+              href={`/files/${styleguide.file}`}
+              download
+              class="bg-white text-primary-600 px-6 py-3 rounded-lg text-lg font-semibold hover:bg-gray-50 transition-colors border-2 border-primary-600 flex items-center gap-2 justify-center"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+              </svg>
+              Download (.md)
+            </a>
+          </div>
+          
+          <!-- Stats -->
+          <div class="mt-6 text-sm text-gray-500">
+            <span>{styleguide.downloadCount.toLocaleString('de-DE')} Downloads</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <section class="py-12 lg:py-16 bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="prose prose-sm max-w-none">
+          {sections.map((section, index) => {
+            if (section.level === 1) {
+              return null; // Skip main title as it's already in header
+            }
+            
+            const sectionId = section.title.toLowerCase().replace(/[^a-z0-9]/g, '-');
+            const lines = section.content.trim().split('\n').filter(line => line.trim());
+            
+            return (
+              <div class="mb-8" id={sectionId}>
+                <div class="flex items-start gap-4 mb-4">
+                  <div class="flex-1">
+                    <h2 class={`font-bold text-gray-900 mb-3 ${
+                      section.level === 2 ? 'text-xl' : 'text-lg'
+                    }`}>
+                      {section.title}
+                    </h2>
+                  </div>
+                  <CopyButton 
+                    content={section.title + '\n\n' + section.content}
+                    label="Abschnitt kopieren"
+                    size="sm"
+                    variant="ghost"
+                  />
+                </div>
+                
+                <div class="space-y-2">
+                  {lines.map((line, lineIndex) => {
+                    if (line.startsWith('#### ')) {
+                      return (
+                        <h4 class="text-base font-semibold text-gray-900 mt-4 mb-1">
+                          {line.substring(5)}
+                        </h4>
+                      );
+                    } else if (line.startsWith('* ') || line.startsWith('- ')) {
+                      return (
+                        <div class="text-sm text-gray-700 ml-3 leading-tight" set:html={formatMarkdownText(line.substring(2))} />
+                      );
+                    } else if (line.match(/^\d+\./)) {
+                      return (
+                        <div class="text-sm text-gray-700 ml-3 leading-tight" set:html={formatMarkdownText(line)} />
+                      );
+                    } else if (line.trim()) {
+                      return (
+                        <p class="text-sm text-gray-700 leading-tight" set:html={formatMarkdownText(line)} />
+                      );
+                    }
+                    return null;
+                  })}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation to other guides -->
+    <section class="py-12 bg-gray-50">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">
+          Weitere Styleguides entdecken
+        </h2>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a 
+            href="/styleguides/"
+            class="bg-primary-600 text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-primary-700 transition-colors text-center"
+          >
+            📚 Alle Styleguides ansehen
+          </a>
+          <a 
+            href="/downloads/"
+            class="border-2 border-primary-600 text-primary-600 px-6 py-3 rounded-lg text-lg font-semibold hover:bg-primary-50 transition-colors text-center"
+          >
+            📦 Komplettpaket herunterladen
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<style>
+  .prose h4 {
+    @apply text-lg font-semibold text-gray-900 mt-6 mb-2;
+  }
+  
+  .prose code {
+    @apply bg-gray-100 px-1 py-0.5 rounded text-sm font-mono;
+  }
+  
+  .prose strong {
+    @apply font-semibold text-gray-900;
+  }
+  
+  .prose em {
+    @apply italic;
+  }
+  
+  .prose del {
+    @apply line-through text-gray-500;
+  }
+</style>

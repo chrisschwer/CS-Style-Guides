@@ -1,0 +1,339 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CopyButton from '../components/CopyButton.astro';
+---
+
+<Layout title="Anwendung - KI-Styleguides" description="Detaillierte Anleitung zur Verwendung der Styleguides mit Claude, ChatGPT und anderen KI-Assistenten">
+  <Header />
+  
+  <main>
+    <!-- Header -->
+    <section class="bg-gradient-to-br from-primary-50 to-primary-100 py-16">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <!-- Breadcrumb -->
+          <nav class="text-sm text-gray-600 mb-6">
+            <a href="/" class="hover:text-primary-600">Home</a>
+            <span class="mx-2">›</span>
+            <span class="text-gray-900">Anwendung</span>
+          </nav>
+          
+          <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+            🚀 Schnellstart-Anleitung
+          </h1>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            So verwenden Sie die Styleguides mit Claude, ChatGPT, Microsoft 365 Copilot und anderen KI-Assistenten
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Start Steps -->
+    <section class="py-16 bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="space-y-12">
+          
+          <!-- Step 1 -->
+          <div class="bg-gray-50 rounded-xl p-8">
+            <div class="flex items-start gap-6">
+              <div class="bg-primary-600 text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold flex-shrink-0">
+                1
+              </div>
+              <div class="flex-1">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">
+                  Styleguide auswählen und herunterladen
+                </h2>
+                <p class="text-gray-700 mb-6 leading-relaxed">
+                  Wählen Sie den passenden Styleguide für Ihr Projekt aus. Jeder Guide ist für bestimmte Anwendungsfälle optimiert:
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                  <div class="bg-white p-4 rounded-lg border">
+                    <h3 class="font-semibold text-gray-900 mb-2">📝 Wolf Schneider</h3>
+                    <p class="text-sm text-gray-600">Geschäftstexte, E-Mails, Berichte</p>
+                  </div>
+                  <div class="bg-white p-4 rounded-lg border">
+                    <h3 class="font-semibold text-gray-900 mb-2">⭐ Gendergerecht</h3>
+                    <p class="text-sm text-gray-600">Inklusive Kommunikation</p>
+                  </div>
+                  <div class="bg-white p-4 rounded-lg border">
+                    <h3 class="font-semibold text-gray-900 mb-2">📊 Präsentationen</h3>
+                    <p class="text-sm text-gray-600">Folien und Vorträge</p>
+                  </div>
+                  <div class="bg-white p-4 rounded-lg border">
+                    <h3 class="font-semibold text-gray-900 mb-2">📈 Datenvisualisierung</h3>
+                    <p class="text-sm text-gray-600">Charts und Diagramme</p>
+                  </div>
+                </div>
+                <a href="/styleguides/" class="inline-flex items-center text-primary-600 font-semibold hover:text-primary-700">
+                  Alle Styleguides ansehen →
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="bg-gray-50 rounded-xl p-8">
+            <div class="flex items-start gap-6">
+              <div class="bg-primary-600 text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold flex-shrink-0">
+                2
+              </div>
+              <div class="flex-1">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">
+                  In KI-Tool einrichten
+                </h2>
+                <div class="space-y-6">
+                  
+                  <!-- Claude -->
+                  <div class="bg-white rounded-lg p-6 border">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                      🤖 Claude Projects
+                    </h3>
+                    <ol class="space-y-2 text-gray-700 mb-4">
+                      <li class="flex gap-2">
+                        <span class="font-medium">1.</span>
+                        <span>Neues Claude Project erstellen</span>
+                      </li>
+                      <li class="flex gap-2">
+                        <span class="font-medium">2.</span>
+                        <span>Styleguide-Inhalt in die Projektanweisungen einfügen</span>
+                      </li>
+                      <li class="flex gap-2">
+                        <span class="font-medium">3.</span>
+                        <span>Project speichern und für alle Unterhaltungen verwenden</span>
+                      </li>
+                    </ol>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                      <p class="text-sm text-gray-600 mb-2"><strong>Tipp:</strong> Beispiel-Projektanweisung:</p>
+                      <div class="bg-white p-3 rounded border text-sm font-mono text-gray-700">
+                        Du bist ein erfahrener Redakteur. Befolge diese Stilregeln:<br><br>
+                        [Hier den Styleguide einfügen]
+                      </div>
+                      <CopyButton 
+                        content={"Du bist ein erfahrener Redakteur. Befolge diese Stilregeln:\n\n[Hier den gewählten Styleguide einfügen]"}
+                        label="Projektanweisung kopieren"
+                        size="sm"
+                        variant="primary"
+                      />
+                    </div>
+                  </div>
+
+                  <!-- ChatGPT -->
+                  <div class="bg-white rounded-lg p-6 border">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                      💬 ChatGPT Custom Instructions
+                    </h3>
+                    <ol class="space-y-2 text-gray-700 mb-4">
+                      <li class="flex gap-2">
+                        <span class="font-medium">1.</span>
+                        <span>ChatGPT öffnen → Einstellungen → Custom Instructions</span>
+                      </li>
+                      <li class="flex gap-2">
+                        <span class="font-medium">2.</span>
+                        <span>Styleguide in "How would you like ChatGPT to respond?" einfügen</span>
+                      </li>
+                      <li class="flex gap-2">
+                        <span class="font-medium">3.</span>
+                        <span>Speichern - gilt für alle neuen Unterhaltungen</span>
+                      </li>
+                    </ol>
+                  </div>
+
+                  <!-- Microsoft 365 Copilot -->
+                  <div class="bg-white rounded-lg p-6 border">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                      🏢 Microsoft 365 Copilot
+                    </h3>
+                    <ol class="space-y-2 text-gray-700 mb-4">
+                      <li class="flex gap-2">
+                        <span class="font-medium">1.</span>
+                        <span>In Word/Outlook: Copilot-Icon klicken</span>
+                      </li>
+                      <li class="flex gap-2">
+                        <span class="font-medium">2.</span>
+                        <span>Styleguide-Regeln vor jeden Schreibauftrag einfügen</span>
+                      </li>
+                      <li class="flex gap-2">
+                        <span class="font-medium">3.</span>
+                        <span>Beispiel: "Befolge diese Stilregeln: [Regeln] Schreibe eine E-Mail..."</span>
+                      </li>
+                    </ol>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="bg-gray-50 rounded-xl p-8">
+            <div class="flex items-start gap-6">
+              <div class="bg-primary-600 text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold flex-shrink-0">
+                3
+              </div>
+              <div class="flex-1">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">
+                  Loslegen und Texte schreiben
+                </h2>
+                <p class="text-gray-700 mb-6 leading-relaxed">
+                  Sobald der Styleguide eingerichtet ist, wendet Ihr KI-Assistent die Regeln automatisch an. 
+                  Sie müssen sie nicht mehr bei jedem Prompt wiederholen.
+                </p>
+                
+                <div class="bg-white rounded-lg p-6 border">
+                  <h3 class="text-lg font-semibold text-gray-900 mb-3">Beispiel-Prompts</h3>
+                  <div class="space-y-4">
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                      <p class="text-sm text-gray-600 mb-2"><strong>Für Geschäftstexte:</strong></p>
+                      <p class="text-gray-700">"Schreibe eine E-Mail an unsere Kunden über die Preisanpassung zum 1. Juli."</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                      <p class="text-sm text-gray-600 mb-2"><strong>Für Präsentationen:</strong></p>
+                      <p class="text-gray-700">"Erstelle eine 10-Folien-Präsentation über unsere Quartalsergebnisse für den Vorstand."</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                      <p class="text-sm text-gray-600 mb-2"><strong>Für Berichte:</strong></p>
+                      <p class="text-gray-700">"Verfasse einen Projektbericht über die Einführung des neuen CRM-Systems."</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Advanced Tips -->
+    <section class="py-16 bg-gray-50">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">
+          💡 Profi-Tipps
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-white rounded-lg p-6 shadow-sm">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">
+              🎯 Spezifische Anweisungen
+            </h3>
+            <p class="text-gray-700 text-sm leading-relaxed">
+              Ergänzen Sie den Styleguide um projektspezifische Anforderungen: 
+              "Zusätzlich: Verwende die Anrede 'Sie', maximal 200 Wörter, erwähne unsere Nachhaltigkeitsziele."
+            </p>
+          </div>
+          
+          <div class="bg-white rounded-lg p-6 shadow-sm">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">
+              🔄 Iterative Verbesserung
+            </h3>
+            <p class="text-gray-700 text-sm leading-relaxed">
+              Lassen Sie Texte schrittweise überarbeiten: "Mache den Text kürzer", 
+              "Füge mehr konkrete Beispiele hinzu", "Verbessere die Überschriften".
+            </p>
+          </div>
+          
+          <div class="bg-white rounded-lg p-6 shadow-sm">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">
+              📋 Kombinieren von Styleguides
+            </h3>
+            <p class="text-gray-700 text-sm leading-relaxed">
+              Verwenden Sie mehrere Guides gleichzeitig: Wolf Schneider für klare Sprache 
+              + Gendergerecht für inklusive Formulierungen.
+            </p>
+          </div>
+          
+          <div class="bg-white rounded-lg p-6 shadow-sm">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">
+              ✅ Qualitätskontrolle
+            </h3>
+            <p class="text-gray-700 text-sm leading-relaxed">
+              Bitten Sie die KI um Selbstcheck: "Prüfe den Text nochmals gegen die Stilregeln 
+              und markiere Verbesserungsmöglichkeiten."
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-16 bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">
+          ❓ Häufige Fragen
+        </h2>
+        
+        <div class="space-y-6">
+          <div class="bg-gray-50 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">
+              Muss ich die Regeln bei jedem Prompt wiederholen?
+            </h3>
+            <p class="text-gray-700">
+              Nein! Sobald Sie den Styleguide in Claude Projects oder ChatGPT Custom Instructions eingerichtet haben, 
+              werden die Regeln automatisch bei jeder Unterhaltung angewendet.
+            </p>
+          </div>
+          
+          <div class="bg-gray-50 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">
+              Kann ich mehrere Styleguides gleichzeitig verwenden?
+            </h3>
+            <p class="text-gray-700">
+              Ja! Kopieren Sie einfach mehrere Guides in Ihre Projektanweisungen. 
+              Achten Sie darauf, dass sich die Regeln nicht widersprechen.
+            </p>
+          </div>
+          
+          <div class="bg-gray-50 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">
+              Funktioniert das auch mit anderen KI-Tools?
+            </h3>
+            <p class="text-gray-700">
+              Ja! Die Styleguides funktionieren mit allen textbasierten KI-Assistenten. 
+              Fügen Sie die Regeln einfach am Anfang Ihrer Prompts ein.
+            </p>
+          </div>
+          
+          <div class="bg-gray-50 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">
+              Wie aktuell sind die Styleguides?
+            </h3>
+            <p class="text-gray-700">
+              Die Guides basieren auf bewährten Prinzipien und werden regelmäßig überarbeitet. 
+              Alle Dateien sind mit Versionsdatum versehen.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 bg-primary-600">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold text-white mb-6">
+          Bereit zum Loslegen?
+        </h2>
+        <p class="text-xl text-primary-100 mb-8">
+          Laden Sie Ihre ersten Styleguides herunter und verbessern Sie Ihre Texte sofort.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a 
+            href="/styleguides/"
+            class="bg-white text-primary-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 transition-colors"
+          >
+            📚 Styleguides durchstöbern
+          </a>
+          <a 
+            href="/downloads/"
+            class="border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-primary-700 transition-colors"
+          >
+            📦 Komplettpaket herunterladen
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>
