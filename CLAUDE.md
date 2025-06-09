@@ -16,7 +16,12 @@ The style guides in this repository are meant to be:
 ## Current Content
 
 - `Gute Praesentation.md` - Comprehensive presentation guidelines (German)
+- `Wolf Schneider.md` - Rules for clear, concise German writing
+- `Gendergerecht mit Sternchen.md` - Gender-inclusive language with asterisk notation
+- `Gendergerecht ohne Sternchen.md` - Gender-inclusive language without asterisks
+- `Beispielprompts.md` - Example prompts for using these guides with AI assistants
 - `README.md` - Repository overview and usage instructions (English)
+- `LICENSE` - CC BY 4.0 license
 
 ## Working with Style Guides
 

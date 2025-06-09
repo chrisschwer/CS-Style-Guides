@@ -12,6 +12,9 @@ A collection of style guides and best practices for AI editing and writing proje
 ### Presentation Guidelines
 - **[Gute Praesentation.md](Gute%20Praesentation.md)** - Comprehensive guidelines for creating effective presentations
 
+### Usage Examples
+- **[Beispielprompts.md](Beispielprompts.md)** - Ready-to-use prompts for Claude and ChatGPT with these style guides
+
 ## Overview
 
 This repository contains style guides designed to help AI systems maintain consistency and quality when editing and writing content. Each guide provides structured approaches and best practices that can be used as instructions or reference material for AI-assisted writing tasks.
@@ -45,29 +48,24 @@ There are two main ways to use these style guides with Claude:
 
 ### Example Prompts
 
-#### Example 1: Writing with Gender-Inclusive Language
+For ready-to-use prompts, see **[Beispielprompts.md](Beispielprompts.md)** which includes:
+- Project setup instructions for Claude
+- Custom GPT configuration for ChatGPT
+- Detailed example prompts for various use cases
+- Tips for effective usage
+
+Quick examples:
+
+#### Writing with Gender-Inclusive Language
 ```
 Using the "Gendergerecht mit Sternchen" style guide, please write a job posting 
 for a software developer position.
 ```
 
-#### Example 2: Editing for Clarity
+#### Editing for Clarity
 ```
 Please edit the following text according to Wolf Schneider's principles:
 [Your text to edit]
-```
-
-#### Example 3: Creating a Presentation
-```
-Help me create a presentation about our Q4 results following the "Gute Praesentation" 
-guidelines. The presentation should tell a clear story using the SCS pattern.
-```
-
-#### Example 4: Combining Multiple Guides
-```
-Write a company announcement that follows both:
-1. Wolf Schneider's principles for clarity
-2. Gender-inclusive language (ohne Sternchen variant)
 ```
 
 ### Project Setup Example
