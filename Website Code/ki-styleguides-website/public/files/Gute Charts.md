@@ -1,4 +1,4 @@
-# Gene Zelazny - Say it with Charts
+# Gute Charts
 
 ## Anwendungsbereich
 Diese Stilrichtlinien basieren auf Gene Zelaznys Prinzipien für effektive Datenvisualisierung und Geschäftscharts. Sie sind anzuwenden, wenn Diagramme, Grafiken oder datenbasierte Präsentationen erstellt werden sollen.

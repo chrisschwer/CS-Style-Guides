@@ -9,8 +9,8 @@ import { join } from 'path';
 // Define styleguide mappings
 const styleguideMap = {
   'wolf-schneider': {
-    file: 'Wolf Schneider.md',
-    title: 'Wolf Schneider - Regeln für gutes Deutsch',
+    file: 'Gutes Deutsch.md',
+    title: 'Gutes Deutsch - Regeln für klares Schreiben',
     description: 'Klares, prägnantes Deutsch nach bewährten Prinzipien. Hauptsachen in Hauptsätze, Verben statt Substantive, konkret statt abstrakt.',
     icon: '📝',
     difficulty: 'Einfach',
@@ -45,8 +45,8 @@ const styleguideMap = {
     downloadCount: 1456
   },
   'charts': {
-    file: 'Gene Zelazny Charts.md',
-    title: 'Gene Zelazny Charts',
+    file: 'Gute Charts.md',
+    title: 'Gute Charts',
     description: 'Professionelle Charts und Diagramme nach bewährten Prinzipien. Die richtige Chart-Art für jede Botschaft, klare Gestaltung, überzeugende Datengeschichten.',
     icon: '📈',
     difficulty: 'Fortgeschritten',
@@ -107,7 +107,7 @@ try {
 }
 
 // Parse the markdown content into sections
-function parseMarkdown(markdown) {
+function parseMarkdown(markdown: string) {
   const lines = markdown.split('\n');
   const sections = [];
   let currentSection = null;
@@ -148,7 +148,7 @@ function parseMarkdown(markdown) {
 const sections = parseMarkdown(content);
 
 // Convert markdown text to HTML-like formatting
-function formatMarkdownText(text) {
+function formatMarkdownText(text: string) {
   return text
     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.*?)\*/g, '<em>$1</em>')
@@ -200,7 +200,7 @@ const pageTitle = `${styleguide.title} - KI-Styleguides`;
           
           <!-- Tags -->
           <div class="flex flex-wrap gap-2 justify-center mb-8">
-            {styleguide.tags.map(tag => (
+            {styleguide.tags.map((tag: string) => (
               <span class="bg-white text-gray-600 px-3 py-1 rounded-full text-sm border">
                 {tag}
               </span>
@@ -239,13 +239,13 @@ const pageTitle = `${styleguide.title} - KI-Styleguides`;
     <section class="py-12 lg:py-16 bg-white">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="prose prose-sm max-w-none">
-          {sections.map((section, index) => {
+          {sections.map((section: any) => {
             if (section.level === 1) {
               return null; // Skip main title as it's already in header
             }
             
             const sectionId = section.title.toLowerCase().replace(/[^a-z0-9]/g, '-');
-            const lines = section.content.trim().split('\n').filter(line => line.trim());
+            const lines = section.content.trim().split('\n').filter((line: string) => line.trim());
             
             return (
               <div class="mb-8" id={sectionId}>
@@ -266,7 +266,7 @@ const pageTitle = `${styleguide.title} - KI-Styleguides`;
                 </div>
                 
                 <div class="space-y-2">
-                  {lines.map((line, lineIndex) => {
+                  {lines.map((line: string) => {
                     if (line.startsWith('#### ')) {
                       return (
                         <h4 class="text-base font-semibold text-gray-900 mt-4 mb-1">

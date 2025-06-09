@@ -37,7 +37,7 @@ import StyleguideCard from '../components/StyleguideCard.astro';
             <h3 class="font-semibold mb-4">📦 Paket enthält:</h3>
             <div class="grid md:grid-cols-2 gap-3 text-sm">
               <div class="flex items-center gap-2">
-                <span>✓</span> Wolf Schneider.md
+                <span>✓</span> Gutes Deutsch.md
               </div>
               <div class="flex items-center gap-2">
                 <span>✓</span> Gendergerecht (Sternchen).md
@@ -49,7 +49,7 @@ import StyleguideCard from '../components/StyleguideCard.astro';
                 <span>✓</span> Gute Präsentationen.md
               </div>
               <div class="flex items-center gap-2">
-                <span>✓</span> Gene Zelazny Charts.md
+                <span>✓</span> Gute Charts.md
               </div>
               <div class="flex items-center gap-2">
                 <span>✓</span> Tufte Visualisierung.md
@@ -92,10 +92,10 @@ import StyleguideCard from '../components/StyleguideCard.astro';
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <StyleguideCard
-            title="Wolf Schneider"
+            title="Gutes Deutsch"
             description="Klares, prägnantes Deutsch nach bewährten Prinzipien der Verständlichkeit."
             icon="📝"
-            downloadUrl="/files/Wolf Schneider.md"
+            downloadUrl="/files/Gutes Deutsch.md"
             detailUrl="/styleguides/wolf-schneider/"
             downloadCount={1247}
             tags={["12 KB", "Deutsch"]}
@@ -132,10 +132,10 @@ import StyleguideCard from '../components/StyleguideCard.astro';
           />
           
           <StyleguideCard
-            title="Gene Zelazny Charts"
+            title="Gute Charts"
             description="Professionelle Datenvisualisierung nach bewährten Chart-Prinzipien."
             icon="📈"
-            downloadUrl="/files/Gene Zelazny Charts.md"
+            downloadUrl="/files/Gute Charts.md"
             detailUrl="/styleguides/charts/"
             downloadCount={387}
             tags={["18 KB", "Deutsch"]}
@@ -261,25 +261,25 @@ import StyleguideCard from '../components/StyleguideCard.astro';
 <script>
   // Complete package download functionality
   document.addEventListener('DOMContentLoaded', () => {
-    const downloadButton = document.getElementById('download-complete-package');
+    const downloadButton = document.getElementById('download-complete-package') as HTMLButtonElement;
     
     if (downloadButton) {
       downloadButton.addEventListener('click', async () => {
         try {
           // Show loading state
           downloadButton.textContent = '📦 Wird vorbereitet...';
-          downloadButton.disabled = true;
+          if (downloadButton) downloadButton.disabled = true;
           
           // Create a new ZIP instance
-          const zip = new JSZip();
+          const zip = new (window as any).JSZip();
           
           // List of files to include
           const files = [
-            'Wolf Schneider.md',
+            'Gutes Deutsch.md',
             'Gendergerecht mit Sternchen.md',
             'Gendergerecht ohne Sternchen.md',
             'Gute Praesentation.md',
-            'Gene Zelazny Charts.md',
+            'Gute Charts.md',
             'Datenvisualisierung nach Tufte.md',
             'Beispielprompts.md',
             'README.md'
@@ -366,21 +366,21 @@ Autor: Christoph Schwerdtfeger`;
           downloadButton.textContent = '✅ Heruntergeladen!';
           setTimeout(() => {
             downloadButton.textContent = '📦 Komplettpaket herunterladen';
-            downloadButton.disabled = false;
+            if (downloadButton) downloadButton.disabled = false;
           }, 2000);
           
           // Show success toast with file count
-          window.showToast(`ZIP-Paket mit ${successfulFiles.length} Dateien erfolgreich heruntergeladen!`, 'success');
+          (window as any).showToast(`ZIP-Paket mit ${successfulFiles.length} Dateien erfolgreich heruntergeladen!`, 'success');
           
         } catch (error) {
           console.error('Download failed:', error);
           downloadButton.textContent = '❌ Fehler beim Download';
           setTimeout(() => {
             downloadButton.textContent = '📦 Komplettpaket herunterladen';
-            downloadButton.disabled = false;
+            if (downloadButton) downloadButton.disabled = false;
           }, 2000);
           
-          window.showToast('Download fehlgeschlagen. Bitte versuchen Sie es erneut.', 'error');
+          (window as any).showToast('Download fehlgeschlagen. Bitte versuchen Sie es erneut.', 'error');
         }
       });
     }

@@ -42,11 +42,12 @@ const variantClasses = {
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    document.addEventListener('click', async (e) => {
-      const button = e.target.closest('.copy-button');
+    document.addEventListener('click', async (e: Event) => {
+      const target = e.target as Element;
+      const button = target.closest('.copy-button') as HTMLButtonElement;
       if (!button) return;
       
-      const content = button.dataset.content;
+      const content = button?.dataset?.content;
       const textElement = button.querySelector('.button-text');
       const copyIcon = button.querySelector('.copy-icon');
       const checkIcon = button.querySelector('.check-icon');
@@ -54,7 +55,7 @@ const variantClasses = {
       if (!content || !textElement || !copyIcon || !checkIcon) return;
       
       try {
-        await window.copyToClipboard(content);
+        await (window as any).copyToClipboard(content);
         
         // Update button state
         textElement.textContent = '✓ Kopiert!';
@@ -71,7 +72,7 @@ const variantClasses = {
         }
         
         // Show toast
-        window.showToast('In Zwischenablage kopiert', 'success');
+        (window as any).showToast('In Zwischenablage kopiert', 'success');
         
         // Reset after 2 seconds
         setTimeout(() => {
@@ -91,15 +92,15 @@ const variantClasses = {
         
       } catch (err) {
         console.error('Failed to copy to clipboard:', err);
-        window.showToast('Kopieren fehlgeschlagen', 'error');
+        (window as any).showToast('Kopieren fehlgeschlagen', 'error');
       }
     });
     
     // Store original labels
-    document.querySelectorAll('.copy-button').forEach(button => {
+    document.querySelectorAll('.copy-button').forEach((button) => {
       const textElement = button.querySelector('.button-text');
-      if (textElement) {
-        button.dataset.originalLabel = textElement.textContent;
+      if (textElement && textElement.textContent) {
+        (button as HTMLElement).dataset.originalLabel = textElement.textContent;
       }
     });
   });

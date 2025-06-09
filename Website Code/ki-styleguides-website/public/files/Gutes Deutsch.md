@@ -1,4 +1,4 @@
-# Wolf Schneider - Regeln für gutes Deutsch
+# Regeln für gutes Deutsch
 
 ## Anwendungsbereich
 Diese Stilregeln basieren auf den Prinzipien von Wolf Schneider für klares, verständliches Deutsch. Sie sind anzuwenden, wenn Texte nach seinen Maßstäben verfasst oder überarbeitet werden sollen.

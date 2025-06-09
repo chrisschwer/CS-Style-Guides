@@ -11,11 +11,11 @@ This is a comprehensive project for creating and distributing professional style
 ### 📋 Styleguides/
 **Purpose**: The core content - ready-to-use style guides for AI tools
 **Content**: 
-- `Wolf Schneider.md` - Clear, concise German writing principles
+- `Gutes Deutsch.md` - Clear, concise German writing principles
 - `Gendergerecht mit Sternchen.md` - Gender-inclusive language with asterisk notation
 - `Gendergerecht ohne Sternchen.md` - Gender-inclusive language without special characters  
 - `Gute Praesentation.md` - Presentation structure and argumentation
-- `Gene Zelazny Charts.md` - Data visualization principles
+- `Gute Charts.md` - Data visualization principles
 - `Datenvisualisierung nach Tufte.md` - Edward Tufte's visualization principles
 - `Beispielprompts.md` - Ready-to-use prompts for Claude, ChatGPT, and Microsoft 365 Copilot
 - `README.md` - Main documentation and usage instructions
@@ -152,7 +152,7 @@ All content is licensed under CC BY 4.0, allowing free commercial and non-commer
 - **Performance**: Compact rendering with `prose-sm` and `leading-tight`
 
 ### ✅ Content Integration
-- **All Styleguides**: Wolf Schneider, Gender guides, Presentations, Charts, Tufte, Examples
+- **All Styleguides**: Gutes Deutsch, Gender guides, Presentations, Charts, Tufte, Examples
 - **Proper Routing**: Each guide accessible via clean URLs
 - **Download Links**: Fixed file paths to match actual filenames
 - **Search Accessibility**: All content properly structured for SEO

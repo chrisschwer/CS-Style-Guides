@@ -33,7 +33,7 @@ const { title, description = "Professionelle Styleguides für KI-assistiertes Sc
     
     <script>
       // Copy to clipboard functionality
-      function copyToClipboard(text) {
+      function copyToClipboard(text: string): Promise<void> {
         if (navigator.clipboard) {
           return navigator.clipboard.writeText(text);
         } else {
@@ -42,7 +42,7 @@ const { title, description = "Professionelle Styleguides für KI-assistiertes Sc
           textarea.value = text;
           document.body.appendChild(textarea);
           textarea.select();
-          document.execCommand('copy');
+          document.execCommand('copy'); // Deprecated but needed for fallback
           document.body.removeChild(textarea);
           return Promise.resolve();
         }
@@ -64,7 +64,7 @@ const { title, description = "Professionelle Styleguides für KI-assistiertes Sc
       }
 
       // Toast notifications
-      function showToast(message, type = 'success') {
+      function showToast(message: string, type: 'success' | 'error' = 'success') {
         const toast = document.createElement('div');
         toast.className = `fixed top-4 right-4 px-6 py-3 rounded-lg shadow-lg z-50 ${
           type === 'success' ? 'bg-green-600 text-white' : 'bg-red-600 text-white'
@@ -78,9 +78,9 @@ const { title, description = "Professionelle Styleguides für KI-assistiertes Sc
       }
 
       // Make functions globally available
-      window.copyToClipboard = copyToClipboard;
-      window.toggleMobileMenu = toggleMobileMenu;
-      window.showToast = showToast;
+      (window as any).copyToClipboard = copyToClipboard;
+      (window as any).toggleMobileMenu = toggleMobileMenu;
+      (window as any).showToast = showToast;
     </script>
   </body>
 </html>

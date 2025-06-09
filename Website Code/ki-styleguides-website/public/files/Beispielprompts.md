@@ -32,7 +32,7 @@ Du bist ein erfahrener deutscher Redakteur und Stilberater. Du hilfst bei der Er
 und Überarbeitung von deutschen Texten und Präsentationen nach spezifischen Stilrichtlinien.
 
 Verfügbare Stilrichtlinien:
-1. Wolf Schneider - Klares, prägnantes Deutsch
+1. Gutes Deutsch - Klares, prägnantes Deutsch
 2. Gendergerechte Sprache mit Sternchen (z.B. Student*innen)
 3. Gendergerechte Sprache ohne Sternchen (neutrale Begriffe)
 4. Gute Präsentationen (Struktur und Argumentation)
@@ -47,9 +47,9 @@ Gib konstruktives, detailliertes Feedback und erkläre deine Verbesserungsvorsch
 
 ### Beispielprompts für ChatGPT
 
-#### Prompt 1: Text nach Wolf Schneider überarbeiten
+#### Prompt 1: Text nach Gutes Deutsch überarbeiten
 ```
-Ich möchte folgenden Text nach Wolf Schneiders Prinzipien überarbeiten lassen. 
+Ich möchte folgenden Text nach den Prinzipien für gutes Deutsch überarbeiten lassen. 
 Bitte mache ihn kürzer, klarer und verständlicher:
 
 [Hier den Text einfügen]
@@ -92,7 +92,7 @@ Verwende dabei die Prinzipien aus "Gute Präsentationen".
 [Text einfügen]
 
 Bitte wende an:
-1. Wolf Schneiders Klarheitsprinzipien (kurze Sätze, aktiv, konkret)
+1. Klarheitsprinzipien für gutes Deutsch (kurze Sätze, aktiv, konkret)
 2. Gendergerechte Sprache OHNE Sternchen (neutrale Begriffe bevorzugen)
 
 Markiere alle Änderungen und erkläre, welche Regel du jeweils angewendet hast.
@@ -104,7 +104,7 @@ Markiere alle Änderungen und erkläre, welche Regel du jeweils angewendet hast.
 Da ChatGPT keinen Zugriff auf die Dateien hat, müssen Sie die relevanten Regeln im Prompt mitgeben:
 
 ```
-Verwende folgende Regeln nach Wolf Schneider:
+Verwende folgende Regeln für gutes Deutsch:
 - Hauptsachen in Hauptsätze
 - Maximal 15-20 Wörter pro Satz
 - Verben statt Substantive
@@ -117,7 +117,7 @@ Verwende folgende Regeln nach Wolf Schneider:
 #### Schritt-für-Schritt-Anleitung
 ```
 Analysiere diesen Text in drei Schritten:
-1. Identifiziere Verstöße gegen Wolf Schneiders Regeln
+1. Identifiziere Verstöße gegen die Regeln für gutes Deutsch
 2. Schlage konkrete Verbesserungen vor
 3. Erstelle eine überarbeitete Gesamtversion
 
@@ -146,7 +146,7 @@ Microsoft 365 Copilot ist direkt in Word, PowerPoint, Excel und Outlook integrie
 
 #### Word - Textverbesserung
 ```
-Überarbeite diesen Text nach Wolf Schneiders Prinzipien:
+Überarbeite diesen Text nach den Prinzipien für gutes Deutsch:
 - Hauptsachen in Hauptsätze
 - Maximal 15-20 Wörter pro Satz  
 - Verben statt Substantive
@@ -173,7 +173,7 @@ Verbessere diese Präsentation nach den Regeln für "Gute Präsentationen":
 #### Outlook - E-Mail-Verbesserung
 ```
 Schreibe diese E-Mail um, sodass sie:
-- Wolf Schneiders Klarheitsprinzipien folgt
+- den Klarheitsprinzipien für gutes Deutsch folgt
 - Gendergerechte Sprache verwendet (ohne Sternchen)
 - Professionell aber freundlich wirkt
 - Maximal 150 Wörter hat
@@ -185,7 +185,7 @@ Ursprüngliche E-Mail: [E-Mail-Text]
 
 #### Prompt 1: Geschäftsbrief optimieren
 ```
-@Copilot Überarbeite diesen Geschäftsbrief nach Wolf Schneider Prinzipien:
+@Copilot Überarbeite diesen Geschäftsbrief nach den Prinzipien für gutes Deutsch:
 
 Anforderungen:
 - Kurze, klare Sätze (max. 20 Wörter)
@@ -220,7 +220,7 @@ Regeln:
 
 Anforderungen:
 - Gendergerechte Sprache mit neutralen Begriffen (Fachkraft, Person, Team)
-- Wolf Schneider Klarheit: kurze Sätze, konkrete Angaben
+- Klarheit im Deutschen: kurze Sätze, konkrete Angaben
 - MECE-strukturierte Aufgabenliste
 - Ansprechende, aber professionelle Tonalität
 
@@ -229,7 +229,7 @@ Inhalte: Teamführung (5 Personen), Budgetverantwortung (500k€), Kundenkontakt
 
 #### Prompt 4: Datenvisualisierung verbessern
 ```
-@Copilot Analysiere dieses Diagramm nach Gene Zelazny Prinzipien:
+@Copilot Analysiere dieses Diagramm nach Prinzipien für gute Charts:
 
 Prüfe auf:
 - Ist die Message im Titel klar erkennbar?
@@ -247,7 +247,7 @@ Gib konkrete Verbesserungsvorschläge.
 
 #### Word-Integration
 ```
-/draft Schreibe einen Bericht über [Thema] nach Wolf Schneider Prinzipien:
+/draft Schreibe einen Bericht über [Thema] nach den Prinzipien für gutes Deutsch:
 - Klare Struktur mit Überschriften als Aussagen
 - Kurze Absätze (max. 5 Sätze)
 - Konkrete Beispiele statt abstrakte Begriffe
@@ -279,7 +279,7 @@ Gib konkrete Verbesserungsvorschläge.
 ```
 @Copilot Für die folgenden Aufgaben verwende diese Stilrichtlinien:
 
-Wolf Schneider Regeln:
+Regeln für gutes Deutsch:
 - Einer muss sich plagen: der Schreiber oder der Leser
 - Hauptsachen in Hauptsätze
 - Verben sind stärker als Substantive
@@ -291,7 +291,7 @@ Jetzt optimiere: [Ihr Text]
 #### Iterative Verbesserung
 ```
 @Copilot Verbessere schrittweise:
-1. Ersten Durchgang: Wolf Schneider Klarheit
+1. Ersten Durchgang: Klarheit im Deutschen
 2. Zweiten Durchgang: Gendergerechte Sprache
 3. Dritten Durchgang: Präsentationslogik (falls zutreffend)
 
@@ -303,7 +303,7 @@ Zeige mir nach jedem Schritt die Änderungen.
 #### Feedback einholen
 ```
 @Copilot Bewerte diesen Text auf einer Skala von 1-10 für:
-- Klarheit (Wolf Schneider Kriterien)
+- Klarheit (Kriterien für gutes Deutsch)
 - Inklusivität (gendergerechte Sprache)
 - Struktur (logischer Aufbau)
 - Zielgruppeneignung

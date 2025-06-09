@@ -5,13 +5,13 @@ Professionelle Styleguides für KI-assistiertes Schreiben auf Deutsch.
 ## Verfügbare Styleguides
 
 ### 📝 Schreibstil
-- **[Wolf Schneider.md](Wolf%20Schneider.md)** - Klares, prägnantes Deutsch nach bewährten Prinzipien
+- **[Gutes Deutsch.md](Gutes%20Deutsch.md)** - Gutes Deutsch: Klares, prägnantes Deutsch nach bewährten Prinzipien
 - **[Gendergerecht mit Sternchen.md](Gendergerecht%20mit%20Sternchen.md)** - Inklusive Sprache mit Asterisk-Notation (Student*innen)
 - **[Gendergerecht ohne Sternchen.md](Gendergerecht%20ohne%20Sternchen.md)** - Inklusive Sprache mit neutralen Begriffen (Studierende)
 
 ### 📊 Präsentationen & Datenvisualisierung
 - **[Gute Praesentation.md](Gute%20Praesentation.md)** - Strukturierte Präsentationen mit SCS-Muster und MECE-Prinzip
-- **[Gene Zelazny Charts.md](Gene%20Zelazny%20Charts.md)** - Effektive Datenvisualisierung nach "Say it with Charts"
+- **[Gute Charts.md](Gute%20Charts.md)** - Gute Charts: Effektive Datenvisualisierung nach "Say it with Charts"
 - **[Datenvisualisierung nach Tufte.md](Datenvisualisierung%20nach%20Tufte.md)** - Informationsdesign nach Edward Tufte
 
 ### 🤖 Anwendungsbeispiele
@@ -35,7 +35,7 @@ Die beiden Guides für gendergerechte Sprache sind **Alternativen** - wählen Si
    - "Add content" klicken
    - .md-Datei hochladen oder
    - Inhalt als Projektanweisung kopieren
-3. **In Prompts referenzieren**: "Verwende Wolf Schneider Prinzipien..."
+3. **In Prompts referenzieren**: "Verwende Gutes Deutsch Prinzipien..."
 
 ### ChatGPT & Microsoft 365 Copilot
 1. **Regeln in Prompt kopieren** oder
@@ -49,9 +49,9 @@ Siehe **[Beispielprompts.md](Beispielprompts.md)** für:
 
 ### Schnellstart-Beispiele
 
-#### Textverbesserung mit Wolf Schneider
+#### Textverbesserung mit Gutes Deutsch
 ```
-Überarbeite folgenden Text nach Wolf Schneider Prinzipien:
+Überarbeite folgenden Text nach bewährten Prinzipien für gutes Deutsch:
 - Hauptsachen in Hauptsätze
 - Kurze, klare Sätze
 - Verben statt Substantive
