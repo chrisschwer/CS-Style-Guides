@@ -184,6 +184,7 @@ Diese Stilrichtlinien basieren auf Gene Zelaznys Prinzipien für effektive Daten
 - [ ] Symmetrie und gleichmäßige Verteilung beachtet?
 - [ ] Bei Organisationscharts: Gleiche Ebene, gleiche Größe?
 
+
 ### Vor der Präsentation
 - [ ] Chart in 5 Sekunden verständlich?
 - [ ] Aus 3 Meter Entfernung lesbar?
