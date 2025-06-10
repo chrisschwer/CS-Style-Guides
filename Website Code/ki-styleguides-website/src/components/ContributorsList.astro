@@ -80,7 +80,7 @@ function formatJoinDate(dateString?: string): string {
               height="64"
               loading="lazy"
               class="w-16 h-16 rounded-full ring-2 ring-gray-200 group-hover:ring-primary-400 transition-all duration-200"
-              onError="this.onerror=null; this.src='/github-logo.svg';"
+              onerror="this.onerror=null; this.src='/github-logo.svg';"
             />
             {contributor.isOwner && (
               <span 
