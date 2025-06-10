@@ -37,6 +37,7 @@ Vollständige Website-Implementierung:
 - **Dynamic Routing** - Individual-Seiten für alle Styleguides
 - **Automatic Versioning** - Semantische Versionierung mit Git-Integration
 - **German Date Formatting** - Durchgängige deutsche Datumsformatierung (dd.mm.yyyy)
+- **Community Acknowledgement** - GitHub-Mitwirkenden-System mit Opt-Out-Mechanismus
 
 ## Quick Start
 
@@ -146,6 +147,23 @@ npm run version:update-hashes
 
 ### Aktuelle Versionen (Stand: 09.06.2025)
 Alle Styleguides wurden auf Version 1.0.1 aktualisiert mit korrigierten Erstellungsdaten und deutscher Datumsformatierung.
+
+## Community Features
+
+### GitHub-Mitwirkenden-Anerkennung
+Das Projekt verfügt über ein vollständiges System zur Anerkennung von Community-Beiträgen:
+
+**Features:**
+- **Automatische Mitwirkenden-Liste** - Zeigt alle GitHub-Contributors der Reihe nach an
+- **Opt-Out-Mechanismus** - Respektiert Privatsphäre-Wünsche (GitHub Issues, Repository-Dateien)
+- **Caching-System** - 24-Stunden-Cache für bessere Performance
+- **Fallback-Behandlung** - Graceful Degradation bei API-Ausfällen
+- **Responsive Design** - Ansprechende Darstellung auf allen Geräten
+
+**Implementierte Komponenten:**
+- `ContributorsList.astro` - Vollständige Komponente mit Lazy Loading und Accessibility
+- GitHub API Integration mit Retry-Logic und Fehlerbehandlung
+- Umfassende Tests für alle Funktionalitäten
 
 ## Lizenz
 

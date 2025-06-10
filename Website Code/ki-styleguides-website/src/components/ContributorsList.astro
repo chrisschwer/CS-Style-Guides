@@ -1,0 +1,180 @@
+---
+import type { ContributorDisplayData } from '../lib/github';
+import { createCachedGitHubClient } from '../lib/github';
+
+export interface Props {
+  maxContributors?: number;
+  showContributions?: boolean;
+  showJoinDate?: boolean;
+}
+
+const { 
+  maxContributors, 
+  showContributions = false,
+  showJoinDate = false 
+} = Astro.props;
+
+let contributors: ContributorDisplayData[] = [];
+let error: string | null = null;
+
+try {
+  const githubClient = createCachedGitHubClient('chrisschwer', 'CS-Style-Guides');
+  
+  // Get contributors with all exclusions applied
+  contributors = await githubClient.getCachedContributorsForDisplayWithExclusions(
+    '.contributors-exclusions',
+    true, // Search GitHub issues
+    true  // Scan repository files
+  );
+  
+  // Limit number of contributors if specified
+  if (maxContributors && maxContributors > 0) {
+    contributors = contributors.slice(0, maxContributors);
+  }
+} catch (err) {
+  console.error('Failed to load contributors:', err);
+  error = 'Die Mitwirkenden konnten nicht geladen werden. Bitte versuchen Sie es später erneut.';
+}
+
+// Helper function to format join date in German
+function formatJoinDate(dateString?: string): string {
+  if (!dateString) return 'Unbekannt';
+  
+  const date = new Date(dateString);
+  return date.toLocaleDateString('de-DE', {
+    month: 'long',
+    year: 'numeric'
+  });
+}
+---
+
+<div class="contributors-section">
+  {error ? (
+    <div class="text-center py-8 px-4 bg-warning-50 border border-warning-200 rounded-lg">
+      <p class="text-warning-800">{error}</p>
+    </div>
+  ) : contributors.length === 0 ? (
+    <div class="text-center py-12">
+      <p class="text-gray-500 text-lg">Lade Mitwirkende...</p>
+      <div class="mt-4 inline-flex items-center gap-2">
+        <div class="w-4 h-4 bg-primary-500 rounded-full animate-pulse"></div>
+        <div class="w-4 h-4 bg-primary-500 rounded-full animate-pulse" style="animation-delay: 0.2s"></div>
+        <div class="w-4 h-4 bg-primary-500 rounded-full animate-pulse" style="animation-delay: 0.4s"></div>
+      </div>
+    </div>
+  ) : (
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+      {contributors.map((contributor) => (
+        <a 
+          href={contributor.html_url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group flex flex-col items-center p-4 rounded-lg hover:bg-gray-50 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+          aria-label={`GitHub-Profil von ${contributor.name || contributor.login} öffnen`}
+        >
+          <div class="relative mb-3">
+            <img 
+              src={contributor.avatar_url || '/github-logo.svg'} 
+              alt={`Avatar von ${contributor.name || contributor.login}`}
+              width="64"
+              height="64"
+              loading="lazy"
+              class="w-16 h-16 rounded-full ring-2 ring-gray-200 group-hover:ring-primary-400 transition-all duration-200"
+              onError="this.onerror=null; this.src='/github-logo.svg';"
+            />
+            {contributor.isOwner && (
+              <span 
+                class="absolute -top-1 -right-1 bg-primary-600 text-white text-xs px-2 py-0.5 rounded-full shadow-sm"
+                title="Repository Owner"
+              >
+                Owner
+              </span>
+            )}
+          </div>
+          
+          <div class="text-center">
+            <h3 class="font-medium text-gray-900 group-hover:text-primary-600 transition-colors">
+              {contributor.name || contributor.login}
+            </h3>
+            
+            {showContributions && (
+              <p class="text-sm text-gray-500 mt-1">
+                {contributor.contributions} {contributor.contributions === 1 ? 'Beitrag' : 'Beiträge'}
+              </p>
+            )}
+            
+            {showJoinDate && contributor.first_commit_date && (
+              <p class="text-xs text-gray-400 mt-1">
+                Seit {formatJoinDate(contributor.first_commit_date)}
+              </p>
+            )}
+          </div>
+        </a>
+      ))}
+    </div>
+  )}
+  
+  <div class="mt-8 text-center">
+    <p class="text-sm text-gray-600">
+      Möchten Sie nicht in dieser Liste erscheinen? 
+      <a 
+        href="https://github.com/chrisschwer/CS-Style-Guides/issues/new?title=Opt-out%20from%20contributors%20list&body=Ich%20möchte%20aus%20der%20Mitwirkenden-Liste%20entfernt%20werden.%20%0A%0AGitHub-Benutzername%3A%20%40[IHR_BENUTZERNAME]"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-primary-600 hover:text-primary-700 underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded-sm"
+      >
+        Erstellen Sie ein Issue
+      </a>
+    </p>
+  </div>
+</div>
+
+<style>
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+  
+  .animate-pulse {
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  
+  /* Ensure images maintain aspect ratio */
+  img {
+    object-fit: cover;
+  }
+  
+  /* Smooth loading transition */
+  .contributors-section {
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<script>
+  // Add error handling for avatar images
+  document.addEventListener('DOMContentLoaded', () => {
+    const avatarImages = document.querySelectorAll<HTMLImageElement>('.contributors-section img');
+    
+    avatarImages.forEach((img) => {
+      img.addEventListener('error', function() {
+        this.src = '/github-logo.svg';
+        this.onerror = null; // Prevent infinite loop
+      });
+    });
+  });
+</script>

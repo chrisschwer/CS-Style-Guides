@@ -44,15 +44,15 @@
   - [x] 3.5 Create filtering logic to exclude opted-out contributors from display
   - [x] 3.6 Write unit tests for opt-out filtering functionality
 
-- [ ] 4.0 Contributors Display Component
-  - [ ] 4.1 Create ContributorsList.astro component with Tailwind CSS styling
-  - [ ] 4.2 Implement responsive grid layout for contributor avatars and names
-  - [ ] 4.3 Add GitHub logo fallback for contributors without profile pictures
-  - [ ] 4.4 Implement lazy loading for contributor avatar images
-  - [ ] 4.5 Add proper accessibility attributes (alt text, ARIA labels)
-  - [ ] 4.6 Ensure component follows existing design language and typography (Inter font)
-  - [ ] 4.7 Add loading states and error handling for display component
-  - [ ] 4.8 Write component tests for ContributorsList component
+- [x] 4.0 Contributors Display Component
+  - [x] 4.1 Create ContributorsList.astro component with Tailwind CSS styling
+  - [x] 4.2 Implement responsive grid layout for contributor avatars and names
+  - [x] 4.3 Add GitHub logo fallback for contributors without profile pictures
+  - [x] 4.4 Implement lazy loading for contributor avatar images
+  - [x] 4.5 Add proper accessibility attributes (alt text, ARIA labels)
+  - [x] 4.6 Ensure component follows existing design language and typography (Inter font)
+  - [x] 4.7 Add loading states and error handling for display component
+  - [x] 4.8 Write component tests for ContributorsList component
 
 - [ ] 5.0 Integration with Über Page and Testing
   - [ ] 5.1 Add Contributors section to ueber.astro page with proper heading and spacing
