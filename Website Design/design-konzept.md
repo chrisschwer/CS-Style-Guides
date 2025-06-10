@@ -238,11 +238,85 @@ Download:
 - **Alt-Texte**: Für alle Bilder/Icons
 - **Skip Links**: Zum Hauptinhalt
 
+## Community Elements
+
+### Contributors Section
+```
+Design für Mitwirkenden-Bereich (Über-Seite):
+
+┌─────────────────────────────────────────────────────────────┐
+│ 👥 Mitwirkende                                             │
+│                                                             │
+│ Beschreibungstext über GitHub-Community...                 │
+│                                                             │
+│ ┌────┐ ┌────┐ ┌────┐ ┌────┐ ┌────┐ ┌────┐                │
+│ │ 👤 │ │ 👤 │ │ 👤 │ │ 👤 │ │ 👤 │ │ 👤 │  Desktop       │
+│ │ @u │ │ @u │ │ @u │ │ @u │ │ @u │ │ @u │  (6 Spalten)   │
+│ └────┘ └────┘ └────┘ └────┘ └────┘ └────┘                │
+│                                                             │
+│ ┌────┐ ┌────┐ ┌────┐ ┌────┐                               │
+│ │ 👤 │ │ 👤 │ │ 👤 │ │ 👤 │  Tablet (4 Spalten)         │
+│ └────┘ └────┘ └────┘ └────┘                               │
+│                                                             │
+│ ┌────┐ ┌────┐                                             │
+│ │ 👤 │ │ 👤 │  Mobile (2 Spalten)                        │
+│ └────┘ └────┘                                             │
+│                                                             │
+│ Opt-out Link für Datenschutz...                          │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Contributor Cards
+```
+Einzelner Mitwirkender:
+┌─────────────────────┐
+│        ┌─────┐      │  - Runder Avatar (64x64px)
+│        │ 👤  │      │  - GitHub-Link (target="_blank")
+│        │     │      │  - Hover: Ring-Farbe wechselt
+│        └─────┘      │  - "Owner" Badge falls zutreffend
+│     @username       │  - Beitragszahl (optional)
+│     5 Beiträge      │  - Lazy Loading für Performance
+│                     │
+└─────────────────────┘
+```
+
+### Visual Hierarchy
+- **Avatars**: 64x64px, border-radius: 50%
+- **Ring Colors**: gray-200 → primary-400 (hover)
+- **Owner Badge**: primary-600 background, white text
+- **Grid Gaps**: 1rem (gap-4)
+- **Responsive**: 2/3/4/6 columns (mobile → desktop)
+
+### Error States
+```
+Fehler-Zustand:
+┌─────────────────────────────────────────────────────────────┐
+│ ⚠️ Die Mitwirkenden konnten nicht geladen werden.           │
+│    Bitte versuchen Sie es später erneut.                   │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Loading States
+```
+Lade-Zustand:
+┌─────────────────────────────────────────────────────────────┐
+│                  Lade Mitwirkende...                       │
+│                   ● ● ●  (animiert)                        │
+└─────────────────────────────────────────────────────────────┘
+```
+
 ## Performance-Ziele
 
 - **Ladezeit**: < 2 Sekunden
 - **Core Web Vitals**: Alle grün
-- **Bildoptimierung**: WebP Format
+- **Bildoptimierung**: WebP Format, Lazy Loading
 - **Font-Loading**: font-display: swap
+- **Contributors**: Max. 12 Avatars, GitHub CDN, 24h Cache
 
-Soll ich als nächstes einen spezifischen Bereich detaillierter ausarbeiten oder haben Sie Anpassungswünsche am Design-Konzept?
+## Privacy & Compliance
+
+### Opt-Out Mechanismus
+- **Multi-Source**: GitHub Issues, Repository Files, Lokale Datei
+- **User-Friendly**: Einfacher Issue-Link für Opt-Out Requests
+- **GDPR-Compliant**: Transparenz über Datenquellen
+- **Fallback**: Graceful Degradation bei API-Ausfällen

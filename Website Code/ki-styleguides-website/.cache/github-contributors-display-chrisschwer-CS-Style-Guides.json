@@ -1,0 +1,16 @@
+{
+  "data": [
+    {
+      "login": "chrisschwer",
+      "name": "chrisschwer",
+      "avatar_url": "https://github.com/chrisschwer.png",
+      "html_url": "https://github.com/chrisschwer",
+      "contributions": 1,
+      "isOwner": true
+    }
+  ],
+  "metadata": {
+    "timestamp": 1749581015667,
+    "expiresIn": 86400000
+  }
+}

@@ -353,6 +353,31 @@ und neue Styleguide-Ideen sind herzlich willkommen.
 • Diskussionen für neue Ideen
 ```
 
+### Mitwirkende
+```
+👥 Mitwirkende
+
+Dieses Projekt wird von der GitHub-Community getragen. Hier sind alle, die durch Code, 
+Feedback, Ideen oder Dokumentation zu den KI-Styleguides beigetragen haben:
+
+[Automatisch generierte Contributors-Liste aus GitHub API]
+• Responsive Grid-Layout (2-6 Spalten je nach Bildschirmgröße)
+• GitHub-Avatars mit Lazy Loading
+• Beitragszahl und Repository-Owner Badge
+• Verknüpfung zu GitHub-Profilen
+
+Datenschutz-Hinweis:
+Möchten Sie nicht in dieser Liste erscheinen? Sie können sich jederzeit abmelden:
+→ [GitHub Issue erstellen] oder
+→ [Per E-Mail kontaktieren]
+
+Technische Details:
+• Daten werden über GitHub API abgerufen
+• 24-Stunden Caching für Performance
+• Graceful Degradation bei API-Ausfällen
+• DSGVO-konforme Opt-out Möglichkeiten
+```
+
 ### Lizenz & Credits
 ```
 Lizenz:
