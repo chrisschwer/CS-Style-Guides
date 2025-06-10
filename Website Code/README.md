@@ -13,12 +13,16 @@ Die Website ist vollständig entwickelt und bereit für den produktiven Einsatz:
 - ✅ Responsive Design für alle Geräte
 - ✅ Rechtliche Seiten (Impressum, Datenschutz, Lizenz)
 - ✅ SEO-optimiert und performance-ready
+- ✅ Community Acknowledgement System (Backend fertig)
 
 ## Technischer Stack
 
 - **Framework**: Astro 4.x
 - **Styling**: Tailwind CSS 3.x
 - **JavaScript**: JSZip für ZIP-Downloads
+- **APIs**: GitHub REST API v3 für Contributors
+- **Caching**: File-based 24h Cache System
+- **Testing**: Vitest mit umfassender Test-Coverage
 - **Deployment**: Netlify/Vercel ready
 - **Performance**: Static Site Generation
 
@@ -33,6 +37,13 @@ Website Code/
 │   │   │   ├── Footer.astro        # Footer mit allen Links
 │   │   │   ├── CopyButton.astro    # Copy-to-clipboard
 │   │   │   └── StyleguideCard.astro # Styleguide-Vorschau
+│   │   ├── lib/                     # Backend-Services
+│   │   │   ├── github.ts           # GitHub API Integration
+│   │   │   ├── github.test.ts      # GitHub API Tests
+│   │   │   ├── cache.ts            # File-based Caching
+│   │   │   ├── cache.test.ts       # Cache Tests
+│   │   │   ├── versioning.ts       # Versioning System
+│   │   │   └── versioning.test.ts  # Versioning Tests
 │   │   ├── layouts/
 │   │   │   └── Layout.astro        # Basis-Layout
 │   │   └── pages/

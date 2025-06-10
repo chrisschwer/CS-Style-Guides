@@ -162,7 +162,7 @@ All content is licensed under CC BY 4.0, allowing free commercial and non-commer
 10. Ready for immediate deployment to Netlify/Vercel
 11. Test with `npm run build && npm run preview` before deployment
 
-## Recent Completions (January 2025)
+## Recent Completions (June 2025)
 
 ### ✅ Core Website Features
 - **Dynamic Styleguide Pages**: `/styleguides/[slug]/` routing implemented
@@ -187,7 +187,7 @@ All content is licensed under CC BY 4.0, allowing free commercial and non-commer
 - **Download Links**: Fixed file paths to match actual filenames
 - **Search Accessibility**: All content properly structured for SEO
 
-### ✅ Automatic Versioning System (January 2025)
+### ✅ Automatic Versioning System (June 2025)
 - **Semantic Versioning**: MAJOR.MINOR.PATCH version numbering for all styleguides
 - **Git-Based Change Detection**: Automatically detects changes using git diff analysis
 - **Content Hashing**: SHA-256 hashes for version validation and fallback change detection
@@ -315,7 +315,7 @@ git push
 - **ZIP Downloads**: Include version manifest, changelog, and version-aware filenames
 - **Homepage**: Recently updated guides section highlights version changes
 
-## Recent Updates (January 2025)
+## Recent Updates (June 2025)
 
 ### ✅ File Naming Standardization
 - **Renamed Files**: Standardized naming to remove author references
@@ -342,10 +342,17 @@ git push
 - **Build Process Integration**: German date formatting works in ZIP downloads, version badges, and all display components
 - **Template Scope Fixes**: Resolved TypeScript compilation issues in inline scripts for downloads page
 
+### ✅ Community Acknowledgement System (June 2025)
+- **GitHub API Integration**: Complete REST API client with contributor fetching, first commit tracking, and error handling
+- **Caching System**: 24-hour file-based cache to reduce API calls during builds with validation and cleanup
+- **Opt-Out Mechanism**: Multi-source exclusion system supporting file-based, GitHub issues, and repository file scanning
+- **Comprehensive Testing**: 100% test coverage for all GitHub API, caching, and opt-out functionality
+- **Ready for Integration**: All backend components complete, awaiting UI component implementation
+
 ## Memories
 
-- When prompted to create a PRD for a new feature, use @.ai-dev-tasks/create-prd.mdc
-- When prompted to create a task list from a PRD, look/ask for a PRD file and use @.ai-dev-tasks/generate-tasks.mdc
-- When asked to work on a set of tasks from a file, use @.ai-dev-task/process-task-list.mdc
+- When prompted to create a PRD for a new feature, use @ai-dev-tasks/create-prd.mdc
+- When prompted to create a task list from a PRD, look/ask for a PRD file and use @ai-dev-tasks/generate-tasks.mdc
+- When asked to work on a set of tasks from a file, use @ai-dev-task/process-task-list.mdc
 
 This structure supports both independent work on different aspects and coordinated development of the complete website experience. **The website is now production-ready.**

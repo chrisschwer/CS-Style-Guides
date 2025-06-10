@@ -1,3 +1,7 @@
+import { getOrSet, cache } from './cache';
+import fs from 'fs/promises';
+import path from 'path';
+
 export interface Contributor {
   id: number;
   login: string;
@@ -42,6 +46,25 @@ export interface GitHubCommit {
   author: Contributor | null;
   committer: Contributor | null;
   html_url: string;
+}
+
+export interface GitHubIssue {
+  id: number;
+  number: number;
+  title: string;
+  body: string | null;
+  state: string;
+  labels: Array<{
+    id: number;
+    name: string;
+    color: string;
+  }>;
+  user: {
+    login: string;
+    id: number;
+  };
+  created_at: string;
+  updated_at: string;
 }
 
 export interface GitHubRepository {
@@ -342,6 +365,213 @@ export class GitHubApiClient {
     const contributors = await this.getContributorsWithFallback();
     return this.transformToDisplayData(contributors);
   }
+
+  /**
+   * Searches GitHub issues for opt-out requests
+   * Looks for issues with specific labels or keywords in the title/body
+   * @param labels - Array of label names to search for (e.g., ['opt-out', 'exclude-contributor'])
+   * @param keywords - Array of keywords to search in issue titles/bodies
+   * @returns Array of usernames who have requested opt-out via issues
+   */
+  async searchOptOutIssues(
+    labels: string[] = ['opt-out', 'contributor-opt-out', 'exclude-me'],
+    keywords: string[] = ['opt out', 'exclude me', 'remove me from contributors']
+  ): Promise<string[]> {
+    const optedOutUsers = new Set<string>();
+    
+    try {
+      // Search by labels
+      for (const label of labels) {
+        const labelUrl = `${this.baseUrl}/repos/${this.owner}/${this.repo}/issues?state=all&labels=${encodeURIComponent(label)}&per_page=100`;
+        
+        try {
+          const response = await this.makeRequest(labelUrl);
+          const issues: GitHubIssue[] = await response.json();
+          
+          // Add issue authors to opt-out list
+          issues.forEach(issue => {
+            if (issue.user && issue.user.login) {
+              optedOutUsers.add(issue.user.login.toLowerCase());
+              console.log(`[Opt-out] Found opt-out request from ${issue.user.login} via issue #${issue.number}`);
+            }
+          });
+        } catch (error) {
+          console.warn(`Failed to search issues with label "${label}":`, error);
+        }
+      }
+      
+      // Search by keywords in issue title and body
+      for (const keyword of keywords) {
+        const searchUrl = `${this.baseUrl}/search/issues?q=${encodeURIComponent(keyword)}+repo:${this.owner}/${this.repo}+type:issue&per_page=100`;
+        
+        try {
+          const response = await this.makeRequest(searchUrl);
+          const searchResult = await response.json();
+          
+          if (searchResult.items) {
+            searchResult.items.forEach((issue: GitHubIssue) => {
+              // Check if the issue is specifically about opting out
+              const titleLower = issue.title.toLowerCase();
+              const bodyLower = (issue.body || '').toLowerCase();
+              
+              // Only add if the issue clearly indicates an opt-out request
+              if (
+                titleLower.includes('opt out') || 
+                titleLower.includes('exclude me') ||
+                titleLower.includes('remove me') ||
+                (bodyLower.includes('opt out') && bodyLower.includes('contributor')) ||
+                (bodyLower.includes('exclude') && bodyLower.includes('contributor')) ||
+                (bodyLower.includes('remove') && bodyLower.includes('contributor'))
+              ) {
+                if (issue.user && issue.user.login) {
+                  optedOutUsers.add(issue.user.login.toLowerCase());
+                  console.log(`[Opt-out] Found opt-out request from ${issue.user.login} via issue #${issue.number} (keyword: "${keyword}")`);
+                }
+              }
+            });
+          }
+        } catch (error) {
+          console.warn(`Failed to search issues with keyword "${keyword}":`, error);
+        }
+      }
+      
+    } catch (error) {
+      console.error('[Opt-out] Error searching for opt-out issues:', error);
+    }
+    
+    return Array.from(optedOutUsers);
+  }
+
+  /**
+   * Scans repository files for opt-out declarations
+   * Looks for specific files that might contain opt-out requests
+   * @param filePaths - Array of file paths to check (e.g., ['.github/CONTRIBUTORS_OPT_OUT', 'docs/opt-out.md'])
+   * @returns Array of usernames who have opted out via repository files
+   */
+  async scanRepositoryOptOutFiles(
+    filePaths: string[] = [
+      '.github/CONTRIBUTORS_OPT_OUT',
+      '.github/contributors-opt-out.txt',
+      'docs/contributors-opt-out.md',
+      'CONTRIBUTORS_OPT_OUT',
+      '.contributors-opt-out'
+    ]
+  ): Promise<string[]> {
+    const optedOutUsers = new Set<string>();
+    
+    for (const filePath of filePaths) {
+      try {
+        const url = `${this.baseUrl}/repos/${this.owner}/${this.repo}/contents/${filePath}`;
+        const response = await this.makeRequest(url);
+        
+        if (response.ok) {
+          const fileData = await response.json();
+          
+          // GitHub API returns file content as base64
+          if (fileData.content && fileData.encoding === 'base64') {
+            const content = atob(fileData.content.replace(/\n/g, ''));
+            
+            // Parse the content similar to the exclusions file
+            const lines = content.split('\n');
+            lines.forEach(line => {
+              const trimmedLine = line.trim();
+              // Skip comments and empty lines
+              if (trimmedLine && !trimmedLine.startsWith('#')) {
+                // Extract username (handle various formats)
+                // Format could be: "username" or "@username" or "- username" or "* username"
+                const username = trimmedLine
+                  .replace(/^[\-\*\s@]+/, '') // Remove leading -, *, spaces, @
+                  .trim();
+                
+                if (username) {
+                  optedOutUsers.add(username.toLowerCase());
+                  console.log(`[Opt-out] Found opt-out for ${username} in ${filePath}`);
+                }
+              }
+            });
+          }
+        }
+      } catch (error) {
+        // File not found is expected for most repos, only log other errors
+        if (error instanceof GitHubApiError && error.status === 404) {
+          // Silently ignore - file doesn't exist
+        } else {
+          console.warn(`[Opt-out] Error checking file ${filePath}:`, error);
+        }
+      }
+    }
+    
+    // Also check README files for opt-out sections
+    try {
+      const readmeFiles = ['README.md', 'readme.md', 'README', 'readme'];
+      
+      for (const readmeFile of readmeFiles) {
+        const url = `${this.baseUrl}/repos/${this.owner}/${this.repo}/contents/${readmeFile}`;
+        
+        try {
+          const response = await this.makeRequest(url);
+          
+          if (response.ok) {
+            const fileData = await response.json();
+            
+            if (fileData.content && fileData.encoding === 'base64') {
+              const content = atob(fileData.content.replace(/\n/g, ''));
+              
+              // Look for opt-out sections in README
+              const lines = content.split('\n');
+              let inOptOutSection = false;
+              
+              for (const line of lines) {
+                const lowerLine = line.toLowerCase();
+                
+                // Check if we're entering an opt-out section
+                if (
+                  lowerLine.includes('contributor opt-out') ||
+                  lowerLine.includes('contributors opt-out') ||
+                  lowerLine.includes('opted out contributors') ||
+                  lowerLine.includes('excluded contributors')
+                ) {
+                  inOptOutSection = true;
+                  continue;
+                }
+                
+                // Check if we're leaving the section (new header)
+                if (inOptOutSection && line.match(/^#+\s/)) {
+                  inOptOutSection = false;
+                  continue;
+                }
+                
+                // Parse usernames in opt-out section
+                if (inOptOutSection) {
+                  const trimmedLine = line.trim();
+                  if (trimmedLine && !trimmedLine.startsWith('#')) {
+                    // Extract username from list formats
+                    const match = trimmedLine.match(/^[\-\*\s]*@?(\w+)/);
+                    if (match && match[1]) {
+                      optedOutUsers.add(match[1].toLowerCase());
+                      console.log(`[Opt-out] Found opt-out for ${match[1]} in ${readmeFile}`);
+                    }
+                  }
+                }
+              }
+            }
+            
+            // Found and processed a README, don't check others
+            break;
+          }
+        } catch (error) {
+          // Silently ignore 404s for README files
+          if (!(error instanceof GitHubApiError && error.status === 404)) {
+            console.warn(`[Opt-out] Error checking ${readmeFile}:`, error);
+          }
+        }
+      }
+    } catch (error) {
+      console.warn('[Opt-out] Error scanning README files:', error);
+    }
+    
+    return Array.from(optedOutUsers);
+  }
 }
 
 class GitHubApiError extends Error {
@@ -354,3 +584,220 @@ class GitHubApiError extends Error {
     this.name = 'GitHubApiError';
   }
 }
+
+/**
+ * Reads and parses the contributors exclusion file
+ * @param filePath - Path to the .contributors-exclusions file
+ * @returns Array of excluded usernames (lowercase for case-insensitive comparison)
+ */
+export async function readExclusionsFile(filePath: string = '.contributors-exclusions'): Promise<string[]> {
+  try {
+    const content = await fs.readFile(filePath, 'utf-8');
+    
+    // Parse the file content
+    const exclusions = content
+      .split('\n')
+      .map(line => line.trim())
+      // Remove comments and empty lines
+      .filter(line => line.length > 0 && !line.startsWith('#'))
+      // Convert to lowercase for case-insensitive comparison
+      .map(username => username.toLowerCase());
+    
+    // Remove duplicates
+    return [...new Set(exclusions)];
+  } catch (error) {
+    // If file doesn't exist or can't be read, return empty array
+    if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
+      console.log('[Exclusions] No exclusions file found, all contributors will be shown');
+      return [];
+    }
+    
+    console.error('[Exclusions] Error reading exclusions file:', error);
+    return [];
+  }
+}
+
+/**
+ * Filters out excluded contributors from the list
+ * @param contributors - Array of contributors
+ * @param exclusions - Array of excluded usernames (lowercase)
+ * @returns Filtered array of contributors
+ */
+export function filterExcludedContributors<T extends { login: string }>(
+  contributors: T[],
+  exclusions: string[]
+): T[] {
+  if (exclusions.length === 0) {
+    return contributors;
+  }
+  
+  return contributors.filter(contributor => 
+    !exclusions.includes(contributor.login.toLowerCase())
+  );
+}
+
+/**
+ * Gets all opt-out exclusions from multiple sources
+ * @param client - GitHub API client instance
+ * @param exclusionsFilePath - Path to the exclusions file
+ * @param searchIssues - Whether to search GitHub issues for opt-outs
+ * @param scanRepoFiles - Whether to scan repository files for opt-outs
+ * @returns Combined array of excluded usernames (lowercase)
+ */
+export async function getAllOptOutExclusions(
+  client: GitHubApiClient,
+  exclusionsFilePath: string = '.contributors-exclusions',
+  searchIssues: boolean = true,
+  scanRepoFiles: boolean = true
+): Promise<string[]> {
+  const exclusions = new Set<string>();
+  
+  // 1. Read from exclusions file
+  const fileExclusions = await readExclusionsFile(exclusionsFilePath);
+  fileExclusions.forEach(username => exclusions.add(username));
+  console.log(`[Opt-out] Found ${fileExclusions.length} exclusions from file`);
+  
+  // 2. Search GitHub issues if enabled
+  if (searchIssues) {
+    try {
+      const issueExclusions = await client.searchOptOutIssues();
+      issueExclusions.forEach(username => exclusions.add(username));
+      console.log(`[Opt-out] Found ${issueExclusions.length} exclusions from GitHub issues`);
+    } catch (error) {
+      console.warn('[Opt-out] Failed to search GitHub issues for opt-outs:', error);
+    }
+  }
+  
+  // 3. Scan repository files if enabled
+  if (scanRepoFiles) {
+    try {
+      const repoFileExclusions = await client.scanRepositoryOptOutFiles();
+      repoFileExclusions.forEach(username => exclusions.add(username));
+      console.log(`[Opt-out] Found ${repoFileExclusions.length} exclusions from repository files`);
+    } catch (error) {
+      console.warn('[Opt-out] Failed to scan repository files for opt-outs:', error);
+    }
+  }
+  
+  const totalExclusions = Array.from(exclusions);
+  console.log(`[Opt-out] Total exclusions: ${totalExclusions.length}`);
+  
+  return totalExclusions;
+}
+
+/**
+ * Cached version of GitHub API client
+ * This uses a 24-hour cache to reduce API calls during builds
+ */
+export const createCachedGitHubClient = (owner: string, repo: string, token?: string) => {
+  const client = new GitHubApiClient(owner, repo, token);
+  
+  return {
+    /**
+     * Get contributors with 24-hour caching
+     * This reduces API calls during builds and improves build times
+     */
+    async getCachedContributors(): Promise<ContributorWithFirstCommit[]> {
+      const cacheKey = `github-contributors-${owner}-${repo}`;
+      
+      return getOrSet(
+        cacheKey,
+        async () => {
+          console.log(`[Cache] Fetching fresh contributors data for ${owner}/${repo}`);
+          return await client.getContributors();
+        },
+        { expiresIn: 24 * 60 * 60 * 1000 } // 24 hours
+      );
+    },
+    
+    /**
+     * Get contributors with exclusions applied from all sources
+     * @param exclusionsPath - Path to the exclusions file (optional)
+     * @param searchIssues - Whether to search GitHub issues for opt-outs
+     * @param scanRepoFiles - Whether to scan repository files for opt-outs
+     */
+    async getCachedContributorsWithExclusions(
+      exclusionsPath?: string,
+      searchIssues: boolean = true,
+      scanRepoFiles: boolean = true
+    ): Promise<ContributorWithFirstCommit[]> {
+      const contributors = await this.getCachedContributors();
+      const exclusions = await getAllOptOutExclusions(
+        client,
+        exclusionsPath,
+        searchIssues,
+        scanRepoFiles
+      );
+      
+      if (exclusions.length > 0) {
+        console.log(`[Exclusions] Filtering out ${exclusions.length} excluded contributors`);
+      }
+      
+      return filterExcludedContributors(contributors, exclusions);
+    },
+    
+    /**
+     * Get contributors for display with caching and fallback
+     */
+    async getCachedContributorsForDisplay(): Promise<ContributorDisplayData[]> {
+      const cacheKey = `github-contributors-display-${owner}-${repo}`;
+      
+      return getOrSet(
+        cacheKey,
+        async () => {
+          console.log(`[Cache] Fetching fresh display data for ${owner}/${repo}`);
+          return await client.getContributorsForDisplay();
+        },
+        { expiresIn: 24 * 60 * 60 * 1000 } // 24 hours
+      );
+    },
+    
+    /**
+     * Get contributors for display with exclusions applied from all sources
+     * @param exclusionsPath - Path to the exclusions file (optional)
+     * @param searchIssues - Whether to search GitHub issues for opt-outs
+     * @param scanRepoFiles - Whether to scan repository files for opt-outs
+     */
+    async getCachedContributorsForDisplayWithExclusions(
+      exclusionsPath?: string,
+      searchIssues: boolean = true,
+      scanRepoFiles: boolean = true
+    ): Promise<ContributorDisplayData[]> {
+      const contributors = await this.getCachedContributorsForDisplay();
+      const exclusions = await getAllOptOutExclusions(
+        client,
+        exclusionsPath,
+        searchIssues,
+        scanRepoFiles
+      );
+      
+      if (exclusions.length > 0) {
+        console.log(`[Exclusions] Filtering out ${exclusions.length} excluded contributors from display`);
+      }
+      
+      return filterExcludedContributors(contributors, exclusions);
+    },
+    
+    /**
+     * Force refresh the cache (useful for manual updates)
+     */
+    async refreshCache(): Promise<void> {
+      const cacheKeys = [
+        `github-contributors-${owner}-${repo}`,
+        `github-contributors-display-${owner}-${repo}`
+      ];
+      
+      // Clear existing cache entries
+      for (const key of cacheKeys) {
+        await cache.delete(key);
+      }
+      
+      // Pre-populate with fresh data
+      await this.getCachedContributors();
+      await this.getCachedContributorsForDisplay();
+    },
+    
+    // Expose non-cached methods for when fresh data is needed
+    client
+  };
+};

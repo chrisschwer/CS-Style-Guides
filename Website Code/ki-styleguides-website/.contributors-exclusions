@@ -1,0 +1,20 @@
+# Contributors Exclusions
+# This file contains a list of GitHub usernames who have opted out of being displayed
+# in the contributors section of the website.
+#
+# Format: One username per line
+# Lines starting with # are comments and will be ignored
+# Empty lines will be ignored
+#
+# Example:
+# username1
+# username2
+#
+# To opt out, contributors can:
+# 1. Submit a PR adding their username to this file
+# 2. Open an issue requesting removal
+# 3. Contact the maintainers directly
+#
+# Note: Usernames are case-insensitive
+
+# Add opted-out usernames below this line:

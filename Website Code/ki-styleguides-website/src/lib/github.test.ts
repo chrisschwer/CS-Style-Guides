@@ -1,5 +1,19 @@
-import { describe, it, expect, beforeEach, vi, Mock } from 'vitest';
-import { GitHubApiClient, GitHubApiError, type Contributor, type ContributorWithFirstCommit, type RateLimitInfo } from './github';
+import { describe, it, expect, beforeEach, vi, Mock, afterEach } from 'vitest';
+import { 
+  GitHubApiClient, 
+  GitHubApiError, 
+  readExclusionsFile,
+  filterExcludedContributors,
+  getAllOptOutExclusions,
+  type Contributor, 
+  type ContributorWithFirstCommit, 
+  type RateLimitInfo,
+  type GitHubIssue
+} from './github';
+import fs from 'fs/promises';
+
+// Mock fs module
+vi.mock('fs/promises');
 
 global.fetch = vi.fn();
 
@@ -416,5 +430,523 @@ describe('GitHubApiError', () => {
     const error = new GitHubApiError('Test error', 403, 'https://docs.github.com');
     
     expect(error.documentation_url).toBe('https://docs.github.com');
+  });
+});
+
+describe('Opt-out functionality', () => {
+  const mockFetch = fetch as Mock;
+  
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
+  describe('readExclusionsFile', () => {
+    it('should read and parse exclusions file correctly', async () => {
+      const mockContent = `# Contributors who have opted out
+# This is a comment
+
+user1
+user2
+# Another comment
+USER3
+
+`;
+      
+      vi.mocked(fs.readFile).mockResolvedValue(mockContent);
+      
+      const result = await readExclusionsFile('.contributors-exclusions');
+      
+      expect(result).toEqual(['user1', 'user2', 'user3']);
+    });
+
+    it('should return empty array when file does not exist', async () => {
+      const error = new Error('File not found') as NodeJS.ErrnoException;
+      error.code = 'ENOENT';
+      vi.mocked(fs.readFile).mockRejectedValue(error);
+      
+      const result = await readExclusionsFile('.contributors-exclusions');
+      
+      expect(result).toEqual([]);
+    });
+
+    it('should return empty array on other errors', async () => {
+      vi.mocked(fs.readFile).mockRejectedValue(new Error('Permission denied'));
+      
+      const result = await readExclusionsFile('.contributors-exclusions');
+      
+      expect(result).toEqual([]);
+    });
+
+    it('should remove duplicates and convert to lowercase', async () => {
+      const mockContent = `user1
+USER1
+User1
+user2
+`;
+      
+      vi.mocked(fs.readFile).mockResolvedValue(mockContent);
+      
+      const result = await readExclusionsFile('.contributors-exclusions');
+      
+      expect(result).toEqual(['user1', 'user2']);
+    });
+  });
+
+  describe('filterExcludedContributors', () => {
+    const mockContributors: ContributorWithFirstCommit[] = [
+      {
+        id: 1,
+        login: 'user1',
+        avatar_url: 'https://avatars.githubusercontent.com/u/1?v=4',
+        html_url: 'https://github.com/user1',
+        contributions: 10,
+        type: 'User'
+      },
+      {
+        id: 2,
+        login: 'USER2',
+        avatar_url: 'https://avatars.githubusercontent.com/u/2?v=4',
+        html_url: 'https://github.com/user2',
+        contributions: 5,
+        type: 'User'
+      },
+      {
+        id: 3,
+        login: 'user3',
+        avatar_url: 'https://avatars.githubusercontent.com/u/3?v=4',
+        html_url: 'https://github.com/user3',
+        contributions: 3,
+        type: 'User'
+      }
+    ];
+
+    it('should filter out excluded contributors', () => {
+      const exclusions = ['user1', 'user2'];
+      
+      const result = filterExcludedContributors(mockContributors, exclusions);
+      
+      expect(result).toHaveLength(1);
+      expect(result[0].login).toBe('user3');
+    });
+
+    it('should handle case-insensitive matching', () => {
+      const exclusions = ['user2']; // lowercase
+      
+      const result = filterExcludedContributors(mockContributors, exclusions);
+      
+      expect(result).toHaveLength(2);
+      expect(result.find(c => c.login === 'USER2')).toBeUndefined();
+    });
+
+    it('should return all contributors when no exclusions', () => {
+      const result = filterExcludedContributors(mockContributors, []);
+      
+      expect(result).toEqual(mockContributors);
+    });
+  });
+
+  describe('searchOptOutIssues', () => {
+    let client: GitHubApiClient;
+
+    beforeEach(() => {
+      client = new GitHubApiClient('owner', 'repo');
+      vi.clearAllMocks();
+    });
+
+    it('should find opt-out requests by labels', async () => {
+      const mockIssues: GitHubIssue[] = [
+        {
+          id: 1,
+          number: 123,
+          title: 'Please opt me out',
+          body: 'I would like to opt out',
+          state: 'open',
+          labels: [{ id: 1, name: 'opt-out', color: 'ff0000' }],
+          user: { login: 'user1', id: 1 },
+          created_at: '2024-01-01T00:00:00Z',
+          updated_at: '2024-01-01T00:00:00Z'
+        }
+      ];
+
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve(mockIssues)
+      });
+
+      // Mock empty responses for other default labels and keywords
+      for (let i = 0; i < 5; i++) {
+        mockFetch.mockResolvedValueOnce({
+          ok: true,
+          json: () => Promise.resolve(i < 2 ? [] : { items: [] })
+        });
+      }
+
+      const result = await client.searchOptOutIssues();
+      
+      expect(result).toContain('user1');
+    });
+
+    it('should find opt-out requests by keywords in title', async () => {
+      const mockSearchResult = {
+        items: [
+          {
+            id: 2,
+            number: 456,
+            title: 'Please opt out my account',
+            body: 'Thanks',
+            state: 'open',
+            labels: [],
+            user: { login: 'user2', id: 2 },
+            created_at: '2024-01-01T00:00:00Z',
+            updated_at: '2024-01-01T00:00:00Z'
+          }
+        ]
+      };
+
+      // Mock empty responses for labels
+      for (let i = 0; i < 3; i++) {
+        mockFetch.mockResolvedValueOnce({
+          ok: true,
+          json: () => Promise.resolve([])
+        });
+      }
+
+      // Mock search results
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve(mockSearchResult)
+      });
+
+      // Mock empty responses for remaining keywords
+      for (let i = 0; i < 2; i++) {
+        mockFetch.mockResolvedValueOnce({
+          ok: true,
+          json: () => Promise.resolve({ items: [] })
+        });
+      }
+
+      const result = await client.searchOptOutIssues();
+      
+      expect(result).toContain('user2');
+    });
+
+    it('should deduplicate users found through multiple methods', async () => {
+      const mockIssues: GitHubIssue[] = [
+        {
+          id: 1,
+          number: 123,
+          title: 'Opt-out request',
+          body: null,
+          state: 'open',
+          labels: [{ id: 1, name: 'opt-out', color: 'ff0000' }],
+          user: { login: 'USER1', id: 1 },
+          created_at: '2024-01-01T00:00:00Z',
+          updated_at: '2024-01-01T00:00:00Z'
+        }
+      ];
+
+      const mockSearchResult = {
+        items: [
+          {
+            id: 2,
+            number: 456,
+            title: 'Please exclude me from contributors',
+            body: 'I want to opt out',
+            state: 'open',
+            labels: [],
+            user: { login: 'user1', id: 1 },
+            created_at: '2024-01-01T00:00:00Z',
+            updated_at: '2024-01-01T00:00:00Z'
+          }
+        ]
+      };
+
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve(mockIssues)
+      });
+
+      // Mock empty responses for other labels
+      for (let i = 0; i < 2; i++) {
+        mockFetch.mockResolvedValueOnce({
+          ok: true,
+          json: () => Promise.resolve([])
+        });
+      }
+
+      // Mock search results
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve(mockSearchResult)
+      });
+
+      // Mock empty responses for remaining keywords
+      for (let i = 0; i < 2; i++) {
+        mockFetch.mockResolvedValueOnce({
+          ok: true,
+          json: () => Promise.resolve({ items: [] })
+        });
+      }
+
+      const result = await client.searchOptOutIssues();
+      
+      expect(result).toHaveLength(1);
+      expect(result).toContain('user1');
+    });
+  });
+
+  describe('scanRepositoryOptOutFiles', () => {
+    let client: GitHubApiClient;
+
+    beforeEach(() => {
+      client = new GitHubApiClient('owner', 'repo');
+      vi.clearAllMocks();
+    });
+
+    it('should find opt-outs in repository files', async () => {
+      const mockFileContent = Buffer.from(`# Opted out contributors
+user1
+@user2
+- user3
+* user4`).toString('base64');
+
+      mockFetch
+        .mockResolvedValueOnce({
+          ok: true,
+          json: () => Promise.resolve({
+            content: mockFileContent,
+            encoding: 'base64'
+          })
+        })
+        .mockResolvedValueOnce({
+          ok: false,
+          status: 404,
+          json: () => Promise.resolve({ message: 'Not found' })
+        });
+
+      // Continue mocking 404s for remaining files
+      for (let i = 0; i < 8; i++) {
+        mockFetch.mockResolvedValueOnce({
+          ok: false,
+          status: 404,
+          json: () => Promise.resolve({ message: 'Not found' })
+        });
+      }
+
+      const result = await client.scanRepositoryOptOutFiles();
+      
+      expect(result).toContain('user1');
+      expect(result).toContain('user2');
+      expect(result).toContain('user3');
+      expect(result).toContain('user4');
+    });
+
+    it('should find opt-outs in README sections', async () => {
+      // Mock 404s for opt-out files
+      for (let i = 0; i < 5; i++) {
+        mockFetch.mockResolvedValueOnce({
+          ok: false,
+          status: 404,
+          json: () => Promise.resolve({ message: 'Not found' })
+        });
+      }
+
+      const mockReadmeContent = Buffer.from(`# My Project
+
+## Contributors
+
+Thanks to all contributors!
+
+## Contributor Opt-Out
+
+The following contributors have opted out:
+- user5
+- @user6
+
+## License
+
+MIT`).toString('base64');
+
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({
+          content: mockReadmeContent,
+          encoding: 'base64'
+        })
+      });
+
+      const result = await client.scanRepositoryOptOutFiles();
+      
+      expect(result).toContain('user5');
+      expect(result).toContain('user6');
+    });
+
+    it('should handle files that do not exist', async () => {
+      // Mock all files as 404
+      for (let i = 0; i < 10; i++) {
+        mockFetch.mockResolvedValueOnce({
+          ok: false,
+          status: 404,
+          json: () => Promise.resolve({ message: 'Not found' })
+        });
+      }
+
+      const result = await client.scanRepositoryOptOutFiles();
+      
+      expect(result).toEqual([]);
+    });
+  });
+
+  describe('getAllOptOutExclusions', () => {
+    let client: GitHubApiClient;
+
+    beforeEach(() => {
+      client = new GitHubApiClient('owner', 'repo');
+      vi.clearAllMocks();
+    });
+
+    it('should combine exclusions from all sources', async () => {
+      // Mock file exclusions
+      vi.mocked(fs.readFile).mockResolvedValue('user1\nuser2');
+
+      // Mock issue search
+      const mockIssues: GitHubIssue[] = [
+        {
+          id: 1,
+          number: 123,
+          title: 'Opt me out',
+          body: null,
+          state: 'open',
+          labels: [{ id: 1, name: 'opt-out', color: 'ff0000' }],
+          user: { login: 'user3', id: 3 },
+          created_at: '2024-01-01T00:00:00Z',
+          updated_at: '2024-01-01T00:00:00Z'
+        }
+      ];
+
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve(mockIssues)
+      });
+
+      // Mock empty responses for other labels and keywords
+      for (let i = 0; i < 5; i++) {
+        mockFetch.mockResolvedValueOnce({
+          ok: true,
+          json: () => Promise.resolve(i < 2 ? [] : { items: [] })
+        });
+      }
+
+      // Mock repository file with user4
+      const mockFileContent = Buffer.from('user4').toString('base64');
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({
+          content: mockFileContent,
+          encoding: 'base64'
+        })
+      });
+
+      // Mock 404s for remaining files
+      for (let i = 0; i < 9; i++) {
+        mockFetch.mockResolvedValueOnce({
+          ok: false,
+          status: 404,
+          json: () => Promise.resolve({ message: 'Not found' })
+        });
+      }
+
+      const result = await getAllOptOutExclusions(client);
+      
+      expect(result).toContain('user1');
+      expect(result).toContain('user2');
+      expect(result).toContain('user3');
+      expect(result).toContain('user4');
+      expect(result).toHaveLength(4);
+    });
+
+    it('should deduplicate exclusions across sources', async () => {
+      // Mock file exclusions
+      vi.mocked(fs.readFile).mockResolvedValue('user1\nUSER1\nUser1');
+
+      // Mock issue search returning user1
+      const mockIssues: GitHubIssue[] = [
+        {
+          id: 1,
+          number: 123,
+          title: 'Opt out',
+          body: null,
+          state: 'open',
+          labels: [{ id: 1, name: 'opt-out', color: 'ff0000' }],
+          user: { login: 'USER1', id: 1 },
+          created_at: '2024-01-01T00:00:00Z',
+          updated_at: '2024-01-01T00:00:00Z'
+        }
+      ];
+
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve(mockIssues)
+      });
+
+      // Mock empty responses
+      for (let i = 0; i < 5; i++) {
+        mockFetch.mockResolvedValueOnce({
+          ok: true,
+          json: () => Promise.resolve(i < 2 ? [] : { items: [] })
+        });
+      }
+
+      // Mock repository file with User1
+      const mockFileContent = Buffer.from('User1').toString('base64');
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({
+          content: mockFileContent,
+          encoding: 'base64'
+        })
+      });
+
+      // Mock 404s for remaining files
+      for (let i = 0; i < 9; i++) {
+        mockFetch.mockResolvedValueOnce({
+          ok: false,
+          status: 404,
+          json: () => Promise.resolve({ message: 'Not found' })
+        });
+      }
+
+      const result = await getAllOptOutExclusions(client);
+      
+      expect(result).toHaveLength(1);
+      expect(result).toContain('user1');
+    });
+
+    it('should handle errors gracefully', async () => {
+      // Mock file read error
+      vi.mocked(fs.readFile).mockRejectedValue(new Error('Read error'));
+
+      // Mock API errors
+      mockFetch.mockRejectedValue(new Error('Network error'));
+
+      const result = await getAllOptOutExclusions(client);
+      
+      expect(result).toEqual([]);
+    });
+
+    it('should allow disabling specific sources', async () => {
+      // Mock file exclusions
+      vi.mocked(fs.readFile).mockResolvedValue('user1');
+
+      const result = await getAllOptOutExclusions(
+        client,
+        '.contributors-exclusions',
+        false, // disable issue search
+        false  // disable repo file search
+      );
+      
+      expect(result).toEqual(['user1']);
+      expect(mockFetch).not.toHaveBeenCalled();
+    });
   });
 });
