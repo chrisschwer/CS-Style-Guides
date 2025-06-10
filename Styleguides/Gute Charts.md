@@ -1,7 +1,7 @@
 ---
-version: "1.0.1"
-lastUpdated: "2025-06-09"
-changeNotes: "Minor corrections and fixes"
+version: "2.0.0"
+lastUpdated: "2025-06-10"
+changeNotes: "Major structural changes and updates: Updated section headings, Added new content"
 ---
 
 # Gute Charts
@@ -75,6 +75,13 @@ Diese Stilrichtlinien basieren auf Gene Zelaznys Prinzipien für effektive Daten
 * **Chart Junk vermeiden**: Alles was nicht zur Message beiträgt, weglassen
 * **Farben sparsam verwenden**: 2-3 Farben maximum für Hervorhebungen
 
+### Symmetrie und gleichmäßige Verteilung
+* **Kategorische Elemente symmetrisch anordnen**: Bei Schaubildern mit mehreren gleichwertigen Kategorien
+* **Gleichmäßige Abstände**: Alle Weißräume zwischen gleichen Elementen identisch dimensionieren
+* **Beispiel Säulendiagramm**: Alle Säulenabstände gleich breit (z.B. jeweils 15px), alle Säulen gleicher Kategorie identisch breit
+* **Beispiel Kreisdiagramm**: Bei mehreren Kreisen in einer Darstellung gleichmäßige Abstände und identische Größen für vergleichbare Daten
+* **Ausnahme**: Bewusste Gewichtung durch Größenunterschiede nur bei hierarchischen Unterschieden
+
 ### Konsistente Gestaltung
 * **Einheitliche Farbpalette** durch die gesamte Präsentation
 * **Gleiche Schriftarten und -größen** für ähnliche Elemente
@@ -124,6 +131,16 @@ Diese Stilrichtlinien basieren auf Gene Zelaznys Prinzipien für effektive Daten
 
 ## Spezielle Chart-Arten
 
+### Organisationscharts
+* **Verwendung**: Darstellung von Unternehmensstrukturen und Hierarchien
+* **Hierarchie-Prinzip**: Größere Kästchen für hierarchisch wichtigere Positionen/Einheiten, falls optische Hervorhebung der Hierarchie erwünscht
+* **Gleiche Ebene = gleiche Größe**: Alle Organisationseinheiten oder Personen auf derselben Hierarchieebene erhalten identisch dimensionierte Kästchen
+* **Beispiel**: 
+  - Geschäftsführung: 120x60px Kästchen
+  - Abteilungsleiter (alle): 100x50px Kästchen
+  - Teamleiter (alle): 80x40px Kästchen
+* **Abstände**: Gleichmäßige Abstände zwischen Kästchen derselben Ebene
+
 ### Wasserfalldiagramm
 * **Verwendung**: Aufschlüsselung von Veränderungen (Budget zu Ist)
 * **Aufbau**: Startpunkt → einzelne Veränderungen → Endpunkt
@@ -164,6 +181,8 @@ Diese Stilrichtlinien basieren auf Gene Zelaznys Prinzipien für effektive Daten
 - [ ] Schrift groß genug?
 - [ ] Farben unterstützen die Message?
 - [ ] Quelle angegeben?
+- [ ] Symmetrie und gleichmäßige Verteilung beachtet?
+- [ ] Bei Organisationscharts: Gleiche Ebene, gleiche Größe?
 
 ### Vor der Präsentation
 - [ ] Chart in 5 Sekunden verständlich?
