@@ -158,6 +158,99 @@ changeNotes: "Initial version"
 10. Test the guide with actual AI tools (Claude, ChatGPT, etc.) before finalizing
 11. Run versioning commands to register the new file (see Automatic Versioning System section)
 
+### When User Adds New Styleguide: Complete Integration Checklist
+
+If a user reports they have added a new styleguide to `Styleguides/`, perform these steps to ensure full website integration:
+
+#### Step 1: Verify File Structure
+```bash
+# Check that the new file exists with proper frontmatter
+ls -la Styleguides/
+# Verify the file has required frontmatter (version, lastUpdated, changeNotes)
+```
+
+#### Step 2: Add to Version Manifest
+1. **Add entry to `/versions.json`** following the existing pattern:
+   ```json
+   "new-styleguide-slug": {
+     "filename": "New Styleguide.md",
+     "version": "1.0.0", 
+     "lastUpdated": "YYYY-MM-DD",
+     "changeNotes": "Initial version",
+     "title": "New Styleguide Title",
+     "contentHash": "",
+     "history": [...]
+   }
+   ```
+
+#### Step 3: Update Styleguides Documentation
+1. **Update `Styleguides/README.md`** - Add new guide to the appropriate section
+2. **Update main project `README.md`** - Update styleguide count and add to list
+
+#### Step 4: Website Integration (Critical)
+1. **Add to styleguide mapping** in `/src/pages/styleguides/[...slug].astro`:
+   ```javascript
+   'new-slug': {
+     file: 'New Styleguide.md',
+     title: 'New Styleguide Title', 
+     description: 'Brief description...',
+     icon: '📋',
+     difficulty: 'Einfach',
+     tags: ['Tag1', 'Tag2']
+   }
+   ```
+
+2. **Add to getStaticPaths** in same file:
+   ```javascript
+   { params: { slug: 'new-slug' } }
+   ```
+
+3. **Add to version slug mapping** in same file:
+   ```javascript
+   'new-slug': 'new-styleguide-slug'
+   ```
+
+4. **Add StyleguideCard to main overview** in `/src/pages/styleguides/index.astro`
+
+5. **Add StyleguideCard to homepage** in `/src/pages/index.astro` 
+
+6. **Add to Footer navigation** in `/src/components/Footer.astro`
+
+7. **Update Downloads page** in `/src/pages/downloads.astro`:
+   - Change count from "7" to "8" (or appropriate number)
+   - Add file to package contents list
+   - Add filename to JavaScript files array for ZIP download
+
+#### Step 5: Run Versioning Commands
+```bash
+cd "Website Code/ki-styleguides-website"
+npm run version:update-hashes  # Generate content hash
+npm run files:sync            # Sync to public directory  
+npm run version:check         # Verify recognition
+```
+
+#### Step 6: Test Integration
+```bash
+npm run build                 # Full build test
+# Verify all pages build successfully
+# Check that new styleguide appears in build output
+```
+
+#### Step 7: Verify All Integrations
+- ✅ Individual detail page builds at `/styleguides/new-slug/`
+- ✅ Appears in main styleguides overview page
+- ✅ Shows on homepage styleguide grid
+- ✅ Listed in footer navigation
+- ✅ Included in ZIP download (count updated)
+- ✅ Version tracking works properly
+- ✅ File synced to `/public/files/`
+
+**Common Issues:**
+- Missing from ZIP download → Check hardcoded files array in downloads.astro
+- 404 on detail page → Check slug mapping and getStaticPaths
+- Not showing on homepage → Check StyleguideCard addition
+- Version errors → Check versions.json entry and run update-hashes
+
 ### Updating Website Design
 1. Modify files in `Website Design/` 
 2. Ensure wireframes match content changes
@@ -173,7 +266,7 @@ changeNotes: "Initial version"
 6. ✅ Legal pages (Impressum, Datenschutz, Lizenz) completed
 7. ✅ Copy-to-clipboard functionality for all content
 8. ✅ Responsive design and compact markdown rendering
-9. ✅ All 7 styleguides properly linked and accessible
+9. ✅ All 8 styleguides properly linked and accessible
 10. Ready for immediate deployment to Netlify/Vercel
 11. Test with `npm run build && npm run preview` before deployment
 
@@ -192,7 +285,7 @@ changeNotes: "Initial version"
 
 ### ✅ User Experience
 - **Copy Functionality**: Entire guides and individual sections
-- **Navigation**: All 7 styleguides in footer and main navigation
+- **Navigation**: All 8 styleguides in footer and main navigation
 - **Mobile Optimization**: Responsive design throughout
 - **Performance**: Compact rendering with `prose-sm` and `leading-tight`
 
@@ -347,7 +440,7 @@ git push
 
 ### ✅ Content Synchronization
 - **Website-Content Alignment**: Design documentation synchronized with actual website
-- **File Count Correction**: Updated from 6 to 7 styleguides in download descriptions
+- **File Count Correction**: Updated from 6 to 8 styleguides in download descriptions
 - **Author Section Removal**: Removed "Über den Autor" section from about page
 
 ### ✅ Date Corrections and German Formatting (June 2025)
