@@ -144,6 +144,21 @@
           "notes": "Minor corrections and fixes"
         }
       ]
+    },
+    "gute-protokolle": {
+      "filename": "Gute Protokolle.md",
+      "version": "1.0.0",
+      "lastUpdated": "2025-06-11",
+      "changeNotes": "Initial version",
+      "title": "Gute Protokolle",
+      "contentHash": "f4aa09cc1aa488bbcb9b6bf80cb528c0ac36d22517fc79e9392b9b202372f295",
+      "history": [
+        {
+          "version": "1.0.0",
+          "date": "2025-06-11",
+          "notes": "Initial version"
+        }
+      ]
     }
   },
   "schema": {

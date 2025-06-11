@@ -65,6 +65,14 @@ const styleguideMap = {
     icon: '💬',
     difficulty: 'Einfach',
     tags: ['Claude', 'ChatGPT', 'Copilot']
+  },
+  'protokolle': {
+    file: 'Gute Protokolle.md',
+    title: 'Gute Protokolle',
+    description: 'Prägnante Meetingprotokolle und klare Aufgabenverfolgung. Entscheidungen festhalten, Verantwortlichkeiten definieren, nächste Schritte dokumentieren.',
+    icon: '📋',
+    difficulty: 'Einfach',
+    tags: ['Meetings', 'Aufgaben', 'Dokumentation']
   }
 };
 
@@ -77,7 +85,8 @@ export function getStaticPaths() {
     { params: { slug: 'praesentationen' } },
     { params: { slug: 'charts' } },
     { params: { slug: 'tufte' } },
-    { params: { slug: 'beispielprompts' } }
+    { params: { slug: 'beispielprompts' } },
+    { params: { slug: 'protokolle' } }
   ];
   return paths;
 }
@@ -99,7 +108,8 @@ const versionSlugMap = {
   'praesentationen': 'gute-praesentation',
   'charts': 'gute-charts',
   'tufte': 'datenvisualisierung',
-  'beispielprompts': 'beispielprompts'
+  'beispielprompts': 'beispielprompts',
+  'protokolle': 'gute-protokolle'
 };
 
 // Load version information

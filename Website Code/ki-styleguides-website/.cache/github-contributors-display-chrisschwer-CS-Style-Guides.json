@@ -3,14 +3,15 @@
     {
       "login": "chrisschwer",
       "name": "chrisschwer",
-      "avatar_url": "https://github.com/chrisschwer.png",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4752569?v=4",
       "html_url": "https://github.com/chrisschwer",
-      "contributions": 1,
+      "contributions": 24,
+      "first_commit_date": "2025-06-11T21:46:40Z",
       "isOwner": true
     }
   ],
   "metadata": {
-    "timestamp": 1749581015667,
+    "timestamp": 1749678769324,
     "expiresIn": 86400000
   }
 }

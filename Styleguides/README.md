@@ -4,10 +4,11 @@ Professionelle Styleguides für KI-assistiertes Schreiben auf Deutsch.
 
 ## Verfügbare Styleguides
 
-### 📝 Schreibstil
+### 📝 Schreibstil & Kommunikation
 - **[Gutes Deutsch.md](Gutes%20Deutsch.md)** - Klares, prägnantes Deutsch nach bewährten Prinzipien
 - **[Gendergerecht mit Sternchen.md](Gendergerecht%20mit%20Sternchen.md)** - Inklusive Sprache mit Asterisk-Notation (Student*innen)
 - **[Gendergerecht ohne Sternchen.md](Gendergerecht%20ohne%20Sternchen.md)** - Inklusive Sprache mit neutralen Begriffen (Studierende)
+- **[Gute Protokolle.md](Gute%20Protokolle.md)** - Prägnante Meetingprotokolle und Aufgabenverfolgung
 
 ### 📊 Präsentationen & Datenvisualisierung
 - **[Gute Praesentation.md](Gute%20Praesentation.md)** - Strukturierte Präsentationen mit SCS-Muster und MECE-Prinzip
