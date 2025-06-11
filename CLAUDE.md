@@ -128,20 +128,35 @@ All content is licensed under CC BY 4.0, allowing free commercial and non-commer
 ## Common Tasks
 
 ### Adding a New Style Guide
-1. Create new .md file in `Styleguides/`
-2. Add version frontmatter:
-   ```yaml
-   ---
-   version: "1.0.0"
-   lastUpdated: "YYYY-MM-DD"
-   changeNotes: "Initial version"
-   ---
-   ```
-3. Follow existing format and structure
-4. Update `Styleguides/README.md` with new guide
-5. Add entry to `/versions.json` manifest
-6. Add corresponding content to `Website Design/website-content.md`
-7. Test with AI tools before publishing
+
+#### Required Frontmatter
+Every new styleguide file in `Styleguides/` must begin with YAML frontmatter containing version metadata:
+
+```yaml
+---
+version: "1.0.0"
+lastUpdated: "YYYY-MM-DD"
+changeNotes: "Initial version"
+---
+```
+
+**Field specifications:**
+- `version`: Always start with "1.0.0" for new guides (semantic versioning)
+- `lastUpdated`: Use format "YYYY-MM-DD" (e.g., "2025-06-11")
+- `changeNotes`: Brief description of changes (e.g., "Initial version", "Added examples for formal letters")
+
+#### Complete Process
+1. Create new .md file in `Styleguides/` with descriptive German name (e.g., `Gute Protokolle.md`)
+2. Add the required frontmatter at the very beginning of the file
+3. Add a main heading and introduction paragraph explaining the guide's purpose
+4. Structure content with clear sections and subsections using markdown headers
+5. Include practical examples and clear rules that AI systems can interpret
+6. Follow the formatting patterns from existing guides (bullet points, numbered lists, examples)
+7. Update `Styleguides/README.md` to include the new guide in the overview
+8. Add entry to `/versions.json` manifest following the existing structure
+9. Add corresponding content to `Website Design/website-content.md` for website integration
+10. Test the guide with actual AI tools (Claude, ChatGPT, etc.) before finalizing
+11. Run versioning commands to register the new file (see Automatic Versioning System section)
 
 ### Updating Website Design
 1. Modify files in `Website Design/` 

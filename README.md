@@ -2,9 +2,37 @@
 
 Professionelle Styleguides für KI-assistiertes Schreiben auf Deutsch.
 
+## 📝 Styleguides bearbeiten / hinzufügen (für Contributors)
+
+### Neuen Styleguide hinzufügen
+
+1. **Erstellen Sie eine neue .md-Datei** im `Styleguides/` Ordner
+2. **Fügen Sie das erforderliche Frontmatter hinzu**:
+   ```yaml
+   ---
+   version: "1.0.0"
+   lastUpdated: "YYYY-MM-DD"
+   changeNotes: "Initial version"
+   ---
+   ```
+3. **Strukturieren Sie den Inhalt** mit klaren Überschriften und Beispielen
+4. **Testen Sie** den Guide mit KI-Tools (Claude, ChatGPT)
+5. **Erstellen Sie einen Pull Request**
+
+### Bestehende Styleguides bearbeiten
+
+**⚠️ WICHTIG**: Bearbeiten Sie nur Dateien im `Styleguides/` Ordner!
+
+1. **Bearbeiten Sie die gewünschte Datei** in `Styleguides/`
+2. **Aktualisieren Sie das Frontmatter** (version, lastUpdated, changeNotes)
+3. **Testen Sie Ihre Änderungen**
+4. **Erstellen Sie einen Pull Request**
+
+Detaillierte Anweisungen finden Sie in [CLAUDE.md](CLAUDE.md#adding-a-new-style-guide).
+
 ## 🚀 Projekt-Status
 
-**Content**: ✅ 7 Styleguides komplett, inkl. Microsoft 365 Copilot Support
+**Content**: ✅ 8 Styleguides komplett, inkl. Microsoft 365 Copilot Support
 **Design**: ✅ Vollständiges Design-System und Wireframes
 **Website**: ✅ Vollständig implementiert mit allen Detail-Seiten
 **Deployment**: ✅ Produktionsbereit für sofortiges Deployment
@@ -17,6 +45,7 @@ Die eigentlichen Styleguide-Dateien - ready to use mit KI-Tools:
 - **Gendergerechte Sprache** (2 Varianten: mit/ohne Sternchen)
 - **Gute Präsentationen**: SCS-Muster und MECE-Prinzip
 - **Gute Charts**: Effektive Datenvisualisierung nach bewährten Prinzipien
+- **Gute Protokolle**: Prägnante Meetingzusammenfassungen und Aufgabenverfolgung
 - **Datenvisualisierung**: Elegante Informationsvisualisierung
 - **Beispielprompts**: Ready-to-use Prompts für Claude, ChatGPT und Microsoft 365 Copilot
 
@@ -69,24 +98,21 @@ Das Projekt verfügt über ein vollständiges automatisches Versionierungssystem
 - **Smart Version Bumps** - Intelligente Bestimmung der Versionstypen
 - **Umfassende Dokumentation** - Vollständige Versionshistorie und Changelog
 
-### Styleguides bearbeiten und Versionen aktualisieren
+### Versionierung bei Änderungen
 
-**⚠️ WICHTIG**: Bearbeiten Sie nur Dateien im `Styleguides/` Ordner! 
+Wenn Sie Änderungen an Styleguides vornehmen und die Website aktualisieren möchten:
 
 ```bash
-# 1. Styleguide-Datei im Hauptordner bearbeiten
-# Beispiel: Bearbeiten Sie "Styleguides/Gutes Deutsch.md"
-
-# 2. Wechseln Sie in das Website-Verzeichnis
+# 1. Nach der Bearbeitung im Styleguides/ Ordner
 cd "Website Code/ki-styleguides-website"
 
-# 3. Änderungen prüfen
+# 2. Änderungen prüfen
 npm run version:check
 
-# 4. Versionen automatisch aktualisieren
+# 3. Versionen automatisch aktualisieren
 npm run version:update
 
-# 5. Build ausführen (synchronisiert automatisch alle Dateien)
+# 4. Build ausführen (synchronisiert automatisch alle Dateien)
 npm run build
 ```
 
