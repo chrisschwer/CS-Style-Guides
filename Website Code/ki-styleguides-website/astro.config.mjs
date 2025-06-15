@@ -7,7 +7,7 @@ import vercel from '@astrojs/vercel/serverless';
 
 export default defineConfig({
   site: 'https://ki-styleguides.netlify.app',
-  output: 'server',
+  output: 'hybrid',
   adapter: vercel(),
   integrations: [
     tailwind(),
