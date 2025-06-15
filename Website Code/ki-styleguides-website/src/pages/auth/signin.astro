@@ -48,19 +48,21 @@ export const prerender = false;
 </Layout>
 
 <script>
-  import { signIn } from 'auth-astro/client';
-  
-  // Add event listeners when DOM is loaded
+  // Authentication temporarily disabled
   document.addEventListener('DOMContentLoaded', () => {
     const googleButton = document.getElementById('google-signin');
     const githubButton = document.getElementById('github-signin');
     
     if (googleButton) {
-      googleButton.addEventListener('click', () => signIn('google'));
+      googleButton.addEventListener('click', () => {
+        alert('Authentifizierung ist derzeit deaktiviert aufgrund von Deployment-Problemen.');
+      });
     }
     
     if (githubButton) {
-      githubButton.addEventListener('click', () => signIn('github'));
+      githubButton.addEventListener('click', () => {
+        alert('Authentifizierung ist derzeit deaktiviert aufgrund von Deployment-Problemen.');
+      });
     }
   });
 </script>
