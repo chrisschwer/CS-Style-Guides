@@ -1,6 +1,5 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { signIn } from 'auth-astro/client';
 ---
 
 <Layout title="Anmelden - KI Style Guides">
@@ -15,7 +14,7 @@ import { signIn } from 'auth-astro/client';
       
       <div class="space-y-4">
         <button
-          onclick="signIn('google')"
+          id="google-signin"
           class="w-full flex items-center justify-center gap-3 px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
         >
           <svg class="w-5 h-5" viewBox="0 0 24 24">
@@ -28,7 +27,7 @@ import { signIn } from 'auth-astro/client';
         </button>
         
         <button
-          onclick="signIn('github')"
+          id="github-signin"
           class="w-full flex items-center justify-center gap-3 px-6 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
         >
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -49,6 +48,17 @@ import { signIn } from 'auth-astro/client';
 <script>
   import { signIn } from 'auth-astro/client';
   
-  // Make signIn available globally for onclick handlers
-  window.signIn = signIn;
+  // Add event listeners when DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    const googleButton = document.getElementById('google-signin');
+    const githubButton = document.getElementById('github-signin');
+    
+    if (googleButton) {
+      googleButton.addEventListener('click', () => signIn('google'));
+    }
+    
+    if (githubButton) {
+      githubButton.addEventListener('click', () => signIn('github'));
+    }
+  });
 </script>
