@@ -41,6 +41,7 @@ Website Code/ki-styleguides-website/node_modules/
 Website Code/ki-styleguides-website/dist/
 Website Code/ki-styleguides-website/.env
 Website Code/ki-styleguides-website/.astro/
+Website Code/ki-styleguides-website/.vercel/
 
 # Logs
 *.log
