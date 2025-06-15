@@ -87,6 +87,58 @@ Vollständige Website-Implementierung:
 - **Features**: Alle 7 Styleguide-Seiten, Downloads, legale Seiten
 - **Bereit für**: Sofortiges Deployment auf Netlify/Vercel
 
+## 💻 Website Entwicklung
+
+### Voraussetzungen
+- Node.js 18+ und npm
+- Git
+
+### Installation
+
+```bash
+cd "Website Code/ki-styleguides-website"
+npm install
+```
+
+### Entwicklungsserver
+
+```bash
+npm run dev
+```
+
+Die Website läuft dann unter http://localhost:4321
+
+### Community Contribution Editor (In Entwicklung)
+
+Ein neues Feature für Community-Beiträge wird entwickelt:
+
+#### Aktueller Status
+- ✅ OAuth 2.0 Authentifizierung mit auth-astro
+- ✅ Google OAuth Provider konfiguriert
+- 🚧 GitHub OAuth Provider (in Arbeit)
+- 🚧 Editor-Interface (geplant)
+
+#### Konfiguration für Entwickler
+
+1. **Umgebungsvariablen einrichten**:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. **AUTH_SECRET generieren**:
+   ```bash
+   openssl rand -base64 32
+   ```
+
+3. **OAuth Provider konfigurieren** (siehe `docs/oauth-setup.md`)
+
+4. **Server starten**:
+   ```bash
+   npm run dev
+   ```
+
+**Hinweis**: Die Website verwendet jetzt Server-Side Rendering (SSR) statt statischer Generierung für die Authentifizierungsfunktionen.
+
 ## Automatische Versionierung
 
 Das Projekt verfügt über ein vollständiges automatisches Versionierungssystem:

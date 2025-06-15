@@ -115,6 +115,8 @@ npm run preview
 2. **Accessibility**: WCAG AA compliance, keyboard navigation
 3. **Mobile-First**: Responsive design prioritizing mobile experience
 4. **User-Friendly**: One-click downloads, copy-to-clipboard functionality
+5. **Authentication**: OAuth 2.0 with Google/GitHub for contributor access
+6. **Server-Side Rendering**: Using Astro with Node.js adapter for auth support
 
 ### Collaboration
 - **Styleguides/**: Content creators and AI specialists
@@ -467,3 +469,35 @@ git push
 - When asked to work on a set of tasks from a file, use @ai-dev-task/process-task-list.mdc
 
 This structure supports both independent work on different aspects and coordinated development of the complete website experience. **The website is now production-ready.**
+
+## Community Contribution Editor (In Progress)
+
+### Overview
+A new feature is being developed to enable community contributions through an online editor. This will allow non-technical users to contribute to the style guides without Git/Markdown knowledge.
+
+### Current Status (December 2025)
+- ✅ **Authentication Foundation**: OAuth 2.0 integration with auth-astro
+- ✅ **Google OAuth Provider**: Configured with minimal scopes (email, profile)
+- 🚧 **GitHub OAuth Provider**: To be implemented
+- 🚧 **Database Schema**: User management system pending
+- 🚧 **Editor Interface**: WYSIWYG/Markdown editor pending
+- 🚧 **GitHub Integration**: PR creation workflow pending
+
+### Technical Stack
+- **Authentication**: auth-astro (Auth.js for Astro)
+- **OAuth Providers**: Google (configured), GitHub (pending)
+- **Server**: Astro with Node.js adapter for SSR
+- **Environment**: Requires AUTH_SECRET and OAuth credentials
+
+### Development Setup
+1. Copy `.env.example` to `.env`
+2. Generate AUTH_SECRET: `openssl rand -base64 32`
+3. Configure OAuth providers (see `docs/oauth-setup.md`)
+4. Run `npm install` to install dependencies
+5. Run `npm run dev` to start development server
+
+### Architecture Changes
+- Website now uses **server-side rendering** (SSR) instead of static generation
+- Node.js adapter configured for deployment flexibility
+- Session management with secure cookies
+- Modular provider configuration in `src/lib/auth/`

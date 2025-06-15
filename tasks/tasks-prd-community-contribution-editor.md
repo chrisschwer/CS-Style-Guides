@@ -32,8 +32,8 @@
 ## Tasks
 
 - [ ] 1.0 Set up user authentication system with social login
-  - [ ] 1.1 Install and configure OAuth libraries (NextAuth.js or similar)
-  - [ ] 1.2 Set up Google OAuth provider with minimal scope (email, name)
+  - [x] 1.1 Install and configure OAuth libraries (NextAuth.js or similar)
+  - [x] 1.2 Set up Google OAuth provider with minimal scope (email, name)
   - [ ] 1.3 Set up GitHub OAuth provider with minimal scope
   - [ ] 1.4 Create user database schema (email, name, provider, role, blocked status)
   - [ ] 1.5 Implement session management with secure cookies
