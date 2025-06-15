@@ -29,9 +29,34 @@
 - Unit tests should typically be placed alongside the code files they are testing (e.g., `MyComponent.tsx` and `MyComponent.test.tsx` in the same directory).
 - Use `npx jest [optional/path/to/test/file]` to run tests. Running without a path executes all tests found by the Jest configuration.
 
+### Current Status (December 2025)
+
+**Authentication Foundation Complete but Temporarily Disabled**
+
+✅ **Completed:**
+- OAuth libraries installed and configured (auth-astro)
+- Google OAuth provider configured with minimal scopes
+- Environment setup (.env, TypeScript types)
+- Sign-in page UI created
+- Unit test framework (Vitest) configured
+
+⚠️ **Issue:** 
+Authentication system is **temporarily disabled** due to Vercel deployment compatibility issues with Node.js runtime requirements. The auth integration is commented out in `astro.config.mjs`.
+
+**Technical Details:**
+- Auth code is complete and functional locally
+- Vercel serverless functions have runtime conflicts with auth-astro
+- Website currently deployed as static site to ensure core functionality works
+- Auth can be re-enabled when deploying to platforms with better SSR support (Netlify, Railway, etc.)
+
+**Next Steps:**
+1. Either resolve Vercel SSR runtime issues 
+2. Or deploy auth features to a different platform
+3. Continue with remaining auth tasks (GitHub provider, database, etc.)
+
 ## Tasks
 
-- [ ] 1.0 Set up user authentication system with social login
+- [⚠️] 1.0 Set up user authentication system with social login
   - [x] 1.1 Install and configure OAuth libraries (NextAuth.js or similar)
   - [x] 1.2 Set up Google OAuth provider with minimal scope (email, name)
   - [ ] 1.3 Set up GitHub OAuth provider with minimal scope

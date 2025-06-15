@@ -476,8 +476,9 @@ This structure supports both independent work on different aspects and coordinat
 A new feature is being developed to enable community contributions through an online editor. This will allow non-technical users to contribute to the style guides without Git/Markdown knowledge.
 
 ### Current Status (December 2025)
-- ✅ **Authentication Foundation**: OAuth 2.0 integration with auth-astro
+- ✅ **Authentication Foundation**: OAuth 2.0 integration with auth-astro (complete but temporarily disabled)
 - ✅ **Google OAuth Provider**: Configured with minimal scopes (email, profile)
+- ⚠️ **Deployment Issue**: Auth disabled due to Vercel SSR runtime compatibility issues
 - 🚧 **GitHub OAuth Provider**: To be implemented
 - 🚧 **Database Schema**: User management system pending
 - 🚧 **Editor Interface**: WYSIWYG/Markdown editor pending
@@ -496,8 +497,16 @@ A new feature is being developed to enable community contributions through an on
 4. Run `npm install` to install dependencies
 5. Run `npm run dev` to start development server
 
+**Note**: Authentication is currently disabled in production due to Vercel deployment issues.
+
 ### Architecture Changes
-- Website now uses **server-side rendering** (SSR) instead of static generation
-- Node.js adapter configured for deployment flexibility
-- Session management with secure cookies
-- Modular provider configuration in `src/lib/auth/`
+- Authentication foundation ready but temporarily disabled for deployment
+- Deployment currently uses **static generation** for Vercel compatibility
+- SSR capabilities ready when deploying to auth-compatible platforms
+- Session management with secure cookies (configured but inactive)
+- Modular provider configuration in `src/lib/auth/` (ready for activation)
+
+### Deployment Status
+- **Current**: Static deployment on Vercel (all core features working)
+- **Auth Features**: Complete but commented out due to runtime compatibility issues
+- **Alternative**: Could deploy to Netlify/Railway for full SSR + auth support

@@ -113,8 +113,9 @@ Die Website läuft dann unter http://localhost:4321
 Ein neues Feature für Community-Beiträge wird entwickelt:
 
 #### Aktueller Status
-- ✅ OAuth 2.0 Authentifizierung mit auth-astro
+- ✅ OAuth 2.0 Authentifizierung mit auth-astro (vollständig, aber temporär deaktiviert)
 - ✅ Google OAuth Provider konfiguriert
+- ⚠️ **Hinweis**: Auth-System aufgrund von Vercel-Kompatibilitätsproblemen temporär deaktiviert
 - 🚧 GitHub OAuth Provider (in Arbeit)
 - 🚧 Editor-Interface (geplant)
 
@@ -137,7 +138,7 @@ Ein neues Feature für Community-Beiträge wird entwickelt:
    npm run dev
    ```
 
-**Hinweis**: Die Website verwendet jetzt Server-Side Rendering (SSR) statt statischer Generierung für die Authentifizierungsfunktionen.
+**Hinweis**: Das Authentifizierungssystem ist vollständig implementiert, aber derzeit in der Produktion deaktiviert aufgrund von Vercel-Kompatibilitätsproblemen. Die Website läuft momentan als statische Seite.
 
 ## Automatische Versionierung
 
