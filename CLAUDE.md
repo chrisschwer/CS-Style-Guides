@@ -478,15 +478,15 @@ A new feature is being developed to enable community contributions through an on
 ### Current Status (December 2025)
 - ✅ **Authentication Foundation**: OAuth 2.0 integration with auth-astro (complete but temporarily disabled)
 - ✅ **Google OAuth Provider**: Configured with minimal scopes (email, profile)
+- ✅ **GitHub OAuth Provider**: Configured with minimal scopes (read:user, user:email)
 - ⚠️ **Deployment Issue**: Auth disabled due to Vercel SSR runtime compatibility issues
-- 🚧 **GitHub OAuth Provider**: To be implemented
 - 🚧 **Database Schema**: User management system pending
 - 🚧 **Editor Interface**: WYSIWYG/Markdown editor pending
 - 🚧 **GitHub Integration**: PR creation workflow pending
 
 ### Technical Stack
 - **Authentication**: auth-astro (Auth.js for Astro)
-- **OAuth Providers**: Google (configured), GitHub (pending)
+- **OAuth Providers**: Google (configured), GitHub (configured)
 - **Server**: Astro with Node.js adapter for SSR
 - **Environment**: Requires AUTH_SECRET and OAuth credentials
 

@@ -1,5 +1,6 @@
 import type { Provider } from '@auth/core/providers';
 import Google from '@auth/core/providers/google';
+import GitHub from '@auth/core/providers/github';
 
 /**
  * Configure Google OAuth provider with minimal scopes
@@ -35,6 +36,36 @@ export function getGoogleProvider(): Provider {
 }
 
 /**
+ * Configure GitHub OAuth provider with minimal scopes
+ * Only requests read access to user profile and email
+ */
+export function getGitHubProvider(): Provider {
+  if (!process.env.AUTH_GITHUB_ID || !process.env.AUTH_GITHUB_SECRET) {
+    throw new Error('GitHub OAuth credentials not configured. Please set AUTH_GITHUB_ID and AUTH_GITHUB_SECRET in your .env file');
+  }
+
+  return GitHub({
+    clientId: process.env.AUTH_GITHUB_ID,
+    clientSecret: process.env.AUTH_GITHUB_SECRET,
+    authorization: {
+      params: {
+        scope: "read:user user:email" // Minimal scope: only user profile and email
+      }
+    },
+    // Map the minimal profile data we need
+    profile(profile) {
+      return {
+        id: profile.id.toString(),
+        name: profile.name || profile.login,
+        email: profile.email,
+        image: profile.avatar_url,
+        provider: 'github'
+      };
+    }
+  });
+}
+
+/**
  * Get all configured OAuth providers
  */
 export function getProviders(): Provider[] {
@@ -45,6 +76,13 @@ export function getProviders(): Provider[] {
     providers.push(getGoogleProvider());
   } catch (error) {
     console.warn('Google OAuth not configured:', error.message);
+  }
+  
+  // Add GitHub provider if configured
+  try {
+    providers.push(getGitHubProvider());
+  } catch (error) {
+    console.warn('GitHub OAuth not configured:', error.message);
   }
   
   return providers;
