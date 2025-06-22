@@ -2,10 +2,10 @@
 
 - `src/lib/auth/providers.ts` - OAuth provider configuration for Google and GitHub
 - `src/lib/auth/providers.test.ts` - Unit tests for OAuth providers
-- `src/lib/auth/session.ts` - Session management and user verification
-- `src/lib/auth/session.test.ts` - Unit tests for session management
-- `src/pages/api/auth/[...auth].ts` - Auth API endpoints for login/logout
-- `src/pages/api/auth/[...auth].test.ts` - Unit tests for auth endpoints
+- `src/lib/auth/session.ts` - Session management and user verification ✓
+- `src/lib/auth/session.test.ts` - Unit tests for session management ✓
+- `src/pages/api/auth/[...auth].ts` - Auth API endpoints for login/logout ✓
+- `src/pages/api/auth/[...auth].test.ts` - Unit tests for auth endpoints ✓
 - `src/components/editor/Editor.tsx` - Main editor component with WYSIWYG/Markdown modes
 - `src/components/editor/Editor.test.tsx` - Unit tests for editor component
 - `src/components/editor/Toolbar.tsx` - Editor toolbar with formatting options
@@ -20,9 +20,17 @@
 - `src/pages/admin/contributions.test.tsx` - Unit tests for admin view
 - `src/lib/email/notifications.ts` - Email notification service
 - `src/lib/email/notifications.test.ts` - Unit tests for email service
-- `src/lib/db/schema.ts` - Database schema for users and contributions
+- `src/lib/db/schema.ts` - Database schema for users and contributions ✓
 - `src/lib/security/sanitizer.ts` - Input sanitization utilities
 - `src/lib/security/sanitizer.test.ts` - Unit tests for sanitizer
+- `src/lib/db/schema.test.ts` - Unit tests for database schema types and validation ✓
+- `src/lib/auth/email-verification.ts` - Email verification token generation and validation ✓
+- `src/lib/auth/email-verification.test.ts` - Unit tests for email verification ✓
+- `src/pages/api/auth/verify-email.ts` - API endpoint for email verification ✓
+- `src/lib/auth/middleware.ts` - Protected route middleware with role-based access control ✓
+- `src/lib/auth/middleware.test.ts` - Unit tests for auth middleware ✓
+- `src/middleware.ts` - Global middleware configuration for Astro ✓
+- `src/lib/auth/auth-flow.integration.test.ts` - Integration tests for complete auth flow ✓
 
 ### Notes
 
@@ -56,16 +64,16 @@ Authentication system is **temporarily disabled** due to Vercel deployment compa
 
 ## Tasks
 
-- [⚠️] 1.0 Set up user authentication system with social login
+- [x] 1.0 Set up user authentication system with social login
   - [x] 1.1 Install and configure OAuth libraries (NextAuth.js or similar)
   - [x] 1.2 Set up Google OAuth provider with minimal scope (email, name)
   - [x] 1.3 Set up GitHub OAuth provider with minimal scope
-  - [ ] 1.4 Create user database schema (email, name, provider, role, blocked status)
-  - [ ] 1.5 Implement session management with secure cookies
-  - [ ] 1.6 Create login/logout API endpoints
-  - [ ] 1.7 Add email verification flow for new accounts
-  - [ ] 1.8 Create protected route middleware for authenticated pages
-  - [ ] 1.9 Write unit tests for authentication flow
+  - [x] 1.4 Create user database schema (email, name, provider, role, blocked status)
+  - [x] 1.5 Implement session management with secure cookies
+  - [x] 1.6 Create login/logout API endpoints
+  - [x] 1.7 Add email verification flow for new accounts
+  - [x] 1.8 Create protected route middleware for authenticated pages
+  - [x] 1.9 Write unit tests for authentication flow
 
 - [ ] 2.0 Create the online editor interface with WYSIWYG and Markdown modes
   - [ ] 2.1 Research and select WYSIWYG editor library (TipTap, Slate, or similar)

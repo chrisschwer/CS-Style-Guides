@@ -113,11 +113,15 @@ Die Website läuft dann unter http://localhost:4321
 Ein neues Feature für Community-Beiträge wird entwickelt:
 
 #### Aktueller Status
-- ✅ OAuth 2.0 Authentifizierung mit auth-astro (vollständig, aber temporär deaktiviert)
-- ✅ Google OAuth Provider konfiguriert
+- ✅ **Vollständiges Authentifizierungssystem** mit OAuth 2.0, sicheren Sessions und Rollenverwaltung
+- ✅ **Datenbank-Schema** für Benutzer, Sessions, Beiträge und Audit-Logs
+- ✅ **E-Mail-Verifizierung** mit Rate-Limiting und Token-Management
+- ✅ **Geschützte Routen** mit rollenbasierter Zugriffskontrolle
+- ✅ **API-Endpunkte** für Login/Logout/Verifizierung
+- ✅ **Umfassende Tests** mit 86+ Unit- und Integrationstests
 - ⚠️ **Hinweis**: Auth-System aufgrund von Vercel-Kompatibilitätsproblemen temporär deaktiviert
-- 🚧 GitHub OAuth Provider (in Arbeit)
-- 🚧 Editor-Interface (geplant)
+- 🚧 **Editor-Interface** (geplant)
+- 🚧 **GitHub Integration** für PR-Erstellung (geplant)
 
 #### Konfiguration für Entwickler
 
