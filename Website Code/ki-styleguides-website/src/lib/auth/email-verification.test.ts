@@ -29,7 +29,7 @@ describe('Email Verification', () => {
   beforeEach(() => {
     // Clear verification stores between tests
     vi.clearAllMocks();
-    __testHelpers.clearStores();
+    __testHelpers?.clearStores();
   });
 
   describe('VERIFICATION_CONFIG', () => {

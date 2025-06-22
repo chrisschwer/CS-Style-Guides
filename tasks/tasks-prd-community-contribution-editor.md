@@ -4,8 +4,8 @@
 - `src/lib/auth/providers.test.ts` - Unit tests for OAuth providers
 - `src/lib/auth/session.ts` - Session management and user verification ✓
 - `src/lib/auth/session.test.ts` - Unit tests for session management ✓
-- `src/pages/api/auth/[...auth].ts` - Auth API endpoints for login/logout ✓
-- `src/pages/api/auth/[...auth].test.ts` - Unit tests for auth endpoints ✓
+- `src/lib/auth/api-endpoints/[...auth].ts` - Auth API endpoints for login/logout ✓
+- `src/lib/auth/api-auth.test.ts` - Unit tests for auth endpoints ✓
 - `src/components/editor/Editor.tsx` - Main editor component with WYSIWYG/Markdown modes
 - `src/components/editor/Editor.test.tsx` - Unit tests for editor component
 - `src/components/editor/Toolbar.tsx` - Editor toolbar with formatting options
@@ -26,7 +26,7 @@
 - `src/lib/db/schema.test.ts` - Unit tests for database schema types and validation ✓
 - `src/lib/auth/email-verification.ts` - Email verification token generation and validation ✓
 - `src/lib/auth/email-verification.test.ts` - Unit tests for email verification ✓
-- `src/pages/api/auth/verify-email.ts` - API endpoint for email verification ✓
+- `src/lib/auth/api-endpoints/verify-email.ts` - API endpoint for email verification ✓
 - `src/lib/auth/middleware.ts` - Protected route middleware with role-based access control ✓
 - `src/lib/auth/middleware.test.ts` - Unit tests for auth middleware ✓
 - `src/middleware.ts` - Global middleware configuration for Astro ✓

@@ -211,11 +211,11 @@ export async function cleanupExpiredSessions(): Promise<number> {
 }
 
 // Test helpers - only exposed for testing
-export const __testHelpers = {
+export const __testHelpers = process.env.NODE_ENV === 'test' ? {
   clearStore: () => {
     sessionStore.clear();
   }
-};
+} : undefined;
 
 // Export types
 export type { Session, User };

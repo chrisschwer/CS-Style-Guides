@@ -6,6 +6,9 @@
 import type { APIRoute } from 'astro';
 import { markEmailAsVerified } from '../../../lib/auth/email-verification';
 
+// Exclude from static generation - this is a server endpoint
+export const prerender = false;
+
 export const GET: APIRoute = async ({ url, redirect }) => {
   const token = url.searchParams.get('token');
   

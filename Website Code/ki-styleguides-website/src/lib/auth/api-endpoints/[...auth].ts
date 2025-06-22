@@ -4,6 +4,9 @@
  */
 
 import type { APIRoute } from 'astro';
+
+// Exclude from static generation - this is a server endpoint
+export const prerender = false;
 import { 
   createSession, 
   deleteSession, 

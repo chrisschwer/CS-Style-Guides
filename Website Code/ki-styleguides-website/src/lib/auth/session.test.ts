@@ -52,7 +52,7 @@ describe('Session Management', () => {
   beforeEach(() => {
     // Clear any existing sessions before each test
     vi.clearAllMocks();
-    __testHelpers.clearStore();
+    __testHelpers?.clearStore();
   });
 
   describe('SESSION_CONFIG', () => {
